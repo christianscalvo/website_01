@@ -32,10 +32,11 @@ ALLOWED_HOSTS = [
     ".railway.app",
 ]
 
-SECURE_SSL_REDIRECT = True
-
-USE_X_FORWARDED_HOST = True
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+USE_X_FORWARDED_HOST = True
+
+
+
 
 # Canonical domain
 CSRF_TRUSTED_ORIGINS = [
