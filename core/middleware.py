@@ -8,8 +8,11 @@ class CanonicalDomainMiddleware:
     def __call__(self, request):
         host = request.get_host()
 
-        if host.startswith("www."):
-            new_url = request.build_absolute_uri().replace("www.", "", 1)
+        # Redirect apex domain → www
+        if not host.startswith("www."):
+            new_url = request.build_absolute_uri().replace(
+                "https://", "https://www.", 1
+            )
             return redirect(new_url, permanent=True)
 
         return self.get_response(request)
