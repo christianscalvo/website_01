@@ -1,0 +1,122 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>RUOH Comic — Chapter 01 | The Uranium Core</title>
+  <link rel="stylesheet" href="{% static 'core/style.css' %}">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="/">
+      <span class="nav-prompt">[</span>URANIUM_CORE<span class="nav-prompt">]</span><span class="nav-cursor">█</span>
+    </a>
+    <div class="nav-links">
+      <a class="nav-link" href="/series/research-unit-of-horrors/">RUOH</a>
+      <a class="nav-link is-active" href="#">COMIC</a>
+    </div>
+  </div>
+</nav>
+
+<div class="fx-noise" aria-hidden="true"></div>
+<div class="fx-scanlines" aria-hidden="true"></div>
+
+<header class="comic-head">
+  <div class="comic-head-inner">
+    <div class="comic-kicker">CASE FILE</div>
+    <h1 class="comic-title">RUOH // CHAPTER 01</h1>
+    <p class="comic-subtitle">FILE: “THE DOOR THAT BREATHES”</p>
+
+    <div class="comic-actions">
+      <a class="btn-secondary" href="/series/research-unit-of-horrors/#read">← BACK TO RUOH</a>
+      <a class="btn-primary" href="{% static 'core/ruoh/comic/chapter-01/RUOH_Chapter_01.pdf' %}" download>
+        DOWNLOAD PDF
+      </a>
+    </div>
+  </div>
+</header>
+
+<main class="comic-reader" id="comicReader" aria-label="Comic reader">
+  <div class="comic-stage">
+    <img id="comicPage"
+         class="comic-page"
+         src=""
+         alt="Comic page" />
+  </div>
+
+  <div class="comic-controls">
+    <button class="comic-btn" id="prevBtn" type="button">PREV</button>
+    <div class="comic-counter">
+      <span id="pageNow">1</span> / <span id="pageTotal">1</span>
+    </div>
+    <button class="comic-btn" id="nextBtn" type="button">NEXT</button>
+  </div>
+</main>
+
+<script>
+(function () {
+  // Update this list to match your actual pages (keep order)
+  const pages = [
+    "{% static 'core/ruoh/comic/chapter-01/Comicformati_001.png' %}",
+    "{% static 'core/ruoh/comic/chapter-01/Comicformati_002.png' %}",
+    "{% static 'core/ruoh/comic/chapter-01/Comicformati_003.png' %}",
+      "{% static 'core/ruoh/comic/chapter-01/Comicformati_004.png' %}",
+    "{% static 'core/ruoh/comic/chapter-01/Comicformati_005.png' %}",
+      "{% static 'core/ruoh/comic/chapter-01/Comicformati_006.png' %}",
+    "{% static 'core/ruoh/comic/chapter-01/Comicformati_007.png' %}",
+      "{% static 'core/ruoh/comic/chapter-01/Comicformati_008.png' %}",
+    "{% static 'core/ruoh/comic/chapter-01/Comicformati_009.png' %}",
+      "{% static 'core/ruoh/comic/chapter-01/Comicformati_010.png' %}",
+    "{% static 'core/ruoh/comic/chapter-01/Comicformati_011.png' %}",
+      "{% static 'core/ruoh/comic/chapter-01/Comicformati_012.png' %}",
+    "{% static 'core/ruoh/comic/chapter-01/Comicformati_013.png' %}",
+      "{% static 'core/ruoh/comic/chapter-01/Comicformati_014.png' %}",
+    "{% static 'core/ruoh/comic/chapter-01/Comicformati_015.png' %}",
+      "{% static 'core/ruoh/comic/chapter-01/Comicformati_017.png' %}",
+    "{% static 'core/ruoh/comic/chapter-01/Comicformati_018.png' %}"
+  ];
+
+  const img = document.getElementById("comicPage");
+  const prevBtn = document.getElementById("prevBtn");
+  const nextBtn = document.getElementById("nextBtn");
+  const pageNow = document.getElementById("pageNow");
+  const pageTotal = document.getElementById("pageTotal");
+
+  let i = 0;
+  pageTotal.textContent = String(pages.length);
+
+  function setPage(index) {
+    i = Math.max(0, Math.min(index, pages.length - 1));
+
+    // Fade/glitch-friendly transition
+    img.classList.remove("is-visible");
+    setTimeout(() => {
+      img.src = pages[i];
+      pageNow.textContent = String(i + 1);
+
+      prevBtn.disabled = (i === 0);
+      nextBtn.disabled = (i === pages.length - 1);
+
+      // Bring it back
+      requestAnimationFrame(() => img.classList.add("is-visible"));
+    }, 120);
+  }
+
+  prevBtn.addEventListener("click", () => setPage(i - 1));
+  nextBtn.addEventListener("click", () => setPage(i + 1));
+
+  // Keyboard navigation
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft") setPage(i - 1);
+    if (e.key === "ArrowRight") setPage(i + 1);
+  });
+
+  // Start
+  setPage(0);
+})();
+</script>
+
+</body>
+</html>

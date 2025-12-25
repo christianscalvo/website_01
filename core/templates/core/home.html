@@ -1,0 +1,265 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>The Uranium Core</title>
+  <link rel="stylesheet" href="{% static 'core/style.css' %}">
+</head>
+
+
+
+<body>
+
+
+
+
+
+
+<div class="intro" id="intro" aria-hidden="false">
+  <div class="intro-inner">
+
+    <img
+      class="intro-logo"
+      src="{% static 'core/uranium_core_logo.png' %}"
+      alt="The Uranium Core"
+    />
+
+    <div class="intro-lines">
+      <div class="intro-line">REQUESTING ACCESS TO THE URANIUM CORE</div>
+      <div class="intro-line subtle">SIGNAL INTEGRITY: UNSTABLE</div>
+      <div class="intro-line subtle">ACCESS LEVEL: UNKNOWN</div>
+    </div>
+
+    <button class="intro-enter" id="introEnter" type="button">
+      ENTER
+    </button>
+
+  </div>
+</div>
+
+
+
+
+
+
+
+<button class="audio-toggle" id="audioToggle" type="button">
+  SOUND: OFF
+</button>
+
+<audio id="ambient" loop preload="auto">
+  <source src="{% static 'core/audio/hum.mp3' %}" type="audio/mpeg">
+</audio>
+
+<audio id="clickSfx" preload="auto">
+  <source src="{% static 'core/audio/weird_click.mp3' %}" type="audio/mpeg">
+</audio>
+
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="/">
+      <span class="nav-prompt">[</span>URANIUM_CORE<span class="nav-prompt">]</span><span class="nav-cursor">█</span>
+    </a>
+
+
+    <div class="nav-links">
+      <a class="nav-link is-active" href="#">HOME</a>
+      <a class="nav-link" href="#work">WORK</a>
+      <a class="nav-link" href="#about">ABOUT</a>
+      <a class="nav-link" href="#contact">CONTACT</a>
+    </div>
+  </div>
+</nav>
+
+
+
+
+<div class="fx-noise" aria-hidden="true"></div>
+<div class="fx-scanlines" aria-hidden="true"></div>
+  <main class="hero">
+    <img src="{% static 'core/uranium_core_logo.png' %}" alt="The Uranium Core Logo" class="logo" />
+    <h1 class="studio-name glitch" data-text="THE URANIUM CORE">THE URANIUM CORE</h1>
+    <p class="tagline">Horrors beyond the comprehension of mortal men.</p>
+  </main>
+
+
+
+
+
+
+<section id="ruoh" class="section featured-series">
+  <header class="section-head">
+    <h2 class="section-title">FEATURED SERIES</h2>
+    <p class="section-subtitle">A primary archive branch of The Uranium Core.</p>
+  </header>
+
+  <div class="series-panel">
+    <div class="series-left">
+      <div class="series-kicker">
+        <span class="badge">CASE FILE</span>
+        <span class="stamp">ACTIVE</span>
+      </div>
+
+      <h3 class="series-title">RESEARCH UNIT OF HORRORS</h3>
+
+      <p class="series-desc">
+        A clandestine unit documents anomalies that should not exist—until the files begin to document them back.
+      </p>
+
+      <div class="series-actions">
+        <a class="btn-primary" href="/series/research-unit-of-horrors/">ENTER RUOH ARCHIVE</a>
+        <a class="btn-secondary" href="/series/research-unit-of-horrors/#read">READ COMIC</a>
+      </div>
+
+      <div class="series-meta">
+        <div class="series-meta-row"><span>MEDIA</span><span>ANIMATION / COMIC / ART</span></div>
+        <div class="series-meta-row"><span>ACCESS</span><span>PUBLIC (DECLASSIFIED)</span></div>
+      </div>
+    </div>
+
+    <div class="series-right">
+      <div class="series-poster">
+        <img src="{% static 'core/ResearchUnitofHorrorsTitle.png' %}"
+             alt="Research Unit of Horrors Title Card">
+        <div class="series-caption">FILE PREVIEW // RUOH</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section id="work" class="section">
+  <header class="section-head">
+    <h2 class="section-title">CLASSIFIED FILES</h2>
+    <p class="section-subtitle">Selected transmissions from The Uranium Core archive.</p>
+  </header>
+
+  <div class="cards">
+    <article class="card">
+      <div class="card-top">
+        <span class="badge">LEVEL: OMEGA</span>
+        <span class="stamp">DECLASSIFIED</span>
+      </div>
+      <h3 class="card-title">SERIES // RESEARCH UNIT OF HORRORS</h3>
+      <p class="card-text">Recovered transmissions, case files, concept art, and anomalies.</p>
+      <div class="card-meta">
+        <span>MEDIA: PILOT / COMIC</span>
+        <span>STATUS: ACTIVE</span>
+      </div>
+      <a class="card-link" href="/series/research-unit-of-horrors/">OPEN FILE</a>
+    </article>
+
+
+    <article class="card">
+      <div class="card-top">
+        <span class="badge">LEVEL: DELTA</span>
+        <span class="stamp">CONTAINED</span>
+      </div>
+      <h3 class="card-title">PROJECT // NEON WITNESS</h3>
+      <p class="card-text">Stylized sci-fi comedy with corrupted UI aesthetics.</p>
+      <div class="card-meta">
+        <span>FORMAT: 2D / 3D HYBRID</span>
+        <span>STATUS: DEVELOPMENT</span>
+      </div>
+      <a class="card-link" href="#">OPEN FILE</a>
+    </article>
+
+    <article class="card">
+      <div class="card-top">
+        <span class="badge">LEVEL: GAMMA</span>
+        <span class="stamp">PUBLIC</span>
+      </div>
+      <h3 class="card-title">PROJECT // URANIUM TEST REEL</h3>
+      <p class="card-text">Short-form experiments. Motion tests. Visual infection.</p>
+      <div class="card-meta">
+        <span>FORMAT: SHORTS</span>
+        <span>STATUS: LIVE</span>
+      </div>
+      <a class="card-link" href="#">OPEN FILE</a>
+    </article>
+  </div>
+</section>
+
+<script>
+(function () {
+  const btn = document.getElementById("audioToggle");
+  const ambient = document.getElementById("ambient");
+  const clickSfx = document.getElementById("clickSfx");
+
+  if (!btn || !ambient || !clickSfx) {
+    console.log("Audio elements not found. Check IDs.");
+    return;
+  }
+
+  let soundOn = false;
+
+  function playClick() {
+    if (!soundOn) return;
+    try {
+      clickSfx.currentTime = 0;
+      clickSfx.volume = 0.35;
+      clickSfx.play();
+    } catch (e) {}
+  }
+
+  btn.addEventListener("click", async () => {
+    try {
+      if (!soundOn) {
+        ambient.volume = 0.18;
+        await ambient.play();
+        soundOn = true;
+        btn.textContent = "SOUND: ON";
+        playClick();
+      } else {
+        ambient.pause();
+        soundOn = false;
+        btn.textContent = "SOUND: OFF";
+      }
+    } catch (e) {
+      console.log("Audio blocked/failed:", e);
+    }
+  });
+
+  document.addEventListener("click", (e) => {
+    const el = e.target.closest(".nav-link, .nav-brand, .card-link");
+    if (el) playClick();
+  });
+})();
+</script>
+
+
+
+
+
+
+<script>
+(function () {
+  const intro = document.getElementById("intro");
+  const enterBtn = document.getElementById("introEnter");
+  const audioBtn = document.getElementById("audioToggle");
+
+  if (!intro || !enterBtn) return;
+
+  enterBtn.addEventListener("click", () => {
+    // Optional: start audio when entering
+    if (audioBtn && audioBtn.textContent.includes("OFF")) {
+      audioBtn.click();
+    }
+
+    intro.classList.add("is-exiting");
+
+    setTimeout(() => {
+      intro.style.display = "none";
+      intro.setAttribute("aria-hidden", "true");
+    }, 560);
+  });
+})();
+</script>
+
+
+
+
+</body>
+</html>

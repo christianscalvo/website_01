@@ -1,0 +1,359 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Research Unit of Horrors | The Uranium Core</title>
+  <link rel="stylesheet" href="{% static 'core/style.css' %}">
+</head>
+<body>
+
+<!-- =========================
+     TRANSMISSION MODAL (VIMEO)
+========================== -->
+<div class="player-modal" id="playerModal" aria-hidden="true">
+  <div class="player-backdrop" data-close-player></div>
+
+  <div class="player-panel" role="dialog" aria-modal="true">
+    <div class="player-top">
+      <div class="player-title">
+        <span class="player-tag">TRANSMISSION</span>
+        <span class="player-series">RUOH</span>
+        <span class="player-name" id="playerTitle">PILOT</span>
+      </div>
+
+      <button
+        class="player-close"
+        type="button"
+        data-close-player
+        aria-label="Close transmission"
+      >
+        ✕
+      </button>
+    </div>
+
+    <div class="player-frame">
+      <iframe
+        id="playerIframe"
+        title="Research Unit of Horrors – Transmission Player"
+        frameborder="0"
+        allow="autoplay; fullscreen; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+    </div>
+  </div>
+</div>
+
+<!-- =========================
+           NAV
+========================== -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="/">
+      <span class="nav-prompt">[</span>URANIUM_CORE<span class="nav-prompt">]</span><span class="nav-cursor">█</span>
+    </a>
+    <div class="nav-links">
+      <a class="nav-link" href="/">HOME</a>
+      <a class="nav-link" href="/#work">WORK</a>
+      <a class="nav-link is-active" href="/series/research-unit-of-horrors/">SERIES</a>
+      <a class="nav-link" href="/#contact">CONTACT</a>
+    </div>
+  </div>
+</nav>
+
+<!-- FX layers (optional; reuse from home) -->
+<div class="fx-noise" aria-hidden="true"></div>
+<div class="fx-scanlines" aria-hidden="true"></div>
+
+<!-- =========================
+           HERO
+========================== -->
+<header class="ruoh-hero">
+  <div class="ruoh-hero-inner">
+    <div class="ruoh-hero-left">
+      <div class="ruoh-kicker">SERIES FILE</div>
+
+      <h1 class="ruoh-title glitch" data-text="RESEARCH UNIT OF HORRORS">
+        RESEARCH UNIT OF HORRORS
+      </h1>
+
+      <p class="ruoh-logline">
+        Team of spooky fellas look into the deepest darkest mysteries lurking The Surface.
+      </p>
+
+      <div class="ruoh-badges">
+        <span class="ruoh-badge">STATUS: ACTIVE</span>
+        <span class="ruoh-badge">MEDIA: ANIMATION / COMIC / ART</span>
+      </div>
+
+      <div class="ruoh-cta">
+        <!-- HERO PLAY (VIMEO) -->
+        <a class="card-link js-open-player"
+           href="#"
+           data-title="RUOH PILOT // FIRST CONTACT"
+           data-vimeo-id="1149281098">
+          PLAY
+        </a>
+
+        <a class="btn-secondary" href="#read">READ COMIC</a>
+      </div>
+
+      <div class="ruoh-meta">
+        <div class="ruoh-meta-row"><span class="ruoh-meta-key">CASE ID</span><span class="ruoh-meta-val">RUOH-01</span></div>
+        <div class="ruoh-meta-row"><span class="ruoh-meta-key">LOCATION</span><span class="ruoh-meta-val">UNKNOWN</span></div>
+        <div class="ruoh-meta-row"><span class="ruoh-meta-key">LAST UPDATE</span><span class="ruoh-meta-val">RECENT</span></div>
+      </div>
+    </div>
+
+    <div class="ruoh-hero-right">
+      <div class="ruoh-poster">
+        <img
+          src="{% static 'core/ResearchUnitofHorrorsTitle.png' %}"
+          alt="Research Unit of Horrors"
+        />
+        <div class="ruoh-poster-caption">FILE PREVIEW // TITLE CARD</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="ruoh-body">
+
+  <!-- =========================
+             WATCH
+  ========================== -->
+  <section id="watch" class="ruoh-section">
+    <header class="ruoh-section-head">
+      <h2 class="ruoh-section-title">WATCH</h2>
+      <p class="ruoh-section-subtitle">Recovered transmissions. Viewer discretion advised.</p>
+    </header>
+
+    <div class="ruoh-grid">
+        <article class="ruoh-card ruoh-video">
+          <a class="ruoh-thumbLink js-open-player"
+             href="#"
+             data-title="RUOH PILOT // FIRST CONTACT"
+             data-vimeo-id="1149281098">
+            <img class="ruoh-thumbImg"
+                 src="{% static 'core/ruoh/thumbs/Thumbnail_pilot.png' %}"
+                 alt="RUOH Pilot preview">
+            <span class="ruoh-playBadge">▶ PLAY</span>
+          </a>
+
+          <div class="ruoh-card-top">
+            <span class="badge">TRANSMISSION</span>
+            <span class="stamp">PILOT</span>
+          </div>
+
+          <h3 class="ruoh-card-title">PILOT // “FIRST CONTACT”</h3>
+          <p class="ruoh-card-text">The unit receives a file that contains footage from the future.</p>
+
+          <div class="ruoh-card-meta">
+            <span>DURATION: 8:42</span>
+            <span>FORMAT: 2D</span>
+          </div>
+
+          <a class="card-link js-open-player"
+             href="#"
+             data-title="RUOH PILOT // FIRST CONTACT"
+             data-vimeo-id="1149281098">
+            PLAY
+          </a>
+        </article>
+
+    </div>
+  </section>
+
+  <!-- =========================
+              READ
+  ========================== -->
+  <section id="read" class="ruoh-section">
+    <header class="ruoh-section-head">
+      <h2 class="ruoh-section-title">READ</h2>
+      <p class="ruoh-section-subtitle">Comic chapters presented as case files.</p>
+    </header>
+
+    <div class="ruoh-grid">
+        <article class="ruoh-card ruoh-comic">
+          <a class="ruoh-coverLink"
+             href="/series/research-unit-of-horrors/comic/chapter-01/">
+            <img class="ruoh-coverImg"
+                 src="{% static 'core/ruoh/comic/covers/cover_01.png' %}"
+                 alt="RUOH Chapter 01 cover">
+            <span class="ruoh-coverBadge">OPEN FILE</span>
+          </a>
+
+          <div class="ruoh-card-top">
+            <span class="badge">CASE FILE</span>
+            <span class="stamp">CHAPTER 01</span>
+          </div>
+
+          <h3 class="ruoh-card-title">FILE // “THE DOOR THAT BREATHES”</h3>
+          <p class="ruoh-card-text">
+            An entry appears in the archive that no one submitted.
+          </p>
+
+          <div class="ruoh-card-meta">
+            <span>PAGES: 18</span>
+            <span>FORMAT: WEB</span>
+          </div>
+
+          <a class="card-link"
+             href="/series/research-unit-of-horrors/comic/chapter-01/">
+            OPEN
+          </a>
+    </article>
+
+    <article class="ruoh-card ruoh-comic">
+      <a class="ruoh-coverLink is-locked"
+         href="#"
+         onclick="return false;">
+        <img class="ruoh-coverImg"
+             src="{% static 'core/ruoh/comic/covers/cover_02.png' %}"
+             alt="RUOH Chapter 02 cover">
+        <span class="ruoh-coverBadge is-locked">LOCKED</span>
+      </a>
+
+      <div class="ruoh-card-top">
+        <span class="badge">CASE FILE</span>
+        <span class="stamp">CHAPTER 02</span>
+      </div>
+
+      <h3 class="ruoh-card-title">FILE // “ECHO PERSONNEL”</h3>
+      <p class="ruoh-card-text">
+        Someone responds from a hallway that doesn’t exist.
+      </p>
+
+      <div class="ruoh-card-meta">
+        <span>PAGES: 22</span>
+        <span>FORMAT: WEB</span>
+      </div>
+
+      <a class="card-link" href="#" onclick="return false;">
+        LOCKED
+      </a>
+    </article>
+
+    </div>
+  </section>
+
+  <!-- =========================
+            EXPLORE
+  ========================== -->
+  <section id="explore" class="ruoh-section">
+    <header class="ruoh-section-head">
+      <h2 class="ruoh-section-title">EXPLORE</h2>
+      <p class="ruoh-section-subtitle">Characters, anomalies, and visual development.</p>
+    </header>
+
+    <div class="ruoh-gallery">
+      <a class="ruoh-thumb" href="#" onclick="return false;">
+        <div class="ruoh-thumb-inner">
+          <div class="ruoh-thumb-label">CHARACTER</div>
+          <div class="ruoh-thumb-title">AGENT // ██████</div>
+        </div>
+      </a>
+      <a class="ruoh-thumb" href="#" onclick="return false;">
+        <div class="ruoh-thumb-inner">
+          <div class="ruoh-thumb-label">ANOMALY</div>
+          <div class="ruoh-thumb-title">SUBJECT // “THE MIRROR FILE”</div>
+        </div>
+      </a>
+      <a class="ruoh-thumb" href="#" onclick="return false;">
+        <div class="ruoh-thumb-inner">
+          <div class="ruoh-thumb-label">LOCATION</div>
+          <div class="ruoh-thumb-title">SITE // ARCHIVE WING</div>
+        </div>
+      </a>
+      <a class="ruoh-thumb" href="#" onclick="return false;">
+        <div class="ruoh-thumb-inner">
+          <div class="ruoh-thumb-label">CONCEPT</div>
+          <div class="ruoh-thumb-title">PROP // RECORDER UNIT</div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- =========================
+            CONTACT
+  ========================== -->
+  <section id="contact" class="ruoh-section ruoh-final">
+    <header class="ruoh-section-head">
+      <h2 class="ruoh-section-title">CONTACT</h2>
+      <p class="ruoh-section-subtitle">Interested in collaboration, voice talent, or production support?</p>
+    </header>
+
+    <div class="ruoh-final-box">
+      <div class="ruoh-final-text">
+        Send a message. Attach links. Keep it short. We will respond if the signal is clean.
+      </div>
+      <a class="btn-primary" href="mailto:ccalvo@theuraniumcore.com">SEND TRANSMISSION</a>
+    </div>
+  </section>
+
+</main>
+
+<!-- =========================
+      VIMEO MODAL JS
+========================== -->
+<script>
+(function () {
+  const modal = document.getElementById("playerModal");
+  const iframe = document.getElementById("playerIframe");
+  const titleEl = document.getElementById("playerTitle");
+
+  if (!modal || !iframe || !titleEl) return;
+
+  function openPlayer(btn) {
+    const title = btn.dataset.title || "TRANSMISSION";
+    const vimeoId = btn.dataset.vimeoId;
+    const ytId = btn.dataset.ytId; // optional if you ever add YouTube again
+
+    titleEl.textContent = title;
+
+    if (vimeoId) {
+      iframe.src =
+        `https://player.vimeo.com/video/${vimeoId}?autoplay=1&muted=0&title=0&byline=0&portrait=0`;
+    } else if (ytId) {
+      iframe.src =
+        `https://www.youtube.com/embed/${ytId}?autoplay=1&rel=0`;
+    } else {
+      console.log("No video id found on this button.");
+      return;
+    }
+
+    modal.classList.add("is-open");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closePlayer() {
+    iframe.src = ""; // stops playback
+    modal.classList.remove("is-open");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+  }
+
+  document.addEventListener("click", (e) => {
+    const openBtn = e.target.closest(".js-open-player");
+    if (openBtn) {
+      e.preventDefault();
+      openPlayer(openBtn);
+      return;
+    }
+
+    if (e.target.closest("[data-close-player]")) {
+      closePlayer();
+    }
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal.classList.contains("is-open")) {
+      closePlayer();
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
