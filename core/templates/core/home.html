@@ -7,15 +7,11 @@
   <link rel="stylesheet" href="{% static 'core/style.css' %}">
 </head>
 
-
-
 <body>
 
-
-
-
-
-
+<!-- =========================
+     INTRO GATE
+========================== -->
 <div class="intro" id="intro" aria-hidden="false">
   <div class="intro-inner">
 
@@ -38,12 +34,9 @@
   </div>
 </div>
 
-
-
-
-
-
-
+<!-- =========================
+     AUDIO
+========================== -->
 <button class="audio-toggle" id="audioToggle" type="button">
   SOUND: OFF
 </button>
@@ -56,45 +49,87 @@
   <source src="{% static 'core/audio/weird_click.mp3' %}" type="audio/mpeg">
 </audio>
 
-
+<!-- =========================
+     NAV
+========================== -->
 <nav class="nav">
   <div class="nav-inner">
     <a class="nav-brand" href="/">
       <span class="nav-prompt">[</span>URANIUM_CORE<span class="nav-prompt">]</span><span class="nav-cursor">█</span>
     </a>
 
-
     <div class="nav-links">
-      <a class="nav-link is-active" href="#">HOME</a>
-      <a class="nav-link" href="#work">WORK</a>
-      <a class="nav-link" href="#about">ABOUT</a>
+      <a class="nav-link is-active" href="#top">HOME</a>
+      <a class="nav-link" href="#featured">SERIES</a>
+      <a class="nav-link" href="#work">ARCHIVE</a>
       <a class="nav-link" href="#contact">CONTACT</a>
     </div>
   </div>
 </nav>
 
-
-
-
+<!-- FX layers -->
 <div class="fx-noise" aria-hidden="true"></div>
 <div class="fx-scanlines" aria-hidden="true"></div>
-  <main class="hero">
-    <img src="{% static 'core/uranium_core_logo.png' %}" alt="The Uranium Core Logo" class="logo" />
+
+<!-- =========================
+     BLOCK 1: AUTO-PLAY REEL (INLINE VIMEO)
+     Autoplay will work reliably only if muted.
+========================== -->
+<section id="top" class="hero hero--reel hero--reelOnly">
+  <div class="hero-reelOverlay" aria-hidden="true"></div>
+
+  <div class="hero-reelFrame" aria-label="Uranium Core Reel">
+    <iframe
+      class="hero-reelIframe"
+      src="https://player.vimeo.com/video/1149281098?autoplay=1&muted=1&loop=1&background=1&title=0&byline=0&portrait=0"
+      title="The Uranium Core Reel"
+      frameborder="0"
+      allow="autoplay; fullscreen; picture-in-picture"
+      allowfullscreen
+    ></iframe>
+  </div>
+
+  <!-- minimal cue to scroll -->
+  <a class="hero-scrollCue" href="#identity" aria-label="Scroll to studio identity">SCROLL ▾</a>
+</section>
+
+<!-- =========================
+     BLOCK 2: IDENTITY / LOGO SECTION
+========================== -->
+<section id="identity" class="hero hero--identity">
+  <div class="hero-inner">
+    <img
+      src="{% static 'core/uranium_core_logo.png' %}"
+      alt="The Uranium Core Logo"
+      class="logo"
+    />
+
     <h1 class="studio-name glitch" data-text="THE URANIUM CORE">THE URANIUM CORE</h1>
     <p class="tagline">Horrors beyond the comprehension of mortal men.</p>
-  </main>
 
+    <div class="hero-actions">
+      <a class="btn-primary" href="#featured">ENTER ARCHIVE</a>
+      <a class="btn-secondary" href="#work">OPEN INDEX</a>
+    </div>
 
+    <div class="hero-meta">
+      <div class="hero-meta-row"><span>STATUS</span><span>ONLINE</span></div>
+      <div class="hero-meta-row"><span>SIGNAL</span><span>DEGRADED</span></div>
+      <div class="hero-meta-row"><span>ACCESS</span><span>PUBLIC (DECLASSIFIED)</span></div>
+    </div>
+  </div>
+</section>
 
-
-
-
-<section id="ruoh" class="section featured-series">
+<!-- =========================
+     FEATURED SERIES
+========================== -->
+<section id="featured" class="section featured-series">
   <header class="section-head">
     <h2 class="section-title">FEATURED SERIES</h2>
-    <p class="section-subtitle">A primary archive branch of The Uranium Core.</p>
+    <p class="section-subtitle">Primary archive branches of The Uranium Core.</p>
   </header>
 
+  <!-- RUOH -->
   <div class="series-panel">
     <div class="series-left">
       <div class="series-kicker">
@@ -110,7 +145,7 @@
 
       <div class="series-actions">
         <a class="btn-primary" href="/series/research-unit-of-horrors/">ENTER RUOH ARCHIVE</a>
-        <a class="btn-secondary" href="/series/research-unit-of-horrors/#read">READ COMIC</a>
+        <a class="btn-secondary" href="/series/research-unit-of-horrors/#watch">WATCH</a>
       </div>
 
       <div class="series-meta">
@@ -127,12 +162,48 @@
       </div>
     </div>
   </div>
+
+  <!-- SPKO -->
+  <div class="series-panel series-panel--reverse" style="margin-top: 22px;">
+    <div class="series-left">
+      <div class="series-kicker">
+        <span class="badge">CASE FILE</span>
+        <span class="stamp">ACTIVE</span>
+      </div>
+
+      <h3 class="series-title">SCOTT PILGRIM: KO</h3>
+
+      <p class="series-desc">
+        A neon-saturated archive entry—transmissions, fan art, and curated references.
+      </p>
+
+      <div class="series-actions">
+        <a class="btn-primary" href="/series/scott-pilgrim-ko/">ENTER SPKO ARCHIVE</a>
+        <a class="btn-secondary" href="/series/scott-pilgrim-ko/#videos">WATCH</a>
+      </div>
+
+      <div class="series-meta">
+        <div class="series-meta-row"><span>MEDIA</span><span>ANIMATION / NOTES / BREAKDOWNS</span></div>
+        <div class="series-meta-row"><span>ACCESS</span><span>PUBLIC (CURATED)</span></div>
+      </div>
+    </div>
+
+    <div class="series-right">
+      <div class="series-poster">
+        <img src="{% static 'core/ScottPilgrimKOTitle.png' %}"
+             alt="Scott Pilgrim: KO Title Card">
+        <div class="series-caption">FILE PREVIEW // SPKO</div>
+      </div>
+    </div>
+  </div>
 </section>
 
-
+<!-- =========================
+     ARCHIVE INDEX
+========================== -->
 <section id="work" class="section">
   <header class="section-head">
-    <h2 class="section-title">CLASSIFIED FILES</h2>
+    <h2 class="section-title">ARCHIVE INDEX</h2>
     <p class="section-subtitle">Selected transmissions from The Uranium Core archive.</p>
   </header>
 
@@ -151,19 +222,18 @@
       <a class="card-link" href="/series/research-unit-of-horrors/">OPEN FILE</a>
     </article>
 
-
     <article class="card">
       <div class="card-top">
         <span class="badge">LEVEL: DELTA</span>
-        <span class="stamp">CONTAINED</span>
+        <span class="stamp">PUBLIC</span>
       </div>
-      <h3 class="card-title">PROJECT // SCOTT PILGRIM</h3>
-      <p class="card-text">Faithful comic book adaptation of the critically acclaimed Graphic Novel series.</p>
+      <h3 class="card-title">SERIES // SCOTT PILGRIM: KO</h3>
+      <p class="card-text">Transmission hub: watch, fan art, notes, and references.</p>
       <div class="card-meta">
-        <span>FORMAT: 2D</span>
-        <span>STATUS: DEVELOPMENT</span>
+        <span>FORMAT: HUB</span>
+        <span>STATUS: ACTIVE</span>
       </div>
-      <a class="card-link" href="#">OPEN FILE</a>
+      <a class="card-link" href="/series/scott-pilgrim-ko/">OPEN FILE</a>
     </article>
 
     <article class="card">
@@ -172,26 +242,52 @@
         <span class="stamp">PUBLIC</span>
       </div>
       <h3 class="card-title">PROJECT // URANIUM TEST REEL</h3>
-      <p class="card-text">Short-form experiments. Motion tests.</p>
+      <p class="card-text">Short-form experiments. Motion tests. Signal fragments.</p>
       <div class="card-meta">
         <span>FORMAT: SHORTS</span>
         <span>STATUS: LIVE</span>
       </div>
-      <a class="card-link" href="#">OPEN FILE</a>
+      <a class="card-link" href="#" onclick="return false;">OPEN FILE</a>
     </article>
   </div>
 </section>
 
+<!-- =========================
+     CONTACT
+========================== -->
+<section id="contact" class="section">
+  <header class="section-head">
+    <h2 class="section-title">CONTACT</h2>
+    <p class="section-subtitle">Interested in collaboration, voice talent, or production support?</p>
+  </header>
+
+  <div class="cards">
+    <article class="card">
+      <div class="card-top">
+        <span class="badge">CHANNEL: EMAIL</span>
+        <span class="stamp">OPEN</span>
+      </div>
+      <h3 class="card-title">SEND TRANSMISSION</h3>
+      <p class="card-text">Attach links. Keep it short. We respond if the signal is clean.</p>
+      <div class="card-meta">
+        <span>PRIORITY: NORMAL</span>
+        <span>SECURITY: LOW</span>
+      </div>
+      <a class="card-link" href="mailto:ccalvo@theuraniumcore.com">OPEN CHANNEL</a>
+    </article>
+  </div>
+</section>
+
+<!-- =========================
+     AUDIO + CLICK SFX
+========================== -->
 <script>
 (function () {
   const btn = document.getElementById("audioToggle");
   const ambient = document.getElementById("ambient");
   const clickSfx = document.getElementById("clickSfx");
 
-  if (!btn || !ambient || !clickSfx) {
-    console.log("Audio elements not found. Check IDs.");
-    return;
-  }
+  if (!btn || !ambient || !clickSfx) return;
 
   let soundOn = false;
 
@@ -217,23 +313,19 @@
         soundOn = false;
         btn.textContent = "SOUND: OFF";
       }
-    } catch (e) {
-      console.log("Audio blocked/failed:", e);
-    }
+    } catch (e) {}
   });
 
   document.addEventListener("click", (e) => {
-    const el = e.target.closest(".nav-link, .nav-brand, .card-link");
+    const el = e.target.closest(".nav-link, .nav-brand, .card-link, .btn-primary, .btn-secondary");
     if (el) playClick();
   });
 })();
 </script>
 
-
-
-
-
-
+<!-- =========================
+     INTRO ENTER
+========================== -->
 <script>
 (function () {
   const intro = document.getElementById("intro");
@@ -243,7 +335,6 @@
   if (!intro || !enterBtn) return;
 
   enterBtn.addEventListener("click", () => {
-    // Optional: start audio when entering
     if (audioBtn && audioBtn.textContent.includes("OFF")) {
       audioBtn.click();
     }
@@ -257,9 +348,6 @@
   });
 })();
 </script>
-
-
-
 
 </body>
 </html>

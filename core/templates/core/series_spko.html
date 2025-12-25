@@ -1,0 +1,299 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Scott Pilgrim: KO | The Uranium Core</title>
+  <link rel="stylesheet" href="{% static 'core/style.css' %}">
+</head>
+<body>
+
+<!-- =========================
+     TRANSMISSION MODAL (VIMEO)
+========================== -->
+<div class="player-modal" id="playerModal" aria-hidden="true">
+  <div class="player-backdrop" data-close-player></div>
+
+  <div class="player-panel" role="dialog" aria-modal="true">
+    <div class="player-top">
+      <div class="player-title">
+        <span class="player-tag">TRANSMISSION</span>
+        <span class="player-series">SPKO</span>
+        <span class="player-name" id="playerTitle">VIDEO</span>
+      </div>
+
+      <button
+        class="player-close"
+        type="button"
+        data-close-player
+        aria-label="Close transmission"
+      >
+        ✕
+      </button>
+    </div>
+
+    <div class="player-frame">
+      <iframe
+        id="playerIframe"
+        title="Scott Pilgrim: KO – Transmission Player"
+        frameborder="0"
+        allow="autoplay; fullscreen; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+    </div>
+  </div>
+</div>
+
+<!-- =========================
+           NAV
+========================== -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="/">
+      <span class="nav-prompt">[</span>URANIUM_CORE<span class="nav-prompt">]</span><span class="nav-cursor">█</span>
+    </a>
+    <div class="nav-links">
+      <a class="nav-link" href="/">HOME</a>
+      <a class="nav-link" href="/#work">WORK</a>
+      <a class="nav-link is-active" href="/series/scott-pilgrim-ko/">SERIES</a>
+      <a class="nav-link" href="/#contact">CONTACT</a>
+    </div>
+  </div>
+</nav>
+
+<!-- FX layers -->
+<div class="fx-noise" aria-hidden="true"></div>
+<div class="fx-scanlines" aria-hidden="true"></div>
+
+<!-- =========================
+           HERO
+========================== -->
+<header class="ruoh-hero">
+  <div class="ruoh-hero-inner">
+    <div class="ruoh-hero-left">
+      <div class="ruoh-kicker">SERIES FILE</div>
+
+      <h1 class="ruoh-title glitch" data-text="SCOTT PILGRIM: KO">
+        SCOTT PILGRIM: KO
+      </h1>
+
+      <p class="ruoh-logline">
+        A fast, neon-saturated archive entry. Videos, fan art, and curated references live here.
+      </p>
+
+      <div class="ruoh-badges">
+        <span class="ruoh-badge">STATUS: ACTIVE</span>
+        <span class="ruoh-badge">MEDIA: ANIMATION</span>
+      </div>
+
+      <div class="ruoh-cta">
+        <!-- Optional: hero PLAY like RUOH -->
+        <a class="card-link js-open-player"
+           href="#"
+           data-title="SPKO VIDEO 01 // TRANSMISSION"
+           data-vimeo-id="1149350137">
+          PLAY
+        </a>
+
+        <a class="btn-secondary" href="#fanart">VIEW FAN ART</a>
+      </div>
+
+      <div class="ruoh-meta">
+        <div class="ruoh-meta-row"><span class="ruoh-meta-key">CASE ID</span><span class="ruoh-meta-val">SPKO-01</span></div>
+        <div class="ruoh-meta-row"><span class="ruoh-meta-key">LOCATION</span><span class="ruoh-meta-val">TORONTO (?)</span></div>
+        <div class="ruoh-meta-row"><span class="ruoh-meta-key">LAST UPDATE</span><span class="ruoh-meta-val">RECENT</span></div>
+      </div>
+    </div>
+
+    <div class="ruoh-hero-right">
+      <div class="ruoh-poster">
+        <img
+          src="{% static 'core/ScottPilgrimKOTitle.png' %}"
+          alt="Scott Pilgrim: KO Title Card"
+        />
+        <div class="ruoh-poster-caption">FILE PREVIEW // SPKO</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="ruoh-body">
+
+  <!-- =========================
+            WATCH (VIDEOS)
+  ========================== -->
+  <section id="videos" class="ruoh-section">
+    <header class="ruoh-section-head">
+      <h2 class="ruoh-section-title">WATCH</h2>
+      <p class="ruoh-section-subtitle">Recovered transmissions. Viewer discretion advised.</p>
+    </header>
+
+    <div class="ruoh-grid">
+
+      <!-- VIDEO 01 (LIVE) -->
+      <article class="ruoh-card ruoh-video">
+        <a class="ruoh-thumbLink js-open-player"
+           href="#"
+           data-title="SPKO VIDEO 01 // TRANSMISSION"
+           data-vimeo-id="1149350137">
+          <img class="ruoh-thumbImg"
+               src="{% static 'core/spko/Part_01_thumb.png' %}"
+               alt="SPKO Video 01 preview">
+          <span class="ruoh-playBadge">▶ PLAY</span>
+        </a>
+
+        <div class="ruoh-card-top">
+          <span class="badge">TRANSMISSION</span>
+          <span class="stamp">VIDEO 01</span>
+        </div>
+
+        <h3 class="ruoh-card-title">VIDEO 01</h3>
+        <p class="ruoh-card-text">Recovered upload. Playback available via Vimeo.</p>
+
+        <div class="ruoh-card-meta">
+          <span>HOST: VIMEO</span>
+          <span>STATUS: LIVE</span>
+        </div>
+
+        <a class="card-link js-open-player"
+           href="#"
+           data-title="SPKO VIDEO 01 // TRANSMISSION"
+           data-vimeo-id="1149350137">
+          PLAY
+        </a>
+      </article>
+
+      <!-- VIDEO 02 (COMING SOON / LOCKED) -->
+      <article class="ruoh-card ruoh-video">
+        <a class="ruoh-thumbLink is-locked"
+           href="#"
+           onclick="return false;">
+          <img class="ruoh-thumbImg"
+               src="{% static 'core/ScottPilgrimKOTitle.png' %}"
+               alt="SPKO Video 02 preview (coming soon)">
+          <span class="ruoh-playBadge">COMING SOON</span>
+        </a>
+
+        <div class="ruoh-card-top">
+          <span class="badge">TRANSMISSION</span>
+          <span class="stamp">VIDEO 02</span>
+        </div>
+
+        <h3 class="ruoh-card-title">VIDEO 02</h3>
+        <p class="ruoh-card-text">Transmission pending upload. Slot reserved.</p>
+
+        <div class="ruoh-card-meta">
+          <span>HOST: TBA</span>
+          <span>STATUS: PENDING</span>
+        </div>
+
+        <a class="card-link" href="#" onclick="return false;">
+          LOCKED
+        </a>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- =========================
+            FAN ART
+  ========================== -->
+  <section id="fanart" class="ruoh-section">
+    <header class="ruoh-section-head">
+      <h2 class="ruoh-section-title">FAN ART</h2>
+      <p class="ruoh-section-subtitle">Curated visuals from the archive feed.</p>
+    </header>
+
+    <div class="ruoh-grid">
+      <article class="ruoh-card" style="grid-column: 1 / -1;">
+        <div class="ruoh-card-top">
+          <span class="badge">IMAGE</span>
+          <span class="stamp">FEATURED</span>
+        </div>
+
+        <h3 class="ruoh-card-title">Featured Fan Art</h3>
+
+        <p class="ruoh-card-text">
+          Current featured piece. More will be added as additional files are cleared for the archive.
+        </p>
+
+        <div style="margin-top: 14px; border-radius: 14px; overflow: hidden; border: 1px solid rgba(255,255,255,0.10);">
+          <img
+            src="{% static 'core/ScottPataParaTwitter.png' %}"
+            alt="Scott Pilgrim: KO fan art"
+            style="width: 100%; height: auto; display: block;"
+          />
+        </div>
+
+        <div class="ruoh-card-foot">
+          <span class="ruoh-foot-note">Image file: <code>core/static/core/ScottPataParaTwitter.png</code></span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+</main>
+
+<!-- =========================
+      VIMEO MODAL JS
+========================== -->
+<script>
+(function () {
+  const modal = document.getElementById("playerModal");
+  const iframe = document.getElementById("playerIframe");
+  const titleEl = document.getElementById("playerTitle");
+
+  if (!modal || !iframe || !titleEl) return;
+
+  function openPlayer(btn) {
+    const title = btn.dataset.title || "TRANSMISSION";
+    const vimeoId = btn.dataset.vimeoId;
+    const ytId = btn.dataset.ytId;
+
+    titleEl.textContent = title;
+
+    if (vimeoId) {
+      iframe.src =
+        `https://player.vimeo.com/video/${vimeoId}?autoplay=1&muted=0&title=0&byline=0&portrait=0`;
+    } else if (ytId) {
+      iframe.src =
+        `https://www.youtube.com/embed/${ytId}?autoplay=1&rel=0`;
+    } else {
+      return;
+    }
+
+    modal.classList.add("is-open");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closePlayer() {
+    iframe.src = "";
+    modal.classList.remove("is-open");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+  }
+
+  document.addEventListener("click", (e) => {
+    const openBtn = e.target.closest(".js-open-player");
+    if (openBtn) {
+      e.preventDefault();
+      openPlayer(openBtn);
+      return;
+    }
+
+    if (e.target.closest("[data-close-player]")) {
+      closePlayer();
+    }
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal.classList.contains("is-open")) {
+      closePlayer();
+    }
+  });
+})();
+</script>
+
+</body>
+</html>

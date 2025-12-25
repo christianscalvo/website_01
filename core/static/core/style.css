@@ -1161,19 +1161,21 @@ body {
 
 
 /* ===============================
-   HOME FEATURED SERIES: RUOH
+   HOME FEATURED SERIES
 ================================ */
 
 .featured-series {
   padding-top: 24px;
 }
 
+/* Base panel */
 .series-panel {
   max-width: 1100px;
   margin: 0 auto;
   padding: 18px;
+
   display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
+  grid-template-columns: 1.2fr 0.8fr; /* TEXT | POSTER */
   gap: 18px;
 
   border-radius: 18px;
@@ -1193,8 +1195,27 @@ body {
   pointer-events: none;
 }
 
+/* Mirror layout (POSTER | TEXT) for alternating series */
+.series-panel--reverse {
+  grid-template-columns: 0.8fr 1.2fr; /* POSTER | TEXT */
+}
+
+/* Ensure children sit in the right columns when reversed */
+.series-panel--reverse .series-right {
+  grid-column: 1;
+}
+.series-panel--reverse .series-left {
+  grid-column: 2;
+}
+
+/* Mobile: single column, keep poster above text for both */
 @media (max-width: 920px) {
   .series-panel { grid-template-columns: 1fr; }
+
+  .series-panel--reverse .series-right,
+  .series-panel--reverse .series-left {
+    grid-column: auto;
+  }
 }
 
 .series-left {
@@ -1252,22 +1273,34 @@ body {
 
 .series-meta-row:last-child { border-bottom: none; }
 
+/* Poster wrapper: lock proportions and prevent “bigger” images from expanding layout */
 .series-right {
   position: relative;
   z-index: 1;
 }
 
 .series-poster {
-  border-radius: 18px;
+  width: 100%;
+  border-radius: 16px;
   overflow: hidden;
-  border: 1px solid rgba(57,255,20,0.16);
-  background: rgba(0,0,0,0.45);
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(0,0,0,0.25);
 }
 
+/* KEY FIX: normalize poster visual size */
 .series-poster img {
   width: 100%;
+  height: 260px;            /* fixed visual height for symmetry */
+  object-fit: cover;        /* crops if aspect ratio differs */
   display: block;
   filter: contrast(105%) brightness(92%);
+}
+
+/* On small screens, allow a slightly taller poster */
+@media (max-width: 920px) {
+  .series-poster img {
+    height: 240px;
+  }
 }
 
 .series-caption {
@@ -1277,6 +1310,7 @@ body {
   color: rgba(255,255,255,0.60);
   border-top: 1px solid rgba(255,255,255,0.10);
 }
+
 
 
 /* ===============================
@@ -1432,3 +1466,177 @@ body {
 }
 
 
+/* ===============================
+   HOME HERO: REEL BACKGROUND (Fortiche-style function)
+   Requires the HTML classes: hero--reel, hero-reel, hero-inner, hero-actions, hero-meta
+================================ */
+
+/* Make the hero a containing block for the video */
+.hero.hero--reel {
+  position: relative;
+  overflow: hidden;
+}
+
+/* The looping background video */
+.hero-reel {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center;
+
+  /* Keep it subtle so neon UI stays readable */
+  opacity: 0.22;
+  filter: contrast(115%) brightness(70%) saturate(95%);
+
+  /* Ensures the video never sits above text */
+  z-index: 0;
+}
+
+/* Optional dark/green overlay to unify the video with your palette */
+.hero-reelOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+
+  background:
+    radial-gradient(circle at center, rgba(57, 255, 20, 0.10), transparent 60%),
+    linear-gradient(to bottom, rgba(5,6,8,0.75), rgba(5,6,8,0.92));
+}
+
+/* Your hero content sits above the video + overlay */
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  width: min(820px, 92vw);
+  margin: 0 auto;
+}
+
+/* Keep your existing hero padding-top (nav clearance) working */
+.hero.hero--reel {
+  padding-top: 72px;
+}
+
+/* Action row inside hero */
+.hero-actions {
+  margin-top: 20px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Simple “terminal meta” box under hero actions */
+.hero-meta {
+  margin: 20px auto 0;
+  max-width: 520px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(0,0,0,0.35);
+  border-radius: 16px;
+  padding: 12px 14px;
+
+  text-align: left;
+}
+
+.hero-meta-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+
+  letter-spacing: 0.14em;
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.70);
+}
+
+.hero-meta-row:last-child {
+  border-bottom: none;
+}
+
+/* Ensure FX layers still sit above video, below text:
+   - video z=0
+   - overlay z=1
+   - hero text z=2
+   - fx-noise/scanlines z=1 already fixed + positioned (global)
+   This keeps your existing scheme stable. */
+
+/* ===============================
+   HOME: INLINE REEL BLOCK + IDENTITY BLOCK
+================================ */
+
+.hero--reelOnly {
+  min-height: 100vh;
+  padding-top: 72px; /* nav clearance */
+  position: relative;
+  overflow: hidden;
+}
+
+/* Vimeo background iframe wrapper */
+.hero-reelFrame {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+/* Make the iframe cover the hero like a video */
+.hero-reelIframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* Dark/green overlay so text/UI elsewhere stays consistent */
+.hero--reelOnly .hero-reelOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+
+  background:
+    radial-gradient(circle at center, rgba(57, 255, 20, 0.10), transparent 60%),
+    linear-gradient(to bottom, rgba(5,6,8,0.45), rgba(5,6,8,0.92));
+}
+
+/* Scroll cue */
+.hero-scrollCue {
+  position: absolute;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  z-index: 2;
+
+  text-decoration: none;
+  color: rgba(255,255,255,0.65);
+  letter-spacing: 0.22em;
+  font-size: 0.72rem;
+  font-weight: 700;
+
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(0,0,0,0.30);
+}
+
+.hero-scrollCue:hover {
+  border-color: rgba(57,255,20,0.30);
+  color: rgba(57,255,20,0.92);
+}
+
+/* Second block: your original centered hero (logo/title) */
+.hero--identity {
+  min-height: 100vh; /* keeps the “two block” feel */
+  padding-top: 72px; /* nav clearance */
+}
+
+/* Keep hero content on top of overlays */
+.hero--identity,
+.hero--reelOnly {
+  position: relative;
+  z-index: 2;
+}
