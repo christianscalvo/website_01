@@ -1591,3 +1591,8 @@ body {
   /* ...keep everything else... */
   align-items: start;   /* was: center */
 }
+
+.cards--social .card-text {
+  max-width: 60ch;
+}
+
