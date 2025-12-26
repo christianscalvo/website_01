@@ -23,8 +23,8 @@
 
     <div class="intro-lines">
       <div class="intro-line">REQUESTING ACCESS TO THE URANIUM CORE</div>
-      <div class="intro-line subtle">SIGNAL INTEGRITY: UNSTABLE</div>
-      <div class="intro-line subtle">ACCESS LEVEL: UNKNOWN</div>
+      <div class="intro-line subtle">SIGNAL CHECK: OK</div>
+      <div class="intro-line subtle">MODE: PORTFOLIO</div>
     </div>
 
     <button class="intro-enter" id="introEnter" type="button">
@@ -38,12 +38,9 @@
      AUDIO
 ========================== -->
 <button class="audio-toggle" id="audioToggle" type="button">
-  SOUND: OFF
+  UI SFX: OFF
 </button>
 
-<audio id="ambient" loop preload="auto">
-  <source src="{% static 'core/audio/hum.mp3' %}" type="audio/mpeg">
-</audio>
 
 <audio id="clickSfx" preload="auto">
   <source src="{% static 'core/audio/weird_click.mp3' %}" type="audio/mpeg">
@@ -187,7 +184,7 @@
       <h3 class="series-title">SCOTT PILGRIM: KO</h3>
 
     <p class="series-desc">
-      Stylized animation studies and tribute work—focused on action timing, graphic design, and punchy edits.
+      Faithful Comic Book Adaptation of the famous series Scott Pilgrim.
     </p>
 
       <div class="series-actions">
@@ -332,12 +329,10 @@
       </div>
         <h3 class="card-title">Contact & Bookings</h3>
         <p class="card-text">
-          For quotes: include your budget range, deadline, and references. We typically reply within 1–2 business days.
-        </p>
+          For quotes: include your budget range, deadline, and references. We typically reply within 1–2 business days.</p>
 
       <div class="card-meta">
-        <span>PRIORITY: NORMAL</span>
-        <span>SECURITY: LOW</span>
+        <span>EMAIL: ccalvo@theuraniumcore.com</span>
       </div>
       <a class="card-link" href="mailto:ccalvo@theuraniumcore.com">OPEN CHANNEL</a>
     </article>
@@ -350,15 +345,14 @@
 <script>
 (function () {
   const btn = document.getElementById("audioToggle");
-  const ambient = document.getElementById("ambient");
   const clickSfx = document.getElementById("clickSfx");
 
-  if (!btn || !ambient || !clickSfx) return;
+  if (!btn || !clickSfx) return;
 
-  let soundOn = false;
+  let sfxOn = false;
 
   function playClick() {
-    if (!soundOn) return;
+    if (!sfxOn) return;
     try {
       clickSfx.currentTime = 0;
       clickSfx.volume = 0.35;
@@ -366,20 +360,10 @@
     } catch (e) {}
   }
 
-  btn.addEventListener("click", async () => {
-    try {
-      if (!soundOn) {
-        ambient.volume = 0.18;
-        await ambient.play();
-        soundOn = true;
-        btn.textContent = "SOUND: ON";
-        playClick();
-      } else {
-        ambient.pause();
-        soundOn = false;
-        btn.textContent = "SOUND: OFF";
-      }
-    } catch (e) {}
+  btn.addEventListener("click", () => {
+    sfxOn = !sfxOn;
+    btn.textContent = sfxOn ? "UI SFX: ON" : "UI SFX: OFF";
+    playClick();
   });
 
   document.addEventListener("click", (e) => {
@@ -388,6 +372,7 @@
   });
 })();
 </script>
+
 
 <!-- =========================
      INTRO ENTER
