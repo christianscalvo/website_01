@@ -1894,3 +1894,156 @@ body {
     padding-right: 8px;
   }
 }
+
+
+/* =========================================
+   MOBILE OVERRIDES (HOME + NAV)
+   Keep desktop unchanged
+========================================= */
+@media (max-width: 680px) {
+
+  /* GLOBAL SPACING: reduce overall padding */
+  :root {
+    --page-pad: 14px;
+    --uc-section-pad-y: 42px;
+  }
+
+  /* NAV: reduce height + prevent “double-line giant bar” */
+  .nav-inner {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    gap: 10px;
+  }
+
+  .nav-brand {
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+  }
+
+  /* Let links wrap cleanly and be tappable */
+  .nav-links {
+    flex-wrap: wrap;
+    gap: 8px 10px;
+    justify-content: flex-start;
+  }
+
+  .nav-link {
+    font-size: 0.72rem;
+    padding: 8px 10px;
+    border-radius: 12px;
+  }
+
+  /* HERO REEL: make it feel tighter + avoid “wasted top padding” */
+  .hero--reelOnly {
+    padding-top: 64px; /* slightly less than desktop */
+  }
+
+  .hero-scrollCue {
+    bottom: 12px;
+    font-size: 0.68rem;
+    padding: 9px 10px;
+  }
+
+  /* IDENTITY: scale down logo + title so it fits without looking cramped */
+  .hero--identity .logo {
+    width: 200px;
+    margin-bottom: 1.2rem;
+  }
+
+  .hero--identity .studio-name {
+    font-size: 2.0rem;
+    letter-spacing: 0.18em;
+  }
+
+  .hero--identity .tagline {
+    font-size: 0.9rem;
+    max-width: 34ch;
+  }
+
+  /* Buttons: full width feels more “mobile native” */
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+  }
+
+  /* Featured series: remove the “desktop card density” and make posters shorter */
+  .series-panel {
+    padding: 12px;
+    gap: 14px;
+  }
+
+  .series-poster img {
+    height: 210px;
+  }
+
+  /* Services + Social: 1-column cards, bigger tap targets */
+  .cards {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .card {
+    padding: 16px;
+  }
+
+  .card-title {
+    font-size: 0.98rem;
+  }
+
+  .card-link {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Intro overlay: scale down and reduce “dead space” */
+  .intro-inner {
+    width: min(560px, 92vw);
+    padding: 22px 16px;
+  }
+
+  .intro-logo {
+    width: 190px;
+    margin-bottom: 14px;
+  }
+
+  .intro-line {
+    font-size: 0.82rem;
+  }
+
+  .intro-enter {
+    width: 100%;
+  }
+
+  /* Audio toggle: keep it reachable, not blocking */
+  .audio-toggle {
+    top: 12px;
+    right: 12px;
+    padding: 9px 10px;
+    font-size: 0.72rem;
+  }
+}
+
+
+.comic-reader--webtoon {
+  max-width: none;         /* stops the “small column” feeling */
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.webtoon-strip {
+  width: min(1100px, 100%);
+  margin: 0 auto;
+  padding: 0 var(--page-pad) 70px;
+}
+
+.webtoon-slice {
+  width: 100%;
+  height: auto;
+  display: block;
+}

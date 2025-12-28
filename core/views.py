@@ -2,6 +2,8 @@ from pathlib import Path
 from django.conf import settings
 from django.shortcuts import render
 from django.http import Http404
+import os
+import re
 
 def home(request):
     return render(request, "core/home.html")
@@ -124,22 +126,50 @@ def ruoh_comic_book(request, comic_slug):
     }
     return render(request, "core/ruoh_comic_book.html", ctx)
 
+def _natural_key(s: str):
+    # "page_2.png" < "page_10.png"
+    return [int(t) if t.isdigit() else t.lower() for t in re.split(r"(\d+)", s)]
 
 def ruoh_comic_reader(request, comic_slug, chapter_slug):
     root = _ruoh_comic_root()
-    chapter_path = os.path.join(root, comic_slug, chapter_slug)
-    if not os.path.isdir(chapter_path):
+    chapter_root = os.path.join(root, comic_slug, chapter_slug)
+    if not os.path.isdir(chapter_root):
         raise Http404("Chapter not found.")
 
-    # pages = image files in the folder
+    # Expect subfolders:
+    # core/static/core/ruoh/comic/<comic>/<chapter>/desktop/
+    # core/static/core/ruoh/comic/<comic>/<chapter>/webtoon/
+    requested_mode = (request.GET.get("mode") or "").strip().lower()
+    if requested_mode not in {"desktop", "webtoon"}:
+        requested_mode = "desktop"
+
+    # Optional: auto-prefer webtoon for mobile-like UAs (remove if you only want CSS/JS switching)
+    ua = (request.META.get("HTTP_USER_AGENT") or "").lower()
+    if "mobile" in ua and request.GET.get("mode") is None:
+        requested_mode = "webtoon"
+
     exts = (".png", ".jpg", ".jpeg", ".webp")
-    pages = []
-    for fn in sorted(os.listdir(chapter_path)):
-        if fn.lower().endswith(exts):
-            pages.append(f"core/ruoh/comic/{comic_slug}/{chapter_slug}/{fn}")
+
+    def collect_pages(mode: str):
+        folder = os.path.join(chapter_root, mode)
+        if not os.path.isdir(folder):
+            return []
+        fns = [fn for fn in os.listdir(folder) if fn.lower().endswith(exts)]
+        fns.sort(key=_natural_key)
+        # paths must be relative to STATIC root for {% static p %}
+        return [f"core/ruoh/comic/{comic_slug}/{chapter_slug}/{mode}/{fn}" for fn in fns]
+
+    pages = collect_pages(requested_mode)
+
+    # Fallback logic so you don't 404 if one folder isn't made yet
+    if not pages:
+        fallback = "desktop" if requested_mode == "webtoon" else "webtoon"
+        pages = collect_pages(fallback)
+        if pages:
+            requested_mode = fallback
 
     if not pages:
-        raise Http404("No pages found in chapter.")
+        raise Http404("No pages found in chapter (desktop/ or webtoon/).")
 
     ctx = {
         "comic_slug": comic_slug,
@@ -147,5 +177,6 @@ def ruoh_comic_reader(request, comic_slug, chapter_slug):
         "comic_title": comic_slug.replace("-", " ").upper(),
         "chapter_title": chapter_slug.replace("-", " ").upper(),
         "pages": pages,
+        "mode": requested_mode,  # template uses this
     }
     return render(request, "core/ruoh_comic_reader.html", ctx)

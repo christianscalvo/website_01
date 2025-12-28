@@ -14,12 +14,38 @@
   </div>
 </header>
 
-<main class="comic-reader">
-  <div class="comic-stage" style="display:block; padding: 18px;">
-    {% for p in pages %}
-      <img class="comic-page is-visible" src="{% static p %}" alt="Page {{ forloop.counter }}" style="margin-bottom:
-       14px;">
-    {% endfor %}
-  </div>
+<main class="comic-reader comic-reader--{{ mode }}">
+
+  {% if mode == "webtoon" %}
+    <!-- WEBTOON MODE: vertical strip, wider container -->
+    <div class="webtoon-strip">
+      {% for p in pages %}
+        <img class="webtoon-slice" src="{% static p %}" alt="Slice {{ forloop.counter }}" loading="lazy">
+      {% endfor %}
+    </div>
+
+  {% else %}
+    <!-- DESKTOP MODE: framed stage (your current style) -->
+    <div class="comic-stage">
+      {% for p in pages %}
+        <img class="comic-page is-visible" src="{% static p %}" alt="Page {{ forloop.counter }}" loading="lazy">
+      {% endfor %}
+    </div>
+  {% endif %}
+
 </main>
+
+    <script>
+(function () {
+  const params = new URLSearchParams(window.location.search);
+  if (params.get("mode")) return; // user forced it
+
+  if (window.matchMedia("(max-width: 820px)").matches) {
+    params.set("mode", "webtoon");
+    const url = window.location.pathname + "?" + params.toString();
+    window.location.replace(url);
+  }
+})();
+</script>
+
 {% endblock %}
