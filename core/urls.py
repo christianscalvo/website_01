@@ -11,15 +11,10 @@ urlpatterns = [
     path("series/research-unit-of-horrors/explore/characters/", views.ruoh_characters, name="ruoh_characters"),
     path("series/research-unit-of-horrors/explore/environments/", views.ruoh_environments, name="ruoh_environments"),
     path("series/research-unit-of-horrors/explore/lore/", views.ruoh_lore, name="ruoh_lore"),
-    path(
-        "series/research-unit-of-horrors/explore/characters/",
-        views.ruoh_characters,
-        name="ruoh_characters",
-    ),
-    path(
-        "series/research-unit-of-horrors/explore/characters/<slug:character_slug>/",
-        views.ruoh_character_detail,
-        name="ruoh_character_detail",
-    ),
+    path("series/research-unit-of-horrors/explore/characters/", views.ruoh_characters,name="ruoh_characters",),
+    path("series/research-unit-of-horrors/explore/characters/<slug:character_slug>/", views.ruoh_character_detail, name="ruoh_character_detail",),
+    path("series/research-unit-of-horrors/comic/", views.ruoh_comic_archive, name="ruoh_comic_archive"),
+    path("series/research-unit-of-horrors/comic/<slug:comic_slug>/", views.ruoh_comic_book, name="ruoh_comic_book"),
+    path("series/research-unit-of-horrors/comic/<slug:comic_slug>/<slug:chapter_slug>/", views.ruoh_comic_reader, name="ruoh_comic_reader"),
 
 ]

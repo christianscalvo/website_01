@@ -1,0 +1,25 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %}{{ comic_title }} — {{ chapter_title }}{% endblock %}
+
+{% block content %}
+<header class="comic-head">
+  <div class="comic-head-inner">
+    <div class="comic-kicker">CASE FILE</div>
+    <h1 class="comic-title">{{ comic_title }} // {{ chapter_title }}</h1>
+    <div class="comic-actions">
+      <a class="btn-secondary" href="{% url 'ruoh_comic_book' comic_slug %}">BACK TO CHAPTERS</a>
+    </div>
+  </div>
+</header>
+
+<main class="comic-reader">
+  <div class="comic-stage" style="display:block; padding: 18px;">
+    {% for p in pages %}
+      <img class="comic-page is-visible" src="{% static p %}" alt="Page {{ forloop.counter }}" style="margin-bottom:
+       14px;">
+    {% endfor %}
+  </div>
+</main>
+{% endblock %}

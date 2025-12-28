@@ -1252,7 +1252,7 @@ body {
 ================================ */
 #explore .ruoh-gallery {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
   margin-top: 14px;
 }
@@ -1819,3 +1819,78 @@ body {
   pointer-events: none;
 }
 
+/* ===============================
+   EXPLORE THUMBNAILS (RUOH)
+   Use background images correctly
+================================ */
+
+#explore .ruoh-thumb.ruoh-thumb--explore {
+  position: relative;
+  overflow: hidden;
+
+  /* Keep your existing tile feel */
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.55);
+  text-decoration: none;
+
+  /* Pick ONE ratio: your grid uses 4/3 right now */
+  aspect-ratio: 4 / 5;
+  min-height: 170px;
+
+  /* This is the key part */
+  background-image: var(--thumb);
+  background-size: cover;              /* correct crop */
+  background-repeat: no-repeat;
+  background-position: center;         /* change per tile if needed */
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+#explore .ruoh-thumb.ruoh-thumb--explore:hover {
+  transform: translateY(-2px);
+  border-color: rgba(57, 255, 20, 0.35);
+  box-shadow: 0 24px 90px rgba(0, 0, 0, 0.70);
+}
+
+/* Dark overlay + green glow for readability */
+#explore .ruoh-thumb.ruoh-thumb--explore::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(57, 255, 20, 0.16), transparent 60%),
+    linear-gradient(to bottom, rgba(0,0,0,0.25), rgba(0,0,0,0.85));
+  z-index: 0;
+}
+
+/* Bottom label area stays as your existing style */
+#explore .ruoh-thumb.ruoh-thumb--explore .ruoh-thumb-inner {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  padding: 12px 12px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.0));
+  z-index: 1;
+}
+
+/* ===============================
+   COMIC READER — WIDE MODE
+================================ */
+
+
+.comic-reader {
+  width: 100vw;
+  max-width: none;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+}
+
+@media (max-width: 680px) {
+  .comic-reader {
+    width: 100%;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+}

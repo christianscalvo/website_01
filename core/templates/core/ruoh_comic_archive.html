@@ -1,0 +1,35 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %}RUOH Comic Archive | The Uranium Core{% endblock %}
+
+{% block content %}
+<main class="page">
+  <section class="ruoh-section">
+    <header class="ruoh-section-head">
+      <h2 class="ruoh-section-title">COMIC ARCHIVE</h2>
+      <p class="ruoh-section-subtitle">Select a book.</p>
+    </header>
+
+    <div class="ruoh-grid">
+      {% for c in comics %}
+      <article class="ruoh-card ruoh-comic">
+        <a class="ruoh-coverLink" href="{% url 'ruoh_comic_book' c.slug %}">
+          <img class="ruoh-coverImg" src="{% static c.cover %}" alt="{{ c.title }} cover">
+          <span class="ruoh-coverBadge">OPEN</span>
+        </a>
+
+        <div class="ruoh-card-top">
+          <span class="badge">BOOK</span>
+          <span class="stamp">{{ c.chapter_count }} CHAPTERS</span>
+        </div>
+
+        <h3 class="ruoh-card-title">{{ c.title }}</h3>
+
+        <a class="card-link" href="{% url 'ruoh_comic_book' c.slug %}">VIEW CHAPTERS</a>
+      </article>
+      {% endfor %}
+    </div>
+  </section>
+</main>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %}{{ comic_title }} | RUOH Comic{% endblock %}
+
+{% block content %}
+<main class="page">
+  <section class="ruoh-section">
+    <header class="ruoh-section-head">
+      <h2 class="ruoh-section-title">{{ comic_title }}</h2>
+      <p class="ruoh-section-subtitle">Select a chapter.</p>
+    </header>
+
+    <div class="ruoh-grid">
+      {% for ch in chapters %}
+      <article class="ruoh-card">
+        <div class="ruoh-card-top">
+          <span class="badge">CHAPTER</span>
+          <span class="stamp">{{ ch.title }}</span>
+        </div>
+
+        <h3 class="ruoh-card-title">{{ ch.title }}</h3>
+
+        <a class="card-link" href="{{ ch.url }}">READ</a>
+      </article>
+      {% endfor %}
+    </div>
+  </section>
+</main>
+{% endblock %}

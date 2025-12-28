@@ -93,7 +93,6 @@
   <section id="watch" class="ruoh-section">
     <header class="ruoh-section-head">
       <h2 class="ruoh-section-title">WATCH</h2>
-      <p class="ruoh-section-subtitle">Recovered transmissions. Viewer discretion advised.</p>
     </header>
 
     <div class="ruoh-grid">
@@ -131,102 +130,74 @@
     </div>
   </section>
 
-  <!-- =========================
-              READ
-  ========================== -->
-  <section id="read" class="ruoh-section">
-    <header class="ruoh-section-head">
-      <h2 class="ruoh-section-title">READ</h2>
-      <p class="ruoh-section-subtitle">Comic chapters</p>
-    </header>
-
-    <div class="ruoh-grid">
-      <article class="ruoh-card ruoh-comic">
-        <a class="ruoh-coverLink" href="/series/research-unit-of-horrors/comic/chapter-01/">
-          <img class="ruoh-coverImg"
-               src="{% static 'core/ruoh/comic/covers/cover_01.png' %}"
-               alt="RUOH Chapter 01 cover">
-          <span class="ruoh-coverBadge">OPEN FILE</span>
-        </a>
-
-        <div class="ruoh-card-top">
-          <span class="badge">CASE FILE</span>
-          <span class="stamp">CHAPTER 01</span>
-        </div>
-
-        <h3 class="ruoh-card-title">SIDE QUEST // “THE MONSTER FROM THE LAB”</h3>
-        <p class="ruoh-card-text">Calavera's work is interrupted by a disturbance in Roche-Bleu.</p>
-
-        <div class="ruoh-card-meta">
-          <span>PAGES: 18</span>
-          <span>FORMAT: WEB</span>
-        </div>
-
-        <a class="card-link" href="/series/research-unit-of-horrors/comic/chapter-01/">OPEN</a>
-      </article>
-
-      <article class="ruoh-card ruoh-comic">
-        <a class="ruoh-coverLink is-locked" href="#" onclick="return false;">
-          <img class="ruoh-coverImg"
-               src="{% static 'core/ruoh/comic/covers/cover_02.png' %}"
-               alt="RUOH Chapter 02 cover">
-          <span class="ruoh-coverBadge is-locked">LOCKED</span>
-        </a>
-
-        <div class="ruoh-card-top">
-          <span class="badge">CASE FILE</span>
-          <span class="stamp">CHAPTER 02</span>
-        </div>
-
-        <h3 class="ruoh-card-title">SIDE QUEST // “LET THERE BE GOBLIN”</h3>
-        <p class="ruoh-card-text">
-          The Unit does an excavation exploration in the middle of Frolisian mountain ranges to be greeted by potentially unfriendly creatures.
-        </p>
-
-        <div class="ruoh-card-meta">
-          <span>PAGES: 48</span>
-          <span>FORMAT: WEB</span>
-        </div>
-
-        <a class="card-link" href="#" onclick="return false;">LOCKED</a>
-      </article>
-    </div>
-  </section>
-
-  <!-- =========================
+      <!-- =========================
             EXPLORE
   ========================== -->
 <section id="explore" class="ruoh-section">
 
-
-
   <header class="ruoh-section-head">
     <h2 class="ruoh-section-title">EXPLORE</h2>
-    <p class="ruoh-section-subtitle">Open the archive branches.</p>
   </header>
 
-  <div class="ruoh-gallery">
+    <div class="ruoh-gallery">
 
-    <a class="ruoh-thumb" href="{% url 'ruoh_characters' %}">
-      <div class="ruoh-thumb-inner">
-        <div class="ruoh-thumb-label">ARCHIVE</div>
-        <div class="ruoh-thumb-title">CHARACTERS</div>
-      </div>
-    </a>
+<a class="ruoh-thumb ruoh-thumb--explore"
+   href="{% url 'ruoh_characters' %}"
+   style="--thumb: url('{% static 'core/ruoh/explore/characters.png' %}');">
+  <div class="ruoh-thumb-inner">
+    <div class="ruoh-thumb-label">ARCHIVE</div>
+    <div class="ruoh-thumb-title">CHARACTERS</div>
+  </div>
+</a>
 
-    <a class="ruoh-thumb" href="{% url 'ruoh_environments' %}">
-      <div class="ruoh-thumb-inner">
-        <div class="ruoh-thumb-label">ARCHIVE</div>
-        <div class="ruoh-thumb-title">ENVIRONMENTS</div>
-      </div>
-    </a>
+<a class="ruoh-thumb ruoh-thumb--explore"
+   href="{% url 'ruoh_environments' %}"
+   style="--thumb: url('{% static 'core/ruoh/explore/environments.png' %}');">
+  <div class="ruoh-thumb-inner">
+    <div class="ruoh-thumb-label">ARCHIVE</div>
+    <div class="ruoh-thumb-title">ENVIRONMENTS</div>
+  </div>
+</a>
 
-    <a class="ruoh-thumb" href="{% url 'ruoh_lore' %}">
-      <div class="ruoh-thumb-inner">
-        <div class="ruoh-thumb-label">ARCHIVE</div>
-        <div class="ruoh-thumb-title">LORE</div>
+<a class="ruoh-thumb ruoh-thumb--explore"
+   href="{% url 'ruoh_lore' %}"
+   style="--thumb: url('{% static 'core/ruoh/explore/lore.png' %}');">
+  <div class="ruoh-thumb-inner">
+    <div class="ruoh-thumb-label">ARCHIVE</div>
+    <div class="ruoh-thumb-title">LORE</div>
+  </div>
+</a>
+
+
+</div>
+
+
+</section>
+
+
+
+  <!-- =========================
+              READ
+  ========================== -->
+
+    <section id="read" class="ruoh-section">
+  <header class="ruoh-section-head">
+    <h2 class="ruoh-section-title">READ</h2>
+    <p class="ruoh-section-subtitle">Browse the comic archive.</p>
+  </header>
+
+  <div class="ruoh-grid">
+    <article class="ruoh-card ruoh-comic">
+      <div class="ruoh-card-top">
+        <span class="badge">COMIC ARCHIVE</span>
+        <span class="stamp">BROWSE</span>
       </div>
-    </a>
+
+      <h3 class="ruoh-card-title">OPEN THE ARCHIVE</h3>
+      <p class="ruoh-card-text">View available books and chapters.</p>
+
+      <a class="card-link" href="{% url 'ruoh_comic_archive' %}">VIEW CHAPTERS</a>
+    </article>
   </div>
 </section>
 
