@@ -1,0 +1,25 @@
+NAME: SCIO CALAVERA
+NICKNAME: "The Philosopher of Ruin"
+
+BIO:
+Scio Calavera is a natural philosopher from Mainake, recognized for his highly unorthodox advancements in chemistry, biology, and mechanical engineering. His work consistently exceeds the scientific standards of his era, combining organic matter, volatile substances, and experimental machinery into functional—often unstable—systems. Despite lacking physical strength or combat training, Calavera’s inventions have repeatedly proven effective in sabotage, area denial, and asymmetric warfare.
+
+Currently operating from a subterranean laboratory beneath the independent city of Roche-Bleu, Calavera leads a small and unconventional research unit composed of soldiers, assistants, and anomalous entities. He is widely regarded as brilliant but ethically compromised, exhibiting obsessive focus, manipulative leadership, and little concern for collateral consequences. Among analysts, Scio Calavera is considered less a conventional scientist and more a destabilizing force whose work blurs the boundary between innovation, catastrophe, and forbidden knowledge.
+END
+
+ABILITIES:
+- Natural Philosophy | Advanced practical knowledge of chemistry, biology, and engineering far beyond contemporary norms.
+- Organic Mechanisms | Creation of semi-living constructs using DARK STUFF and biological components.
+- Liquid CAELIUM Cannon | Modular weapon system capable of functioning as acid projector, flamethrower, high-pressure cutter, adhesive trap, or focused energy beam.
+- Steampunk Robotics | Design and deployment of mechanical systems adapted for combat, infiltration, and experimentation.
+- Creative Problem Solving | Average measured intelligence paired with exceptional improvisational and lateral thinking.
+- Homunculus Assistance | Symbiotic entity capable of acting as a whip-like weapon, machinery sabotage tool, and core component in organic mechanism creation.
+END
+
+DETAILS:
+- Lacks physical combat ability and relies entirely on tools and constructs.
+- Exhibits manipulative and morally flexible behavior in pursuit of objectives.
+- Known for extreme impatience and volatile temperament.
+- Obsessively focused on long-term goals regardless of risk.
+- Maintains minimal concern for hierarchy, law, or conventional ethics.
+END

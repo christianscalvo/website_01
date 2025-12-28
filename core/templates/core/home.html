@@ -1,16 +1,11 @@
+{% extends "core/base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>The Uranium Core</title>
-  <link rel="stylesheet" href="{% static 'core/style.css' %}">
-</head>
 
-<body>
+{% block title %}The Uranium Core{% endblock %}
 
+{% block intro %}
 <!-- =========================
-     INTRO GATE
+     INTRO GATE (HOME ONLY)
 ========================== -->
 <div class="intro" id="intro" aria-hidden="false">
   <div class="intro-inner">
@@ -30,70 +25,51 @@
     <button class="intro-enter" id="introEnter" type="button">
       ENTER
     </button>
-
   </div>
 </div>
 
 <!-- =========================
-     AUDIO
+     AUDIO (HOME ONLY)
 ========================== -->
 <button class="audio-toggle" id="audioToggle" type="button">
   UI SFX: OFF
 </button>
 
-
 <audio id="clickSfx" preload="auto">
   <source src="{% static 'core/audio/weird_click.mp3' %}" type="audio/mpeg">
 </audio>
+{% endblock %}
+
+{% block content %}
 
 <!-- =========================
-     NAV
-========================== -->
-<nav class="nav">
-  <div class="nav-inner">
-    <a class="nav-brand" href="/">
-      <span class="nav-prompt">[</span>URANIUM_CORE<span class="nav-prompt">]</span><span class="nav-cursor">█</span>
-    </a>
-
-    <div class="nav-links">
-      <a class="nav-link is-active" href="#top">HOME</a>
-      <a class="nav-link" href="#featured">SERIES</a>
-      <a class="nav-link" href="#work">ARCHIVE</a>
-      <a class="nav-link" href="#contact">CONTACT</a>
-    </div>
-  </div>
-</nav>
-
-<!-- FX layers -->
-<div class="fx-noise" aria-hidden="true"></div>
-<div class="fx-scanlines" aria-hidden="true"></div>
-
-<!-- =========================
-     BLOCK 1: AUTO-PLAY REEL (INLINE VIMEO)
-     Autoplay will work reliably only if muted.
+     BLOCK 1: AUTO-PLAY REEL
 ========================== -->
 <section id="top" class="hero hero--reel hero--reelOnly">
   <div class="hero-reelOverlay" aria-hidden="true"></div>
 
-    <div class="hero-reelFrame" aria-label="Uranium Core Reel">
-      <iframe
-        class="hero-reelIframe"
-        src="https://player.vimeo.com/video/1149396230?autoplay=1&muted=1&loop=1&background=1&title=0&byline=0&portrait=0"
-        title="The Uranium Core Reel"
-        frameborder="0"
-        allow="autoplay; fullscreen; picture-in-picture"
-        allowfullscreen
-      ></iframe>
-    </div>
+  <div class="hero-reelFrame" aria-label="Uranium Core Reel">
+    <iframe
+      class="hero-reelIframe"
+      src="https://player.vimeo.com/video/1149396230?autoplay=1&muted=1&loop=1&background=1&title=0&byline=0&portrait=0"
+      title="The Uranium Core Reel"
+      frameborder="0"
+      allow="autoplay; fullscreen; picture-in-picture"
+      allowfullscreen
+    ></iframe>
+  </div>
 
-
-  <!-- minimal cue to scroll -->
   <a class="hero-scrollCue" href="#identity" aria-label="Scroll to studio identity">SCROLL ▾</a>
 </section>
 
 <!-- =========================
-     BLOCK 2: IDENTITY / LOGO SECTION
+     BLOCK 2: IDENTITY
 ========================== -->
+
+
+
+
+
 <section id="identity" class="hero hero--identity">
   <div class="hero-inner">
     <img
@@ -124,76 +100,74 @@
      FEATURED SERIES
 ========================== -->
 <section id="featured" class="section featured-series">
-  <header class="section-head">
-    <h2 class="section-title">FEATURED SERIES</h2>
-    <p class="section-subtitle">Primary archive branches of The Uranium Core.</p>
-  </header>
+  <div class="section-inner">
 
-  <!-- RUOH -->
-  <div class="series-panel">
-    <div class="series-left">
-      <div class="series-kicker">
-        <span class="badge">CASE FILE</span>
-        <span class="stamp">ACTIVE</span>
+    <header class="section-head">
+      <h2 class="section-title">FEATURED SERIES</h2>
+      <p class="section-subtitle">Primary archive branches of The Uranium Core.</p>
+    </header>
+
+    <!-- RUOH -->
+    <div class="series-panel">
+      <div class="series-left">
+        <div class="series-kicker">
+          <span class="badge">CASE FILE</span>
+          <span class="stamp">ACTIVE</span>
+        </div>
+
+        <h3 class="series-title">RESEARCH UNIT OF HORRORS</h3>
+
+        <p class="series-desc">
+          Original animated series concept with a horror-comedy tone. Proof of our character work, pacing, and world-building.
+        </p>
+
+        <div class="series-actions">
+          <a class="btn-primary" href="/series/research-unit-of-horrors/">ENTER RUOH ARCHIVE</a>
+          <a class="btn-secondary" href="/series/research-unit-of-horrors/#watch">WATCH</a>
+        </div>
+
+        <div class="series-meta">
+          <div class="series-meta-row"><span>MEDIA</span><span>ANIMATION / COMIC / ART</span></div>
+        </div>
       </div>
 
-      <h3 class="series-title">RESEARCH UNIT OF HORRORS</h3>
-
-    <p class="series-desc">
-      Original animated series concept with a horror-comedy tone. Proof of our character work, pacing, and world-building.
-    </p>
-
-
-      <div class="series-actions">
-        <a class="btn-primary" href="/series/research-unit-of-horrors/">ENTER RUOH ARCHIVE</a>
-        <a class="btn-secondary" href="/series/research-unit-of-horrors/#watch">WATCH</a>
-      </div>
-
-      <div class="series-meta">
-        <div class="series-meta-row"><span>MEDIA</span><span>ANIMATION / COMIC / ART</span></div>
-      </div>
-    </div>
-
-    <div class="series-right">
-      <div class="series-poster">
-        <img src="{% static 'core/ResearchUnitofHorrorsTitle.png' %}"
-             alt="Research Unit of Horrors Title Card">
-        <div class="series-caption">Research Unit of Horrors</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- SPKO -->
-  <div class="series-panel series-panel--reverse" style="margin-top: 22px;">
-
-    <div class="series-right">
-      <div class="series-poster">
-        <img src="{% static 'core/ScottPilgrimKOTitle.png' %}"
-             alt="Scott Pilgrim: KO Title Card">
-        <div class="series-caption">Scott Pilgrim KO</div>
+      <div class="series-right">
+        <div class="series-poster">
+          <img src="{% static 'core/ResearchUnitofHorrorsTitle.png' %}" alt="Research Unit of Horrors Title Card">
+          <div class="series-caption">Research Unit of Horrors</div>
+        </div>
       </div>
     </div>
 
-
-    <div class="series-left">
-      <div class="series-kicker">
-        <span class="badge">CASE FILE</span>
-        <span class="stamp">ACTIVE</span>
+    <!-- SPKO -->
+    <div class="series-panel series-panel--reverse" style="margin-top: 22px;">
+      <div class="series-right">
+        <div class="series-poster">
+          <img src="{% static 'core/ScottPilgrimKOTitle.png' %}" alt="Scott Pilgrim: KO Title Card">
+          <div class="series-caption">Scott Pilgrim KO</div>
+        </div>
       </div>
 
-      <h3 class="series-title">SCOTT PILGRIM: KO</h3>
+      <div class="series-left">
+        <div class="series-kicker">
+          <span class="badge">CASE FILE</span>
+          <span class="stamp">ACTIVE</span>
+        </div>
 
-    <p class="series-desc">
-      Faithful Comic Book Adaptation of the famous series Scott Pilgrim.
-    </p>
+        <h3 class="series-title">SCOTT PILGRIM: KO</h3>
 
-      <div class="series-actions">
-        <a class="btn-primary" href="/series/scott-pilgrim-ko/">ENTER SPKO ARCHIVE</a>
-        <a class="btn-secondary" href="/series/scott-pilgrim-ko/#videos">WATCH</a>
-      </div>
+        <p class="series-desc">
+          Faithful Comic Book Adaptation of the famous series Scott Pilgrim.
+        </p>
 
-      <div class="series-meta">
-        <div class="series-meta-row"><span>MEDIA</span><span>ANIMATION / ADAPTATION</span></div>
+        <div class="series-actions">
+          <a class="btn-primary" href="/series/scott-pilgrim-ko/">ENTER SPKO ARCHIVE</a>
+          <a class="btn-secondary" href="/series/scott-pilgrim-ko/#videos">WATCH</a>
+        </div>
+
+        <div class="series-meta">
+          <div class="series-meta-row"><span>MEDIA</span><span>ANIMATION / ADAPTATION</span></div>
+        </div>
       </div>
     </div>
 
@@ -201,146 +175,159 @@
 </section>
 
 <!-- =========================
-     ARCHIVE INDEX
+     SERVICES
 ========================== -->
 <section id="work" class="section">
-  <header class="section-head">
-    <h2 class="section-title">SERVICES</h2>
-    <p class="section-subtitle">
-      We build animation that sells ideas—whether it’s a short-form campaign, a branded spot, or an original series pitch.
-    </p>
-  </header>
+  <div class="section-inner">
 
-  <div class="cards">
-    <article class="card">
-      <div class="card-top">
-        <span class="badge">2D ANIMATION</span>
-        <span class="stamp">FULL PIPELINE</span>
-      </div>
-      <h3 class="card-title">Animation Production</h3>
-      <p class="card-text">
-        Storyboards → animation → polish. We deliver clean, stylized motion with strong timing and appeal.
+    <header class="section-head">
+      <h2 class="section-title">SERVICES</h2>
+      <p class="section-subtitle">
+        We build animation that sells ideas—whether it’s a short-form campaign, a branded spot, or an original series pitch.
       </p>
-      <div class="card-meta">
-        <span>SHORTS • SCENES • PILOTS</span>
-        <span>TURNAROUND: FAST & RELIABLE</span>
-      </div>
-      <a class="card-link" href="#contact">REQUEST A QUOTE</a>
-    </article>
+    </header>
 
-    <article class="card">
-      <div class="card-top">
-        <span class="badge">MOTION DESIGN</span>
-        <span class="stamp">BRANDED</span>
-      </div>
-      <h3 class="card-title">Titles, Promos, Ads</h3>
-      <p class="card-text">
-        Punchy motion graphics for brands, creators, and campaigns—optimized for YouTube, Shorts, and social.
-      </p>
-      <div class="card-meta">
-        <span>LOGO ANIMATION • OPENERS</span>
-        <span>SOCIAL CUTDOWNS</span>
-      </div>
-      <a class="card-link" href="#contact">START A PROJECT</a>
-    </article>
+    <div class="cards">
+      <article class="card">
+        <div class="card-top">
+          <span class="badge">2D ANIMATION</span>
+          <span class="stamp">FULL PIPELINE</span>
+        </div>
+        <h3 class="card-title">Animation Production</h3>
+        <p class="card-text">
+          Storyboards → animation → polish. We deliver clean, stylized motion with strong timing and appeal.
+        </p>
+        <div class="card-meta">
+          <span>SHORTS • SCENES • PILOTS</span>
+          <span>TURNAROUND: FAST & RELIABLE</span>
+        </div>
+        <a class="card-link" href="#contact">REQUEST A QUOTE</a>
+      </article>
 
-    <article class="card">
-      <div class="card-top">
-        <span class="badge">AUDIO</span>
-        <span class="stamp">OPTIONAL</span>
-      </div>
-      <h3 class="card-title">Sound & Music Support</h3>
-      <p class="card-text">
-        Sound design and music support when you need a finished, watch-ready deliverable.
-      </p>
-      <div class="card-meta">
-        <span>SFX • MIX • MUSIC DIRECTION</span>
-        <span>DELIVERED WITH VIDEO</span>
-      </div>
-      <a class="card-link" href="#contact">ASK ABOUT AUDIO</a>
-    </article>
+      <article class="card">
+        <div class="card-top">
+          <span class="badge">MOTION DESIGN</span>
+          <span class="stamp">BRANDED</span>
+        </div>
+        <h3 class="card-title">Titles, Promos, Ads</h3>
+        <p class="card-text">
+          Punchy motion graphics for brands, creators, and campaigns—optimized for YouTube, Shorts, and social.
+        </p>
+        <div class="card-meta">
+          <span>LOGO ANIMATION • OPENERS</span>
+          <span>SOCIAL CUTDOWNS</span>
+        </div>
+        <a class="card-link" href="#contact">START A PROJECT</a>
+      </article>
+
+      <article class="card">
+        <div class="card-top">
+          <span class="badge">AUDIO</span>
+          <span class="stamp">OPTIONAL</span>
+        </div>
+        <h3 class="card-title">Sound & Music Support</h3>
+        <p class="card-text">
+          Sound design and music support when you need a finished, watch-ready deliverable.
+        </p>
+        <div class="card-meta">
+          <span>SFX • MIX • MUSIC DIRECTION</span>
+          <span>DELIVERED WITH VIDEO</span>
+        </div>
+        <a class="card-link" href="#contact">ASK ABOUT AUDIO</a>
+      </article>
+    </div>
+
   </div>
 </section>
-
 
 <!-- =========================
-     SOCIAL MEDIA
+     SOCIAL
 ========================== -->
-
-
 <section id="social" class="section">
-  <header class="section-head">
-    <h2 class="section-title">FOLLOW</h2>
-    <p class="section-subtitle">
-      New clips, works-in-progress, and releases—posted across platforms.
-    </p>
-  </header>
+  <div class="section-inner">
 
-  <div class="cards cards--social">
-    <article class="card">
-      <div class="card-top">
-        <span class="badge">YOUTUBE</span>
-        <span class="stamp">MAIN</span>
-      </div>
-      <h3 class="card-title">The Uranium Core</h3>
-      <p class="card-text">Reels, episodes, and curated uploads.</p>
-      <a class="card-link" href="https://www.youtube.com/theuraniumcore" target="_blank" rel="noopener">OPEN CHANNEL</a>
-    </article>
+    <header class="section-head">
+      <h2 class="section-title">FOLLOW</h2>
+      <p class="section-subtitle">
+        New clips, works-in-progress, and releases—posted across platforms.
+      </p>
+    </header>
 
-    <article class="card">
-      <div class="card-top">
-        <span class="badge">INSTAGRAM</span>
-        <span class="stamp">CLIPS</span>
-      </div>
-      <h3 class="card-title">Short-form + BTS</h3>
-      <p class="card-text">WIP shots, shots breakdowns, and updates.</p>
-      <a class="card-link" href="https://www.instagram.com/theuraniumcore" target="_blank" rel="noopener">VIEW PROFILE</a>
-    </article>
+    <div class="cards cards--social">
+      <article class="card">
+        <div class="card-top">
+          <span class="badge">YOUTUBE</span>
+          <span class="stamp">MAIN</span>
+        </div>
+        <h3 class="card-title">The Uranium Core</h3>
+        <p class="card-text">Reels, episodes, and curated uploads.</p>
+        <a class="card-link" href="https://www.youtube.com/theuraniumcore" target="_blank" rel="noopener">OPEN CHANNEL</a>
+      </article>
 
-    <article class="card">
-      <div class="card-top">
-        <span class="badge">TIKTOK</span>
-        <span class="stamp">FAST</span>
-      </div>
-      <h3 class="card-title">Shorts + Experiments</h3>
-      <p class="card-text">Animation tests and fast edits.</p>
-      <a class="card-link" href="https://www.tiktok.com/@theuraniumcore" target="_blank" rel="noopener">WATCH</a>
-    </article>
+      <article class="card">
+        <div class="card-top">
+          <span class="badge">INSTAGRAM</span>
+          <span class="stamp">CLIPS</span>
+        </div>
+        <h3 class="card-title">Short-form + BTS</h3>
+        <p class="card-text">WIP shots, shots breakdowns, and updates.</p>
+        <a class="card-link" href="https://www.instagram.com/theuraniumcore" target="_blank" rel="noopener">VIEW PROFILE</a>
+      </article>
+
+      <article class="card">
+        <div class="card-top">
+          <span class="badge">TIKTOK</span>
+          <span class="stamp">FAST</span>
+        </div>
+        <h3 class="card-title">Shorts + Experiments</h3>
+        <p class="card-text">Animation tests and fast edits.</p>
+        <a class="card-link" href="https://www.tiktok.com/@theuraniumcore" target="_blank" rel="noopener">WATCH</a>
+      </article>
+    </div>
+
   </div>
 </section>
-
 
 <!-- =========================
      CONTACT
 ========================== -->
 <section id="contact" class="section">
-  <header class="section-head">
-    <h2 class="section-title">CONTACT</h2>
-    <p class="section-subtitle">
-      Booking projects now. Tell us your timeline, style references, and deliverables—then we’ll reply with next steps.
-    </p>
-  </header>
+  <div class="section-inner">
 
-  <div class="cards">
-    <article class="card">
-      <div class="card-top">
-        <span class="badge">CHANNEL: EMAIL</span>
-        <span class="stamp">OPEN</span>
-      </div>
+    <header class="section-head">
+      <h2 class="section-title">CONTACT</h2>
+      <p class="section-subtitle">
+        Booking projects now. Tell us your timeline, style references, and deliverables—then we’ll reply with next steps.
+      </p>
+    </header>
+
+    <div class="cards">
+      <article class="card">
+        <div class="card-top">
+          <span class="badge">CHANNEL: EMAIL</span>
+          <span class="stamp">OPEN</span>
+        </div>
+
         <h3 class="card-title">Contact & Bookings</h3>
         <p class="card-text">
-          For quotes: include your budget range, deadline, and references. We typically reply within 1–2 business days.</p>
+          For quotes: include your budget range, deadline, and references. We typically reply within 1–2 business days.
+        </p>
 
-      <div class="card-meta">
-        <span>EMAIL: ccalvo@theuraniumcore.com</span>
-      </div>
-      <a class="card-link" href="mailto:ccalvo@theuraniumcore.com">OPEN CHANNEL</a>
-    </article>
+        <div class="card-meta">
+          <span>EMAIL: ccalvo@theuraniumcore.com</span>
+        </div>
+        <a class="card-link" href="mailto:ccalvo@theuraniumcore.com">OPEN CHANNEL</a>
+      </article>
+    </div>
+
   </div>
 </section>
 
+{% endblock %}
+
+{% block scripts %}
 <!-- =========================
-     AUDIO + CLICK SFX
+     AUDIO + CLICK SFX (HOME ONLY)
 ========================== -->
 <script>
 (function () {
@@ -373,9 +360,9 @@
 })();
 </script>
 
-
 <!-- =========================
-     INTRO ENTER
+     INTRO ENTER (HOME ONLY)
+     Show once per tab/session
 ========================== -->
 <script>
 (function () {
@@ -383,9 +370,23 @@
   const enterBtn = document.getElementById("introEnter");
   const audioBtn = document.getElementById("audioToggle");
 
-  if (!intro || !enterBtn) return;
+  if (!intro) return;
+
+  const KEY = "uc_intro_seen_v1";
+
+  try {
+    if (sessionStorage.getItem(KEY) === "1") {
+      intro.style.display = "none";
+      intro.setAttribute("aria-hidden", "true");
+      return;
+    }
+  } catch (e) {}
+
+  if (!enterBtn) return;
 
   enterBtn.addEventListener("click", () => {
+    try { sessionStorage.setItem(KEY, "1"); } catch (e) {}
+
     if (audioBtn && audioBtn.textContent.includes("OFF")) {
       audioBtn.click();
     }
@@ -399,6 +400,4 @@
   });
 })();
 </script>
-
-</body>
-</html>
+{% endblock %}

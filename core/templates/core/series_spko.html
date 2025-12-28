@@ -1,12 +1,9 @@
+{% extends "core/base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Scott Pilgrim: KO | The Uranium Core</title>
-  <link rel="stylesheet" href="{% static 'core/style.css' %}">
-</head>
-<body>
+
+{% block title %}Scott Pilgrim: KO | The Uranium Core{% endblock %}
+
+{% block content %}
 
 <!-- =========================
      TRANSMISSION MODAL (VIMEO)
@@ -22,14 +19,7 @@
         <span class="player-name" id="playerTitle">VIDEO</span>
       </div>
 
-      <button
-        class="player-close"
-        type="button"
-        data-close-player
-        aria-label="Close transmission"
-      >
-        ✕
-      </button>
+      <button class="player-close" type="button" data-close-player aria-label="Close transmission">✕</button>
     </div>
 
     <div class="player-frame">
@@ -43,27 +33,6 @@
     </div>
   </div>
 </div>
-
-<!-- =========================
-           NAV
-========================== -->
-<nav class="nav">
-  <div class="nav-inner">
-    <a class="nav-brand" href="/">
-      <span class="nav-prompt">[</span>URANIUM_CORE<span class="nav-prompt">]</span><span class="nav-cursor">█</span>
-    </a>
-    <div class="nav-links">
-      <a class="nav-link" href="/">HOME</a>
-      <a class="nav-link" href="/#work">WORK</a>
-      <a class="nav-link is-active" href="/series/scott-pilgrim-ko/">SERIES</a>
-      <a class="nav-link" href="/#contact">CONTACT</a>
-    </div>
-  </div>
-</nav>
-
-<!-- FX layers -->
-<div class="fx-noise" aria-hidden="true"></div>
-<div class="fx-scanlines" aria-hidden="true"></div>
 
 <!-- =========================
            HERO
@@ -87,7 +56,6 @@
       </div>
 
       <div class="ruoh-cta">
-        <!-- Optional: hero PLAY like RUOH -->
         <a class="card-link js-open-player"
            href="#"
            data-title="SPKO VIDEO 01 // TRANSMISSION"
@@ -95,7 +63,8 @@
           PLAY
         </a>
 
-        <a class="btn-secondary" href="#fanart">VIEW FAN ART</a>
+        <!-- UPDATED: send to gallery page -->
+        <a class="btn-secondary" href="/spko/fanart">VIEW FAN ART</a>
       </div>
 
       <div class="ruoh-meta">
@@ -129,15 +98,13 @@
     </header>
 
     <div class="ruoh-grid">
-
-      <!-- VIDEO 01 (LIVE) -->
       <article class="ruoh-card ruoh-video">
         <a class="ruoh-thumbLink js-open-player"
            href="#"
            data-title="SPKO VIDEO 01 // TRANSMISSION"
            data-vimeo-id="1149350137">
           <img class="ruoh-thumbImg"
-               src="{% static 'core/spko/Part_01_thumb.png' %}"
+               src="{% static 'core/spko/Thumbnails/Part_01_thumb.png' %}"
                alt="SPKO Video 01 preview">
           <span class="ruoh-playBadge">▶ PLAY</span>
         </a>
@@ -163,15 +130,15 @@
         </a>
       </article>
 
-      <!-- VIDEO 02 (COMING SOON / LOCKED) -->
       <article class="ruoh-card ruoh-video">
-        <a class="ruoh-thumbLink is-locked"
+        <a class="ruoh-thumbLink js-open-player"
            href="#"
-           onclick="return false;">
+           data-title="SPKO VIDEO 02 // TRANSMISSION"
+           data-vimeo-id="1149759976">
           <img class="ruoh-thumbImg"
-               src="{% static 'core/ScottPilgrimKOTitle.png' %}"
-               alt="SPKO Video 02 preview (coming soon)">
-          <span class="ruoh-playBadge">COMING SOON</span>
+               src="{% static 'core/spko/Thumbnails/Part_02_thumb.png' %}"
+               alt="SPKO Video 02 preview">
+          <span class="ruoh-playBadge">▶ PLAY</span>
         </a>
 
         <div class="ruoh-card-top">
@@ -180,23 +147,25 @@
         </div>
 
         <h3 class="ruoh-card-title">VIDEO 02</h3>
-        <p class="ruoh-card-text">Transmission pending upload. Slot reserved.</p>
+        <p class="ruoh-card-text">Recovered upload. Playback available via Vimeo.</p>
 
         <div class="ruoh-card-meta">
-          <span>HOST: TBA</span>
-          <span>STATUS: PENDING</span>
+          <span>HOST: VIMEO</span>
+          <span>STATUS: LIVE</span>
         </div>
 
-        <a class="card-link" href="#" onclick="return false;">
-          LOCKED
+        <a class="card-link js-open-player"
+           href="#"
+           data-title="SPKO VIDEO 02 // TRANSMISSION"
+           data-vimeo-id="1149759976">
+          PLAY
         </a>
       </article>
-
     </div>
   </section>
 
   <!-- =========================
-            FAN ART
+        FAN ART (TEASER + LINK)
   ========================== -->
   <section id="fanart" class="ruoh-section">
     <header class="ruoh-section-head">
@@ -208,25 +177,25 @@
       <article class="ruoh-card" style="grid-column: 1 / -1;">
         <div class="ruoh-card-top">
           <span class="badge">IMAGE</span>
-          <span class="stamp">FEATURED</span>
+          <span class="stamp">ARCHIVE</span>
         </div>
 
-        <h3 class="ruoh-card-title">Featured Fan Art</h3>
+        <h3 class="ruoh-card-title">Open the Fan Art Gallery</h3>
 
         <p class="ruoh-card-text">
-          Current featured piece. More will be added as additional files are cleared for the archive.
+          View the full archive. The gallery auto-updates from the folder whenever new files are added.
         </p>
 
-        <div style="margin-top: 14px; border-radius: 14px; overflow: hidden; border: 1px solid rgba(255,255,255,0.10);">
+        <div class="ruoh-image-wrap">
           <img
-            src="{% static 'core/ScottPataParaTwitter.png' %}"
-            alt="Scott Pilgrim: KO fan art"
-            style="width: 100%; height: auto; display: block;"
+            src="{% static 'core/spko/Fanart/ScottPataParaTwitter.png' %}"
+            alt="Scott Pilgrim: KO fan art preview"
           />
         </div>
 
-        <div class="ruoh-card-foot">
-          <span class="ruoh-foot-note">Image file: <code>core/static/core/ScottPataParaTwitter.png</code></span>
+        <div class="ruoh-card-foot" style="display:flex; justify-content:space-between; gap:12px; align-items:center;">
+          <span class="ruoh-foot-note">Preview from archive</span>
+          <a class="card-link" href="/spko/fanart">OPEN GALLERY</a>
         </div>
       </article>
     </div>
@@ -234,9 +203,9 @@
 
 </main>
 
-<!-- =========================
-      VIMEO MODAL JS
-========================== -->
+{% endblock %}
+
+{% block scripts %}
 <script>
 (function () {
   const modal = document.getElementById("playerModal");
@@ -253,11 +222,9 @@
     titleEl.textContent = title;
 
     if (vimeoId) {
-      iframe.src =
-        `https://player.vimeo.com/video/${vimeoId}?autoplay=1&muted=0&title=0&byline=0&portrait=0`;
+      iframe.src = `https://player.vimeo.com/video/${vimeoId}?autoplay=1&muted=0&title=0&byline=0&portrait=0`;
     } else if (ytId) {
-      iframe.src =
-        `https://www.youtube.com/embed/${ytId}?autoplay=1&rel=0`;
+      iframe.src = `https://www.youtube.com/embed/${ytId}?autoplay=1&rel=0`;
     } else {
       return;
     }
@@ -281,10 +248,7 @@
       openPlayer(openBtn);
       return;
     }
-
-    if (e.target.closest("[data-close-player]")) {
-      closePlayer();
-    }
+    if (e.target.closest("[data-close-player]")) closePlayer();
   });
 
   document.addEventListener("keydown", (e) => {
@@ -294,6 +258,4 @@
   });
 })();
 </script>
-
-</body>
-</html>
+{% endblock %}

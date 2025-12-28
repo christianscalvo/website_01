@@ -1,0 +1,25 @@
+NAME: SAMHAIN
+NICKNAME: "The Pumpkin King"
+
+BIO:
+Samhain is a cucurbite-born combat entity originating from the Kato Kosmos, documented as possessing extreme physical strength and durability despite his young chronological age. Born in 478 as part of a large cucurbite brood, he exhibited abnormal combat aptitude early in development, particularly in vine manipulation and raw force output. Unlike others of his kind, Samhain showed little interest in leadership or ritual responsibility, instead prioritizing personal strength, combat, and exploration.
+
+After extended activity across multiple regions of the Kato Kosmos, Samhain relocated to the Surface, where his physiology and behavior marked him as immediately hostile to human perception. Operating primarily as a hired combatant and frontline enforcer, he became known for overwhelming battlefield presence, minimal situational awareness, and instinct-driven decision-making. Despite limited cognitive complexity and poor impulse control, Samhain demonstrates unwavering loyalty toward those he considers allies, functioning as a highly effective defensive and assault asset within the Research Unit.
+END
+
+ABILITIES:
+- Super Strength | Delivers devastating physical attacks with or without weapons.
+- Super Resilience | Deep Iron armor provides exceptional protection, allowing sustained frontal engagement against large forces.
+- Vine Manipulation | Uses prehensile vines as tentacles for offense, defense, and armor control.
+- Pumpkin Summoning Arts | Invokes combat entities including Killer Bees, Earth Sharks, and legendary manifestations such as the Infinipede and Will-O-Wisp.
+- Will-O-Wisp Furnace | Activates internal fire system within the armor, selectively immune to Samhain while inflicting severe damage to enemies.
+- Pumpkin King Mode | Temporary state in which Samhain abandons his armor, greatly increasing vine strength at the cost of mobility.
+END
+
+DETAILS:
+- Operates primarily on instinct, hunger, and desire for combat.
+- Displays extremely low situational awareness and strategic planning.
+- Avoids complex problem-solving unless force is applicable.
+- Loyal to allied humans despite limited understanding of social dynamics.
+- Considered one of the most durable frontline assets available to the unit.
+END

@@ -1,12 +1,9 @@
+{% extends "core/base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Research Unit of Horrors | The Uranium Core</title>
-  <link rel="stylesheet" href="{% static 'core/style.css' %}">
-</head>
-<body>
+
+{% block title %}Research Unit of Horrors | The Uranium Core{% endblock %}
+
+{% block content %}
 
 <!-- =========================
      TRANSMISSION MODAL (VIMEO)
@@ -22,14 +19,7 @@
         <span class="player-name" id="playerTitle">PILOT</span>
       </div>
 
-      <button
-        class="player-close"
-        type="button"
-        data-close-player
-        aria-label="Close transmission"
-      >
-        ✕
-      </button>
+      <button class="player-close" type="button" data-close-player aria-label="Close transmission">✕</button>
     </div>
 
     <div class="player-frame">
@@ -43,27 +33,6 @@
     </div>
   </div>
 </div>
-
-<!-- =========================
-           NAV
-========================== -->
-<nav class="nav">
-  <div class="nav-inner">
-    <a class="nav-brand" href="/">
-      <span class="nav-prompt">[</span>URANIUM_CORE<span class="nav-prompt">]</span><span class="nav-cursor">█</span>
-    </a>
-    <div class="nav-links">
-      <a class="nav-link" href="/">HOME</a>
-      <a class="nav-link" href="/#work">WORK</a>
-      <a class="nav-link is-active" href="/series/research-unit-of-horrors/">SERIES</a>
-      <a class="nav-link" href="/#contact">CONTACT</a>
-    </div>
-  </div>
-</nav>
-
-<!-- FX layers (optional; reuse from home) -->
-<div class="fx-noise" aria-hidden="true"></div>
-<div class="fx-scanlines" aria-hidden="true"></div>
 
 <!-- =========================
            HERO
@@ -87,7 +56,6 @@
       </div>
 
       <div class="ruoh-cta">
-        <!-- HERO PLAY (VIMEO) -->
         <a class="card-link js-open-player"
            href="#"
            data-title="RUOH PILOT // FIRST CONTACT"
@@ -129,38 +97,37 @@
     </header>
 
     <div class="ruoh-grid">
-        <article class="ruoh-card ruoh-video">
-          <a class="ruoh-thumbLink js-open-player"
-             href="#"
-             data-title="RUOH PILOT // FIRST CONTACT"
-             data-vimeo-id="1149281098">
-            <img class="ruoh-thumbImg"
-                 src="{% static 'core/ruoh/thumbs/Thumbnail_pilot.png' %}"
-                 alt="RUOH Pilot preview">
-            <span class="ruoh-playBadge">▶ PLAY</span>
-          </a>
+      <article class="ruoh-card ruoh-video">
+        <a class="ruoh-thumbLink js-open-player"
+           href="#"
+           data-title="RUOH PILOT // FIRST CONTACT"
+           data-vimeo-id="1149281098">
+          <img class="ruoh-thumbImg"
+               src="{% static 'core/ruoh/thumbs/Thumbnail_pilot.png' %}"
+               alt="RUOH Pilot preview">
+          <span class="ruoh-playBadge">▶ PLAY</span>
+        </a>
 
-          <div class="ruoh-card-top">
-            <span class="badge">TRANSMISSION</span>
-            <span class="stamp">PILOT</span>
-          </div>
+        <div class="ruoh-card-top">
+          <span class="badge">TRANSMISSION</span>
+          <span class="stamp">PILOT</span>
+        </div>
 
-          <h3 class="ruoh-card-title">PILOT // “FIRST CONTACT”</h3>
-          <p class="ruoh-card-text">The unit receives a file that contains footage from the future.</p>
+        <h3 class="ruoh-card-title">PILOT</h3>
+        <p class="ruoh-card-text">The unit prepares for a mission and Zara finds a new monstruous friend.</p>
 
-          <div class="ruoh-card-meta">
-            <span>DURATION: 8:42</span>
-            <span>FORMAT: 2D</span>
-          </div>
+        <div class="ruoh-card-meta">
+          <span>DURATION: 4:10</span>
+          <span>FORMAT: 2D</span>
+        </div>
 
-          <a class="card-link js-open-player"
-             href="#"
-             data-title="RUOH PILOT // FIRST CONTACT"
-             data-vimeo-id="1149281098">
-            PLAY
-          </a>
-        </article>
-
+        <a class="card-link js-open-player"
+           href="#"
+           data-title="RUOH PILOT"
+           data-vimeo-id="1149281098">
+          PLAY
+        </a>
+      </article>
     </div>
   </section>
 
@@ -174,105 +141,95 @@
     </header>
 
     <div class="ruoh-grid">
-        <article class="ruoh-card ruoh-comic">
-          <a class="ruoh-coverLink"
-             href="/series/research-unit-of-horrors/comic/chapter-01/">
-            <img class="ruoh-coverImg"
-                 src="{% static 'core/ruoh/comic/covers/cover_01.png' %}"
-                 alt="RUOH Chapter 01 cover">
-            <span class="ruoh-coverBadge">OPEN FILE</span>
-          </a>
+      <article class="ruoh-card ruoh-comic">
+        <a class="ruoh-coverLink" href="/series/research-unit-of-horrors/comic/chapter-01/">
+          <img class="ruoh-coverImg"
+               src="{% static 'core/ruoh/comic/covers/cover_01.png' %}"
+               alt="RUOH Chapter 01 cover">
+          <span class="ruoh-coverBadge">OPEN FILE</span>
+        </a>
 
-          <div class="ruoh-card-top">
-            <span class="badge">CASE FILE</span>
-            <span class="stamp">CHAPTER 01</span>
-          </div>
+        <div class="ruoh-card-top">
+          <span class="badge">CASE FILE</span>
+          <span class="stamp">CHAPTER 01</span>
+        </div>
 
-          <h3 class="ruoh-card-title">SIDE QUEST // “THE MONSTER FROM THE LAB”</h3>
-          <p class="ruoh-card-text">
-            Scio's work is interrupted by a disturbance in Roche-Bleu.
-          </p>
+        <h3 class="ruoh-card-title">SIDE QUEST // “THE MONSTER FROM THE LAB”</h3>
+        <p class="ruoh-card-text">Calavera's work is interrupted by a disturbance in Roche-Bleu.</p>
 
-          <div class="ruoh-card-meta">
-            <span>PAGES: 18</span>
-            <span>FORMAT: WEB</span>
-          </div>
+        <div class="ruoh-card-meta">
+          <span>PAGES: 18</span>
+          <span>FORMAT: WEB</span>
+        </div>
 
-          <a class="card-link"
-             href="/series/research-unit-of-horrors/comic/chapter-01/">
-            OPEN
-          </a>
-    </article>
+        <a class="card-link" href="/series/research-unit-of-horrors/comic/chapter-01/">OPEN</a>
+      </article>
 
-    <article class="ruoh-card ruoh-comic">
-      <a class="ruoh-coverLink is-locked"
-         href="#"
-         onclick="return false;">
-        <img class="ruoh-coverImg"
-             src="{% static 'core/ruoh/comic/covers/cover_02.png' %}"
-             alt="RUOH Chapter 02 cover">
-        <span class="ruoh-coverBadge is-locked">LOCKED</span>
-      </a>
+      <article class="ruoh-card ruoh-comic">
+        <a class="ruoh-coverLink is-locked" href="#" onclick="return false;">
+          <img class="ruoh-coverImg"
+               src="{% static 'core/ruoh/comic/covers/cover_02.png' %}"
+               alt="RUOH Chapter 02 cover">
+          <span class="ruoh-coverBadge is-locked">LOCKED</span>
+        </a>
 
-      <div class="ruoh-card-top">
-        <span class="badge">CASE FILE</span>
-        <span class="stamp">CHAPTER 02</span>
-      </div>
+        <div class="ruoh-card-top">
+          <span class="badge">CASE FILE</span>
+          <span class="stamp">CHAPTER 02</span>
+        </div>
 
-      <h3 class="ruoh-card-title">SIDE QUEST // “LET THERE BE GOBLIN”</h3>
-      <p class="ruoh-card-text">
-        The Unit does an excavation exploration in the middle of Frolisian mountain ranges to be greeted by potentially unfriendly creatures.
-      </p>
+        <h3 class="ruoh-card-title">SIDE QUEST // “LET THERE BE GOBLIN”</h3>
+        <p class="ruoh-card-text">
+          The Unit does an excavation exploration in the middle of Frolisian mountain ranges to be greeted by potentially unfriendly creatures.
+        </p>
 
-      <div class="ruoh-card-meta">
-        <span>PAGES: 48</span>
-        <span>FORMAT: WEB</span>
-      </div>
+        <div class="ruoh-card-meta">
+          <span>PAGES: 48</span>
+          <span>FORMAT: WEB</span>
+        </div>
 
-      <a class="card-link" href="#" onclick="return false;">
-        LOCKED
-      </a>
-    </article>
-
+        <a class="card-link" href="#" onclick="return false;">LOCKED</a>
+      </article>
     </div>
   </section>
 
   <!-- =========================
             EXPLORE
   ========================== -->
-  <section id="explore" class="ruoh-section">
-    <header class="ruoh-section-head">
-      <h2 class="ruoh-section-title">EXPLORE</h2>
-      <p class="ruoh-section-subtitle">Characters, anomalies, and visual development.</p>
-    </header>
+<section id="explore" class="ruoh-section">
 
-    <div class="ruoh-gallery">
-      <a class="ruoh-thumb" href="#" onclick="return false;">
-        <div class="ruoh-thumb-inner">
-          <div class="ruoh-thumb-label">CHARACTER</div>
-          <div class="ruoh-thumb-title">SCIO CALAVERA</div>
-        </div>
-      </a>
-      <a class="ruoh-thumb" href="#" onclick="return false;">
-        <div class="ruoh-thumb-inner">
-          <div class="ruoh-thumb-label">ANOMALY</div>
-          <div class="ruoh-thumb-title">SUBJECT // “THE DARK STUFF”</div>
-        </div>
-      </a>
-      <a class="ruoh-thumb" href="#" onclick="return false;">
-        <div class="ruoh-thumb-inner">
-          <div class="ruoh-thumb-label">LOCATION</div>
-          <div class="ruoh-thumb-title">SITE // ROCHE-BLEU</div>
-        </div>
-      </a>
-      <a class="ruoh-thumb" href="#" onclick="return false;">
-        <div class="ruoh-thumb-inner">
-          <div class="ruoh-thumb-label">CONCEPT ART</div>
-          <div class="ruoh-thumb-title">PROP // BILLY BOY</div>
-        </div>
-      </a>
-    </div>
-  </section>
+
+
+  <header class="ruoh-section-head">
+    <h2 class="ruoh-section-title">EXPLORE</h2>
+    <p class="ruoh-section-subtitle">Open the archive branches.</p>
+  </header>
+
+  <div class="ruoh-gallery">
+
+    <a class="ruoh-thumb" href="{% url 'ruoh_characters' %}">
+      <div class="ruoh-thumb-inner">
+        <div class="ruoh-thumb-label">ARCHIVE</div>
+        <div class="ruoh-thumb-title">CHARACTERS</div>
+      </div>
+    </a>
+
+    <a class="ruoh-thumb" href="{% url 'ruoh_environments' %}">
+      <div class="ruoh-thumb-inner">
+        <div class="ruoh-thumb-label">ARCHIVE</div>
+        <div class="ruoh-thumb-title">ENVIRONMENTS</div>
+      </div>
+    </a>
+
+    <a class="ruoh-thumb" href="{% url 'ruoh_lore' %}">
+      <div class="ruoh-thumb-inner">
+        <div class="ruoh-thumb-label">ARCHIVE</div>
+        <div class="ruoh-thumb-title">LORE</div>
+      </div>
+    </a>
+  </div>
+</section>
+
 
   <!-- =========================
             CONTACT
@@ -293,6 +250,9 @@
 
 </main>
 
+{% endblock %}
+
+{% block scripts %}
 <!-- =========================
       VIMEO MODAL JS
 ========================== -->
@@ -307,18 +267,15 @@
   function openPlayer(btn) {
     const title = btn.dataset.title || "TRANSMISSION";
     const vimeoId = btn.dataset.vimeoId;
-    const ytId = btn.dataset.ytId; // optional if you ever add YouTube again
+    const ytId = btn.dataset.ytId;
 
     titleEl.textContent = title;
 
     if (vimeoId) {
-      iframe.src =
-        `https://player.vimeo.com/video/${vimeoId}?autoplay=1&muted=0&title=0&byline=0&portrait=0`;
+      iframe.src = `https://player.vimeo.com/video/${vimeoId}?autoplay=1&muted=0&title=0&byline=0&portrait=0`;
     } else if (ytId) {
-      iframe.src =
-        `https://www.youtube.com/embed/${ytId}?autoplay=1&rel=0`;
+      iframe.src = `https://www.youtube.com/embed/${ytId}?autoplay=1&rel=0`;
     } else {
-      console.log("No video id found on this button.");
       return;
     }
 
@@ -328,7 +285,7 @@
   }
 
   function closePlayer() {
-    iframe.src = ""; // stops playback
+    iframe.src = "";
     modal.classList.remove("is-open");
     modal.setAttribute("aria-hidden", "true");
     document.body.style.overflow = "";
@@ -341,19 +298,12 @@
       openPlayer(openBtn);
       return;
     }
-
-    if (e.target.closest("[data-close-player]")) {
-      closePlayer();
-    }
+    if (e.target.closest("[data-close-player]")) closePlayer();
   });
 
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && modal.classList.contains("is-open")) {
-      closePlayer();
-    }
+    if (e.key === "Escape" && modal.classList.contains("is-open")) closePlayer();
   });
 })();
 </script>
-
-</body>
-</html>
+{% endblock %}

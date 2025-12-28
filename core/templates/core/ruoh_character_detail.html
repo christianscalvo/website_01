@@ -1,0 +1,224 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %}{{ c.name }} | RUOH Characters{% endblock %}
+
+{% block content %}
+
+<main class="page page--characterDetail">
+
+  <!-- HERO / SPLASH -->
+<header class="ruoh-hero ruoh-hero--character">
+
+    <div style="
+      position:absolute; inset:0;
+      background-image: url('{% static c.splash %}');
+      background-size: cover;
+      background-position: center;
+      filter: contrast(105%) brightness(75%);
+      transform: scale(1.02);
+      z-index:0;
+    "></div>
+
+    <div style="
+      position:absolute; inset:0;
+      background:
+        radial-gradient(circle at 30% 20%, rgba(57,255,20,0.16), rgba(0,0,0,0.82)),
+        linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,0.88));
+      z-index:1;
+    "></div>
+
+    <div class="ruoh-hero-inner" style="position:relative; z-index:2;">
+      <div class="ruoh-hero-left">
+        <h1 class="ruoh-title glitch" data-text="{{ c.name|upper }}">
+          {{ c.name|upper }}
+        </h1>
+
+        {% if c.nickname %}
+          <p class="ruoh-nickname">
+            “{{ c.nickname }}”
+          </p>
+        {% endif %}
+
+
+        {% if c.bio %}
+          <p class="ruoh-logline" style="margin-top: 14px; max-width: 720px;">
+            {{ c.bio|linebreaksbr }}
+          </p>
+        {% endif %}
+
+        <div class="ruoh-cta" style="margin-top: 18px;">
+          <a class="btn-secondary" href="{% url 'ruoh_characters' %}">← ALL CHARACTERS</a>
+          <a class="btn-secondary" href="/series/research-unit-of-horrors/#explore">← BACK TO RUOH</a>
+        </div>
+      </div>
+
+
+    </div>
+  </header>
+
+  <!-- ABILITIES -->
+  <section class="ruoh-section">
+    <header class="ruoh-section-head">
+      <h2 class="ruoh-section-title">ABILITIES</h2>
+      <p class="ruoh-section-subtitle">Observed behaviors and operational techniques.</p>
+    </header>
+
+    <div class="ruoh-grid">
+      {% for a_name, a_desc in c.abilities %}
+        <article class="ruoh-card">
+          <h3 class="ruoh-card-title">{{ a_name }}</h3>
+          <p class="ruoh-card-text">{{ a_desc }}</p>
+        </article>
+      {% empty %}
+        <p style="color: rgba(255,255,255,0.65);">No abilities found in data.txt.</p>
+      {% endfor %}
+    </div>
+  </section>
+
+  <!-- DETAILS -->
+  <section class="ruoh-section">
+    <header class="ruoh-section-head">
+      <h2 class="ruoh-section-title">DETAILS</h2>
+      <p class="ruoh-section-subtitle">Notes, trivia, and flagged observations.</p>
+    </header>
+
+    <div class="ruoh-grid">
+      <article class="ruoh-card">
+
+        {% if c.details %}
+          <div class="ruoh-card-text" style="margin-top: 10px;">
+            <ul style="margin-left: 18px; display: grid; gap: 8px;">
+              {% for d in c.details %}
+                <li>{{ d }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% else %}
+          <p class="ruoh-card-text">No details found in data.txt.</p>
+        {% endif %}
+      </article>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="ruoh-section">
+    <header class="ruoh-section-head">
+      <h2 class="ruoh-section-title">GALLERY</h2>
+      <p class="ruoh-section-subtitle">Recovered images from the archive.</p>
+    </header>
+
+    <div class="ruoh-gallery ruoh-gallery--art">
+      {% for img_path in c.gallery %}
+        <button
+          type="button"
+          class="ruoh-thumb ruoh-thumb--art js-lightbox-open"
+          data-full="{% static img_path %}"
+          data-name="{{ c.name }} — {{ img_path|cut:c.static_base|cut:'/' }}"
+        >
+          <img class="ruoh-thumbImg" src="{% static img_path %}" alt="{{ c.name }} image" loading="lazy" />
+          <div class="ruoh-thumb-inner">
+            <div class="ruoh-thumb-label">IMAGE</div>
+            <div class="ruoh-thumb-title">{{ img_path|cut:c.static_base|cut:'/' }}</div>
+          </div>
+        </button>
+      {% empty %}
+        <p style="color: rgba(255,255,255,0.65);">No gallery images found (anything besides main.png).</p>
+      {% endfor %}
+    </div>
+  </section>
+
+</main>
+
+<!-- Reuse your existing lightbox markup if you want it here too -->
+<div class="ruoh-lightbox" id="ruohLightbox" aria-hidden="true">
+  <div class="ruoh-lightbox-backdrop js-lightbox-close" tabindex="-1"></div>
+
+  <div class="ruoh-lightbox-dialog" role="dialog" aria-modal="true" aria-label="Image viewer">
+    <button type="button" class="ruoh-lightbox-nav ruoh-lightbox-prev" aria-label="Previous image">‹</button>
+    <button type="button" class="ruoh-lightbox-nav ruoh-lightbox-next" aria-label="Next image">›</button>
+
+    <div class="ruoh-lightbox-top">
+      <div class="ruoh-lightbox-title" id="ruohLightboxTitle">Image</div>
+      <button type="button" class="ruoh-lightbox-close js-lightbox-close" aria-label="Close image viewer">✕</button>
+    </div>
+
+    <div class="ruoh-lightbox-body">
+      <img id="ruohLightboxImg" alt="" />
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+(function () {
+  const lightbox = document.getElementById("ruohLightbox");
+  if (!lightbox) return;
+
+  const img = document.getElementById("ruohLightboxImg");
+  const title = document.getElementById("ruohLightboxTitle");
+  const prevBtn = lightbox.querySelector(".ruoh-lightbox-prev");
+  const nextBtn = lightbox.querySelector(".ruoh-lightbox-next");
+
+  const items = Array.from(document.querySelectorAll(".js-lightbox-open"));
+  let currentIndex = -1;
+  let lastFocusedEl = null;
+
+  function showAt(index) {
+    if (!items.length) return;
+    if (index < 0) index = items.length - 1;
+    if (index >= items.length) index = 0;
+
+    const el = items[index];
+    currentIndex = index;
+
+    img.src = el.getAttribute("data-full");
+    img.alt = el.getAttribute("data-name") || "Image";
+    title.textContent = el.getAttribute("data-name") || "Image";
+  }
+
+  function openLightbox(index) {
+    lastFocusedEl = document.activeElement;
+    showAt(index);
+
+    lightbox.classList.add("is-open");
+    lightbox.setAttribute("aria-hidden", "false");
+    document.documentElement.style.overflow = "hidden";
+    document.body.style.overflow = "hidden";
+
+    lightbox.querySelector(".ruoh-lightbox-close").focus();
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove("is-open");
+    lightbox.setAttribute("aria-hidden", "true");
+    img.src = "";
+    document.documentElement.style.overflow = "";
+    document.body.style.overflow = "";
+    if (lastFocusedEl) lastFocusedEl.focus();
+  }
+
+  document.addEventListener("click", (e) => {
+    const btn = e.target.closest(".js-lightbox-open");
+    if (!btn) return;
+    const index = items.indexOf(btn);
+    if (index !== -1) openLightbox(index);
+  });
+
+  if (prevBtn) prevBtn.addEventListener("click", () => showAt(currentIndex - 1));
+  if (nextBtn) nextBtn.addEventListener("click", () => showAt(currentIndex + 1));
+
+  document.addEventListener("click", (e) => {
+    if (e.target.closest(".js-lightbox-close")) closeLightbox();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (!lightbox.classList.contains("is-open")) return;
+    if (e.key === "Escape") closeLightbox();
+    if (e.key === "ArrowLeft") showAt(currentIndex - 1);
+    if (e.key === "ArrowRight") showAt(currentIndex + 1);
+  });
+})();
+</script>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %}RUOH Characters | The Uranium Core{% endblock %}
+
+{% block content %}
+<main class="page">
+  <section class="ruoh-section">
+    <header class="ruoh-section-head">
+      <h1 class="ruoh-section-title">CHARACTERS</h1>
+      <p class="ruoh-section-subtitle">Select a file to open the subject dossier.</p>
+    </header>
+
+    <div class="ruoh-charGrid">
+      {% for c in characters %}
+        <a class="ruoh-charTile" href="{% url 'ruoh_character_detail' c.slug %}">
+          <div class="ruoh-charThumb">
+            <img
+              src="{% static c.thumb %}"
+              alt="{{ c.name }} thumbnail"
+              loading="lazy"
+            />
+          </div>
+          <div class="ruoh-charName">{{ c.name }}</div>
+        </a>
+      {% empty %}
+        <p style="color: rgba(255,255,255,0.65);">No character folders found in static/core/characters/.</p>
+      {% endfor %}
+    </div>
+
+
+  </section>
+</main>
+{% endblock %}

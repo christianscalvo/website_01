@@ -1,0 +1,28 @@
+NAME: FREJA VINDERSEN
+NICKNAME: "The Last Breath of Winter"
+
+BIO:
+Freja Vindersen is an Imperial commander of Danisian origin, widely regarded as one of the most formidable combatants in recorded service. Born in 456 in a rural settlement of the Danisian Isles, she enlisted in the Imperial Army at sixteen and distinguished herself through exceptional physical capability, tactical discipline, and mastery of both infantry and cavalry combat. Her rapid advancement placed her in high-responsibility roles within the capital and later across multiple civil and military operations.
+
+Known for her absolute adherence to order and hierarchy, Freja became a decisive presence in conflict zones where conventional authority failed. Her command history is marked by efficient, often uncompromising resolutions, earning her a reputation as both a legendary warrior and an unyielding instrument of imperial will. By the age of twenty-four, she was considered a veteran of sustained warfare and enforcement, perceived less as an individual officer and more as a controlled force in service of stability.
+END
+
+ABILITIES:
+- Elite Combatant | Master of infantry and cavalry combat with near-superhuman strength.
+- Tactical Supremacy | Exceptional strategic mind capable of coordinating complex operations.
+- Retractable Shields | Arm-mounted defensive systems for close-quarters engagements.
+- Motorized Dash | High-speed bursts enabled by powered leg augmentation.
+- Smoke Deployment | Blue smoke bombs for concealment and battlefield control.
+- Grappling System | Rapid mobility tool for traversal and positioning.
+- Returning Blade | Bonded sword capable of returning to her gauntlet mid-combat.
+- The Last Breath | Wields a legendary blade infused with the dying power of the Blind God, granting immense strength, long-range dash capability, and control over water temperature—allowing the creation of ice, fog, and storms.
+- Molecular Perception | Can sense water molecules across vast distances, granting unparalleled environmental awareness and strategic advantage.
+END
+
+DETAILS:
+- Prioritizes honor and duty above personal desire.
+- Exhibits extreme emotional restraint and self-discipline.
+- Suffers from chronic self-loathing and suppressed depression.
+- Obsessed with hierarchy, order, and system optimization.
+- Loyal to a fault once trust is established.
+END

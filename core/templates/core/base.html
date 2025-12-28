@@ -1,0 +1,41 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{% block title %}The Uranium Core{% endblock %}</title>
+
+  <link rel="stylesheet" href="{% static 'core/style.css' %}">
+  {% block head_extra %}{% endblock %}
+</head>
+<body>
+
+  {# Optional: only show intro on the homepage (see note below) #}
+  {% block intro %}{% endblock %}
+
+  <!-- NAV (universal) -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="nav-brand" href="/">
+        <span class="nav-prompt">[</span>URANIUM_CORE<span class="nav-prompt">]</span><span class="nav-cursor">█</span>
+      </a>
+
+      <div class="nav-links">
+        <a class="nav-link" href="/#top">HOME</a>
+        <a class="nav-link" href="/#featured">SERIES</a>
+        <a class="nav-link" href="/#work">ARCHIVE</a>
+        <a class="nav-link" href="/#contact">CONTACT</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- FX layers -->
+  <div class="fx-noise" aria-hidden="true"></div>
+  <div class="fx-scanlines" aria-hidden="true"></div>
+
+  {% block content %}{% endblock %}
+
+  {% block scripts %}{% endblock %}
+</body>
+</html>
