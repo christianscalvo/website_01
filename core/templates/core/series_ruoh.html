@@ -176,30 +176,50 @@
 
 
 
-  <!-- =========================
-              READ
-  ========================== -->
-
-    <section id="read" class="ruoh-section">
-  <header class="ruoh-section-head">
+<!-- =========================
+          READ (FEATURE)
+========================== -->
+<section id="read" class="ruoh-section ruoh-section--read">
+  <header class="ruoh-section-head ruoh-section-head--read">
     <h2 class="ruoh-section-title">READ</h2>
-    <p class="ruoh-section-subtitle">Browse the comic archive.</p>
+    <p class="ruoh-section-subtitle">
+      Browse the official Research Unit of Horrors comic archive.
+    </p>
   </header>
 
-  <div class="ruoh-grid">
-    <article class="ruoh-card ruoh-comic">
-      <div class="ruoh-card-top">
-        <span class="badge">COMIC ARCHIVE</span>
-        <span class="stamp">BROWSE</span>
+  <div class="ruoh-read-panel">
+    <div class="ruoh-read-left">
+      <div class="ruoh-read-badge">COMIC ARCHIVE</div>
+
+      <h3 class="ruoh-read-title">
+        RESEARCH UNIT OF HORRORS
+      </h3>
+
+      <p class="ruoh-read-copy">
+        Semi-Canon comic chapters expanding the world of RUOH.
+        Each book contains self-contained cases, side quests,
+        and long-form arcs.
+      </p>
+
+      <a class="ruoh-read-cta" href="{% url 'ruoh_comic_archive' %}">
+        OPEN COMIC ARCHIVE
+      </a>
+    </div>
+
+    <div class="ruoh-read-right">
+      <div class="ruoh-read-cover">
+        <img
+          src="{% static 'core/ruoh/comic/covers/ruoh.png' %}"
+          alt="Research Unit of Horrors Comic Cover"
+        />
+        <div class="ruoh-read-cover-caption">
+          OFFICIAL COMIC FILE
+        </div>
       </div>
-
-      <h3 class="ruoh-card-title">OPEN THE ARCHIVE</h3>
-      <p class="ruoh-card-text">View available books and chapters.</p>
-
-      <a class="card-link" href="{% url 'ruoh_comic_archive' %}">VIEW CHAPTERS</a>
-    </article>
+    </div>
   </div>
 </section>
+
 
 
   <!-- =========================
@@ -215,7 +235,7 @@
       <div class="ruoh-final-text">
         Send a message. Attach links. Keep it short. We will respond if the signal is clean.
       </div>
-      <a class="btn-primary" href="mailto:ccalvo@theuraniumcore.com">SEND TRANSMISSION</a>
+      <a class="btn-primary" href="mailto:ccalvo@theuraniumcore.com">SEND MESSAGE</a>
     </div>
   </section>
 

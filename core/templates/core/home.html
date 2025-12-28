@@ -17,10 +17,19 @@
     />
 
     <div class="intro-lines">
-      <div class="intro-line">REQUESTING ACCESS TO THE URANIUM CORE</div>
-      <div class="intro-line subtle">SIGNAL CHECK: OK</div>
-      <div class="intro-line subtle">MODE: PORTFOLIO</div>
+      <div class="intro-line type" data-text="REQUESTING ACCESS TO THE URANIUM CORE"></div>
+      <div class="intro-line subtle flicker">SIGNAL CHECK: OK</div>
+      <div class="intro-line subtle flicker">MODE: PORTFOLIO</div>
+
+      <div class="intro-progress" aria-hidden="true">
+        <div class="intro-progress-bar"></div>
+      </div>
+
+      <div class="intro-status subtle" aria-hidden="true">
+        <span class="dot"></span> ESTABLISHING LINK…
+      </div>
     </div>
+
 
     <button class="intro-enter" id="introEnter" type="button">
       ENTER
@@ -38,6 +47,23 @@
 <audio id="clickSfx" preload="auto">
   <source src="{% static 'core/audio/weird_click.mp3' %}" type="audio/mpeg">
 </audio>
+
+<audio id="bootHum" preload="auto">
+  <source src="{% static 'core/audio/hum.mp3' %}" type="audio/mpeg">
+</audio>
+
+<audio id="beepSfx" preload="auto">
+  <source src="{% static 'core/audio/beep_1.mp3' %}" type="audio/mpeg">
+</audio>
+
+<audio id="scanSfx" preload="auto">
+  <source src="{% static 'core/audio/scan.mp3' %}" type="audio/mpeg">
+</audio>
+
+<audio id="confirmSfx" preload="auto">
+  <source src="{% static 'core/audio/confirm.mp3' %}" type="audio/mpeg">
+</audio>
+
 {% endblock %}
 
 {% block content %}
@@ -254,35 +280,69 @@
     </header>
 
     <div class="cards cards--social">
-      <article class="card">
-        <div class="card-top">
-          <span class="badge">YOUTUBE</span>
-          <span class="stamp">MAIN</span>
-        </div>
-        <h3 class="card-title">The Uranium Core</h3>
-        <p class="card-text">Reels, episodes, and curated uploads.</p>
-        <a class="card-link" href="https://www.youtube.com/theuraniumcore" target="_blank" rel="noopener">OPEN CHANNEL</a>
-      </article>
+        <article class="card">
+          <div class="card-top">
+            <div class="social-head">
+              <span class="social-icon youtube" aria-hidden="true">
+                <!-- YouTube SVG -->
+                <svg viewBox="0 0 24 24">
+                  <path d="M23.5 6.2s-.2-1.7-.8-2.5c-.8-.8-1.7-.8-2.1-.9C17.5 2.5 12 2.5 12 2.5h0s-5.5 0-8.6.3c-.4.1-1.3.1-2.1.9-.6.8-.8 2.5-.8 2.5S0 8.1 0 10v1.9c0 1.9.5 3.8.5 3.8s.2 1.7.8 2.5c.8.8 1.9.8 2.4.9 1.8.2 7.8.3 7.8.3s5.5 0 8.6-.3c.4-.1 1.3-.1 2.1-.9.6-.8.8-2.5.8-2.5s.5-1.9.5-3.8V10c0-1.9-.5-3.8-.5-3.8ZM9.6 14.6V7.9l6.2 3.4-6.2 3.3Z"/>
+                </svg>
+              </span>
 
-      <article class="card">
-        <div class="card-top">
-          <span class="badge">INSTAGRAM</span>
-          <span class="stamp">CLIPS</span>
-        </div>
-        <h3 class="card-title">Short-form + BTS</h3>
-        <p class="card-text">WIP shots, shots breakdowns, and updates.</p>
-        <a class="card-link" href="https://www.instagram.com/theuraniumcore" target="_blank" rel="noopener">VIEW PROFILE</a>
-      </article>
+              <span class="badge">YOUTUBE</span>
+            </div>
+          </div>
 
-      <article class="card">
-        <div class="card-top">
-          <span class="badge">TIKTOK</span>
-          <span class="stamp">FAST</span>
-        </div>
-        <h3 class="card-title">Shorts + Experiments</h3>
-        <p class="card-text">Animation tests and fast edits.</p>
-        <a class="card-link" href="https://www.tiktok.com/@theuraniumcore" target="_blank" rel="noopener">WATCH</a>
-      </article>
+          <h3 class="card-title">The Uranium Core</h3>
+          <p class="card-text">Reels, episodes, and curated uploads.</p>
+          <a class="card-link" href="https://www.youtube.com/@TheUraniumCore/videos" target="_blank" rel="noopener">
+            OPEN CHANNEL
+          </a>
+        </article>
+
+
+        <article class="card">
+          <div class="card-top">
+            <div class="social-head">
+              <span class="social-icon instagram" aria-hidden="true">
+                <!-- YouTube SVG -->
+                <svg viewBox="0 0 24 24">
+                    <path d="M7 2h10c2.76 0 5 2.24 5 5v10c0 2.76-2.24 5-5 5H7c-2.76 0-5-2.24-5-5V7c0-2.76 2.24-5 5-5Zm5 5.5a4.5 4.5 0 1 0 4.5 4.5A4.51 4.51 0 0 0 12 7.5Zm0 7.3A2.8 2.8 0 1 1 14.8 12 2.8 2.8 0 0 1 12 14.8ZM18 6.2a1 1 0 1 0 1 1 1 1 0 0 0-1-1Z"/>
+                </svg>
+              </span>
+
+              <span class="badge">Instagram</span>
+            </div>
+          </div>
+
+          <h3 class="card-title">The Uranium Core</h3>
+          <p class="card-text">Reels, episodes, and curated uploads.</p>
+          <a class="card-link" href="https://www.instagram.com/theuraniumcore" target="_blank" rel="noopener">
+            OPEN PROFILE
+          </a>
+        </article>
+
+        <article class="card">
+          <div class="card-top">
+            <div class="social-head">
+              <span class="social-icon tiktok" aria-hidden="true">
+                <!-- YouTube SVG -->
+                <svg viewBox="0 0 24 24">
+                    <path d="M21 8.1c-1.72 0-3.39-.56-4.7-1.6v7.07a6.57 6.57 0 1 1-6.57-6.57c.3 0 .61.02.91.07v3.4a3.13 3.13 0 1 0 2.23 3V2h3.19a5.66 5.66 0 0 0 4.94 3.94v2.16Z"/>
+                </svg>
+              </span>
+
+              <span class="badge">TikTok</span>
+            </div>
+          </div>
+
+          <h3 class="card-title">The Uranium Core</h3>
+          <p class="card-text">Reels, episodes, and curated uploads.</p>
+          <a class="card-link" href="https://www.tiktok.com/@theuraniumcore" target="_blank" rel="noopener">
+            OPEN PROFILE
+          </a>
+        </article>
     </div>
 
   </div>
@@ -291,37 +351,45 @@
 <!-- =========================
      CONTACT
 ========================== -->
-<section id="contact" class="section">
-  <div class="section-inner">
+<section id="contact" class="section section--contact">
+  <div class="section-inner section-inner--contact">
 
-    <header class="section-head">
-      <h2 class="section-title">CONTACT</h2>
-      <p class="section-subtitle">
-        Booking projects now. Tell us your timeline, style references, and deliverables—then we’ll reply with next steps.
+    <header class="section-head section-head--contact">
+      <h2 class="section-title section-title--contact">CONTACT</h2>
+      <p class="section-subtitle section-subtitle--contact">
+        Booking projects now. Tell us your timeline, style references, and deliverables — we’ll reply with next steps.
       </p>
     </header>
 
-    <div class="cards">
-      <article class="card">
-        <div class="card-top">
-          <span class="badge">CHANNEL: EMAIL</span>
-          <span class="stamp">OPEN</span>
-        </div>
+    <div class="contact-panel">
+      <div class="contact-left">
+        <div class="contact-badge">PRIMARY CHANNEL</div>
 
-        <h3 class="card-title">Contact & Bookings</h3>
-        <p class="card-text">
-          For quotes: include your budget range, deadline, and references. We typically reply within 1–2 business days.
+        <h3 class="contact-heading">Work With The Uranium Core</h3>
+
+        <p class="contact-copy">
+          For commissions or collaborations, include your budget range, deadline,
+          and any visual references. We usually respond within 1–2 business days.
         </p>
 
-        <div class="card-meta">
-          <span>EMAIL: ccalvo@theuraniumcore.com</span>
+        <div class="contact-email">
+          <span class="contact-email-label">EMAIL</span>
+          <a href="mailto:ccalvo@theuraniumcore.com">
+            ccalvo@theuraniumcore.com
+          </a>
         </div>
-        <a class="card-link" href="mailto:ccalvo@theuraniumcore.com">OPEN CHANNEL</a>
-      </article>
+      </div>
+
+      <div class="contact-right">
+        <a class="contact-cta" href="mailto:ccalvo@theuraniumcore.com">
+          SEND MESSAGE
+        </a>
+      </div>
     </div>
 
   </div>
 </section>
+
 
 {% endblock %}
 
@@ -361,18 +429,24 @@
 </script>
 
 <!-- =========================
-     INTRO ENTER (HOME ONLY)
-     Show once per tab/session
+     Boot Sequence
 ========================== -->
+
 <script>
 (function () {
   const intro = document.getElementById("intro");
   const enterBtn = document.getElementById("introEnter");
   const audioBtn = document.getElementById("audioToggle");
 
+  // SFX
+  const bootHum = document.getElementById("bootHum");
+  const beepSfx = document.getElementById("beepSfx");
+  const scanSfx = document.getElementById("scanSfx");
+  const confirmSfx = document.getElementById("confirmSfx");
+
   if (!intro) return;
 
-  const KEY = "uc_intro_seen_v1";
+  const KEY = "uc_intro_seen_v2";
 
   try {
     if (sessionStorage.getItem(KEY) === "1") {
@@ -384,20 +458,44 @@
 
   if (!enterBtn) return;
 
+  function safePlay(audioEl, volume) {
+    if (!audioEl) return;
+    try {
+      audioEl.pause();
+      audioEl.currentTime = 0;
+      if (typeof volume === "number") audioEl.volume = volume;
+      audioEl.play();
+    } catch (e) {}
+  }
+
   enterBtn.addEventListener("click", () => {
     try { sessionStorage.setItem(KEY, "1"); } catch (e) {}
 
+    // Turn UI SFX on (your existing system)
     if (audioBtn && audioBtn.textContent.includes("OFF")) {
       audioBtn.click();
     }
 
+    // Boot sequence (allowed because this is a user gesture)
+    safePlay(bootHum, 0.25);
+
+    setTimeout(() => safePlay(beepSfx, 0.35), 120);
+    setTimeout(() => safePlay(scanSfx, 0.35), 320);
+    setTimeout(() => safePlay(confirmSfx, 0.40), 650);
+
+    // Exit after the confirm lands
     intro.classList.add("is-exiting");
 
     setTimeout(() => {
+      // fade hum quickly if it exists
+      try { if (bootHum) bootHum.volume = 0.0; } catch (e) {}
+
       intro.style.display = "none";
       intro.setAttribute("aria-hidden", "true");
-    }, 560);
+    }, 720);
   });
+
 })();
 </script>
+
 {% endblock %}
