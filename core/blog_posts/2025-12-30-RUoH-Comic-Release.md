@@ -42,4 +42,5 @@ These comics give us space to:
 
 The long-term goal is to animate the main Research Unit of Horrors storyline, with a more focused narrative and higher stakes. Side-Quests help us get there without rushing creative decisions.
 
-More pages will start appearing soon.
+
+More pages and chapters will start coming out soon.
