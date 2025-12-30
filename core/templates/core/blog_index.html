@@ -1,0 +1,64 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %}Blog | The Uranium Core{% endblock %}
+
+{% block content %}
+<header class="blog-hero">
+  <div class="blog-hero-inner">
+    <div class="blog-kicker">TRANSMISSION LOG</div>
+    <h1 class="blog-title glitch" data-text="BLOG">BLOG</h1>
+    <p class="blog-subtitle">Updates, process notes, releases, and studio logs.</p>
+  </div>
+</header>
+
+<main class="blog-body">
+  <section class="blog-section">
+    <div class="blog-grid">
+
+      {% for post in posts %}
+      <article class="blog-card">
+
+        <a class="blog-card-media" href="{% url 'blog_detail' post.slug %}">
+          {% if post.cover %}
+            <img src="{% static post.cover %}" alt="{{ post.title }}">
+          {% else %}
+            <div class="blog-card-fallback">NO COVER</div>
+          {% endif %}
+          <div class="blog-card-mediaScrim"></div>
+        </a>
+
+        <div class="blog-card-top">
+          <span class="badge">POST</span>
+          <span class="stamp">{{ post.date|date:"M d, Y" }}</span>
+        </div>
+
+        <h2 class="blog-card-title">
+          <a href="{% url 'blog_detail' post.slug %}">{{ post.title }}</a>
+        </h2>
+
+        {% if post.excerpt %}
+          <p class="blog-card-excerpt">{{ post.excerpt }}</p>
+        {% endif %}
+
+        {% if post.tags %}
+        <div class="blog-tags">
+          {% for t in post.tags %}
+            <span class="blog-tag">{{ t }}</span>
+          {% endfor %}
+        </div>
+        {% endif %}
+
+        <a class="card-link" href="{% url 'blog_detail' post.slug %}">READ</a>
+      </article>
+      {% empty %}
+      <div class="blog-empty">
+        <div class="blog-empty-title">No posts yet.</div>
+        <div class="blog-empty-text">Add Markdown files to <code>core/blog_posts/</code> to publish.</div>
+      </div>
+      {% endfor %}
+
+    </div>
+  </section>
+</main>
+{% endblock %}

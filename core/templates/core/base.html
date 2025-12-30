@@ -23,8 +23,9 @@
 
       <div class="nav-links">
         <a class="nav-link" href="/#top">HOME</a>
+        <a class="nav-link" href="{% url 'about' %}">ABOUT</a>
         <a class="nav-link" href="/#featured">SERIES</a>
-        <a class="nav-link" href="/#work">ARCHIVE</a>
+        <a class="nav-link" href="{% url 'blog_index' %}">BLOG</a>
         <a class="nav-link" href="/#contact">CONTACT</a>
       </div>
     </div>
@@ -37,5 +38,62 @@
   {% block content %}{% endblock %}
 
   {% block scripts %}{% endblock %}
+<!-- =========================
+         SITE FOOTER
+========================== -->
+<footer class="site-footer">
+  <div class="footer-inner">
+
+    <!-- LEFT: SOCIALS -->
+    <div class="footer-col footer-col--left">
+      <div class="footer-label">SOCIALS</div>
+
+      <div class="footer-socials">
+        <a href="https://twitter.com/theuraniumcore" target="_blank" rel="noopener" aria-label="Twitter">
+          TWITTER
+        </a>
+        <a href="https://instagram.com/theuraniumcore" target="_blank" rel="noopener" aria-label="Instagram">
+          INSTAGRAM
+        </a>
+        <a href="https://youtube.com/@theuraniumcore" target="_blank" rel="noopener" aria-label="YouTube">
+          YOUTUBE
+        </a>
+      </div>
+    </div>
+
+    <!-- CENTER: LOGO + LOCATION -->
+    <div class="footer-col footer-col--center">
+      <img
+        src="{% static 'core/uranium_core_logo.png' %}"
+        alt="The Uranium Core"
+        class="footer-logo"
+      />
+
+      <div class="footer-location">
+        PHOENIX, AZ
+      </div>
+    </div>
+
+    <!-- RIGHT: LINKS -->
+    <div class="footer-col footer-col--right">
+      <div class="footer-label">NAVIGATION</div>
+
+      <nav class="footer-links">
+        <a href="{% url 'about' %}">ABOUT</a>
+        <a href="{% url 'blog_index' %}">BLOG</a>
+        <a href="#contact">CONTACT</a>
+      </nav>
+    </div>
+
+  </div>
+
+  <!-- BOTTOM STRIP -->
+  <div class="footer-bottom">
+    <span>© {{ now|date:"Y" }} THE URANIUM CORE</span>
+    <span class="footer-status">SIGNAL STABLE</span>
+  </div>
+</footer>
+
+
 </body>
 </html>

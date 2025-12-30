@@ -1,0 +1,44 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %}{{ post.title }} | Blog | The Uranium Core{% endblock %}
+
+{% block content %}
+<header class="blog-post-hero">
+  <div class="blog-post-hero-inner">
+
+    <div class="blog-post-kicker">BLOG POST</div>
+    <h1 class="blog-post-title glitch" data-text="{{ post.title }}">{{ post.title }}</h1>
+
+    <div class="blog-post-meta">
+      <span class="stamp">{{ post.date|date:"M d, Y" }}</span>
+      {% if post.tags %}
+        <span class="blog-post-tags">
+          {% for t in post.tags %}
+            <span class="blog-tag">{{ t }}</span>
+          {% endfor %}
+        </span>
+      {% endif %}
+    </div>
+
+    {% if post.cover %}
+      <div class="blog-post-cover">
+        <img src="{% static post.cover %}" alt="{{ post.title }}">
+      </div>
+    {% endif %}
+
+  </div>
+</header>
+
+<main class="blog-post-body">
+  <div class="blog-post-inner">
+    <article class="blog-post-content">
+      {{ post.html|safe }}
+    </article>
+
+    <div class="blog-post-back">
+      <a class="btn-secondary" href="{% url 'blog_index' %}">← BACK TO BLOG</a>
+    </div>
+  </div>
+</main>
+{% endblock %}

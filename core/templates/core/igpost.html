@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RUOH // Website Announcement</title>
+  <style>
+    /* ===============================
+       RESET + VARS
+    ================================ */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root{
+      --bg: #050608;
+      --neon: #39ff14;
+      --muted: #2fae12;
+      --gray: #9aa0a6;
+      --white: rgba(255,255,255,0.92);
+    }
+
+    html, body { height: 100%; }
+    body{
+      background: var(--bg);
+      color: var(--white);
+      font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    /* ===============================
+       FX LAYERS (NOISE + SCANLINES)
+    ================================ */
+    .fx-noise, .fx-scanlines{
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .fx-noise{
+      opacity: 0.12;
+      filter: contrast(140%) brightness(110%);
+      background-image:
+        radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.08) 0 1px, transparent 1px),
+        radial-gradient(circle at 80% 60%, rgba(255, 255, 255, 0.06) 0 1px, transparent 1px),
+        radial-gradient(circle at 40% 80%, rgba(255, 255, 255, 0.05) 0 1px, transparent 1px),
+        radial-gradient(circle at 60% 10%, rgba(255, 255, 255, 0.07) 0 1px, transparent 1px);
+      background-size: 120px 120px, 180px 180px, 220px 220px, 160px 160px;
+      background-repeat: repeat;
+      animation: noiseShift 1.2s steps(2) infinite;
+    }
+
+    @keyframes noiseShift {
+      0%   { transform: translate3d(0, 0, 0); }
+      25%  { transform: translate3d(-1%,  1%, 0); }
+      50%  { transform: translate3d( 1%, -1%, 0); }
+      75%  { transform: translate3d(-1%, -1%, 0); }
+      100% { transform: translate3d(0, 0, 0); }
+    }
+
+    .fx-scanlines{
+      opacity: 0.8;
+      background-image: repeating-linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.02) 0px,
+        rgba(255, 255, 255, 0.02) 1px,
+        rgba(0, 0, 0, 0.0) 3px,
+        rgba(0, 0, 0, 0.35) 4px
+      );
+      mix-blend-mode: overlay;
+      animation: scanDrift 8s linear infinite;
+    }
+
+    @keyframes scanDrift {
+      0%   { transform: translateY(0); }
+      100% { transform: translateY(16px); }
+    }
+
+    /* ===============================
+       WRAP
+    ================================ */
+    .wrap{
+      position: relative;
+      z-index: 2;
+      height: 100vh;
+      width: 100vw;
+      display: grid;
+      place-items: center;
+      padding: clamp(18px, 3.5vw, 48px);
+      background:
+        radial-gradient(circle at center, rgba(57,255,20,0.10), transparent 55%),
+        linear-gradient(to bottom, rgba(0,0,0,0.65), rgba(0,0,0,0.85));
+    }
+
+    /* ===============================
+       PANEL
+    ================================ */
+    .panel{
+      width: min(980px, 100%);
+      border-radius: 22px;
+      border: 1px solid rgba(57,255,20,0.22);
+      background: rgba(0,0,0,0.45);
+      box-shadow: 0 26px 120px rgba(0,0,0,0.75);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .panel::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(57,255,20,0.14), transparent 55%),
+        linear-gradient(to bottom, rgba(255,255,255,0.06), transparent 22%);
+      opacity: 0.9;
+    }
+
+    .panel-top{
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.10);
+      background: rgba(0,0,0,0.35);
+      position: relative;
+      z-index: 1;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .sig{
+      letter-spacing: 0.22em;
+      font-weight: 800;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.60);
+      white-space: nowrap;
+    }
+
+    .tag{
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(57,255,20,0.20);
+      background: rgba(57,255,20,0.06);
+      color: rgba(57,255,20,0.95);
+      letter-spacing: 0.18em;
+      font-weight: 900;
+      font-size: 0.72rem;
+      white-space: nowrap;
+    }
+
+    .panel-body{
+      padding: clamp(18px, 3.2vw, 34px);
+      display: grid;
+      gap: 18px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ===============================
+       GLITCH TITLE (RESTRAINED)
+    ================================ */
+    .glitch{
+      position: relative;
+      display: inline-block;
+      color: var(--neon);
+      text-shadow: 0 0 10px rgba(57,255,20,0.45), 0 0 24px rgba(57,255,20,0.20);
+      letter-spacing: 0.20em;
+      font-weight: 800;
+      line-height: 1.05;
+      font-size: clamp(1.55rem, 3.2vw, 2.35rem);
+    }
+
+    .glitch::before,
+    .glitch::after{
+      content: attr(data-text);
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.0;
+    }
+
+    .glitch::before{
+      transform: translateX(-2px);
+      color: rgba(57,255,20,0.90);
+      animation: glitchA 3.0s infinite linear;
+    }
+
+    .glitch::after{
+      transform: translateX(2px);
+      color: rgba(255,255,255,0.55);
+      animation: glitchB 2.4s infinite linear;
+    }
+
+    @keyframes glitchA {
+      0%,92%,100% { clip-path: inset(0 0 0 0); opacity: 0; }
+      93% { clip-path: inset(12% 0 70% 0); opacity: 0.9; }
+      94% { clip-path: inset(55% 0 18% 0); }
+      95% { clip-path: inset(30% 0 45% 0); }
+      96% { clip-path: inset(75% 0 8% 0); }
+      97% { clip-path: inset(42% 0 34% 0); }
+      98% { clip-path: inset(0 0 0 0); opacity: 0; }
+    }
+
+    @keyframes glitchB {
+      0%,88%,100% { clip-path: inset(0 0 0 0); opacity: 0; }
+      89% { clip-path: inset(65% 0 10% 0); opacity: 0.75; }
+      90% { clip-path: inset(10% 0 75% 0); }
+      91% { clip-path: inset(40% 0 35% 0); }
+      92% { clip-path: inset(20% 0 55% 0); }
+      93% { clip-path: inset(0 0 0 0); opacity: 0; }
+    }
+
+    /* ===============================
+       COPY
+    ================================ */
+    .lead{
+      color: rgba(255,255,255,0.72);
+      line-height: 1.65;
+      max-width: 70ch;
+      letter-spacing: 0.02em;
+      font-size: clamp(0.95rem, 1.25vw, 1.05rem);
+    }
+
+    /* ===============================
+       FEATURE GRID
+    ================================ */
+    .grid{
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 6px;
+    }
+
+    @media (max-width: 840px){
+      .grid{ grid-template-columns: 1fr; }
+    }
+
+    .pill{
+      border-radius: 18px;
+      border: 1px solid rgba(57,255,20,0.16);
+      background: rgba(9,10,12,0.72);
+      padding: 16px 16px;
+      box-shadow: 0 18px 60px rgba(0,0,0,0.55);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pill::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(circle at 18% 18%, rgba(57,255,20,0.10), transparent 48%),
+        linear-gradient(to bottom, rgba(255,255,255,0.04), transparent 28%);
+      opacity: 0.8;
+      pointer-events:none;
+    }
+
+    .pill-head{
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .pill-title{
+      letter-spacing: 0.18em;
+      font-weight: 900;
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.90);
+    }
+
+    .pill-stamp{
+      letter-spacing: 0.18em;
+      font-weight: 800;
+      font-size: 0.72rem;
+      color: rgba(57,255,20,0.92);
+      border: 1px solid rgba(57,255,20,0.20);
+      background: rgba(57,255,20,0.06);
+      padding: 8px 10px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .pill-text{
+      margin-top: 10px;
+      position: relative;
+      z-index: 1;
+      color: rgba(255,255,255,0.62);
+      line-height: 1.55;
+      font-size: 0.92rem;
+    }
+
+    /* ===============================
+       FOOTER BAR (URL)
+    ================================ */
+    .footer{
+      margin-top: 10px;
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255,255,255,0.10);
+    }
+
+    .url{
+      letter-spacing: 0.18em;
+      font-weight: 800;
+      font-size: 0.82rem;
+      color: rgba(57,255,20,0.92);
+      text-shadow: 0 0 14px rgba(57,255,20,0.18);
+    }
+
+    .hint{
+      letter-spacing: 0.18em;
+      font-weight: 800;
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.55);
+      border: 1px dashed rgba(255,255,255,0.22);
+      padding: 8px 10px;
+      border-radius: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="fx-noise" aria-hidden="true"></div>
+  <div class="fx-scanlines" aria-hidden="true"></div>
+
+  <main class="wrap">
+    <section class="panel" role="img" aria-label="Website announcement card for The Uranium Core">
+      <div class="panel-top">
+        <div class="brand">
+          <div class="sig">[ URANIUM_CORE ]</div>
+        </div>
+        <div class="tag">WEBSITE LIVE</div>
+      </div>
+
+      <div class="panel-body">
+        <h1 class="glitch" data-text="RESEARCH UNIT OF HORRORS">
+          THEURANIUMCORE.COM
+        </h1>
+
+        <p class="lead">
+          Our animation studio website is now online.
+          Watch long-format episodes, read our comic book chapters, and explore the lore
+          of our original series — all in one place.
+        </p>
+
+        <div class="grid">
+          <div class="pill">
+            <div class="pill-head">
+              <div class="pill-title">WATCH</div>
+              <div class="pill-stamp">LONG-FORM</div>
+            </div>
+            <div class="pill-text">
+              Stream full episodes and major uploads in the RUOH archive.
+            </div>
+          </div>
+
+          <div class="pill">
+            <div class="pill-head">
+              <div class="pill-title">READ</div>
+              <div class="pill-stamp">COMIC</div>
+            </div>
+            <div class="pill-text">
+              Browse chapters and view pages with a clean, case-file reader.
+            </div>
+          </div>
+
+          <div class="pill">
+            <div class="pill-head">
+              <div class="pill-title">EXPLORE</div>
+              <div class="pill-stamp">LORE</div>
+            </div>
+            <div class="pill-text">
+              Characters, environments, and story lore — organized like an archive.
+            </div>
+          </div>
+        </div>
+
+        <div class="footer">
+          <!-- EDIT THIS LINE -->
+          <div class="url">THEURANIUMCORE.COM</div>
+
+          <div class="hint">OPEN THE ARCHIVE ▾</div>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

@@ -134,17 +134,23 @@
     </header>
 
     <!-- RUOH -->
-    <div class="series-panel">
+    <article class="series-panel series-panel--splash"
+      style="--splash: url('{% static 'core/ruoh/concept_art/placeholder_01.png' %}');">
+
       <div class="series-left">
         <div class="series-kicker">
           <span class="badge">CASE FILE</span>
           <span class="stamp">ACTIVE</span>
         </div>
 
-        <h3 class="series-title">RESEARCH UNIT OF HORRORS</h3>
+        <div class="series-titleRow">
+          <h3 class="series-title">RESEARCH UNIT OF HORRORS</h3>
+          <div class="series-subkicker">HORROR-COMEDY • MEDIEVAL / HALLOWEEN FANTASY</div>
+        </div>
 
         <p class="series-desc">
-          Original animated series concept with a horror-comedy tone. Proof of our character work, pacing, and world-building.
+          A stylized horror-comedy with strong world-building, atmosphere, and pace.
+          Explore the archive to watch the pilot, browse art, and read the comic files.
         </p>
 
         <div class="series-actions">
@@ -154,23 +160,27 @@
 
         <div class="series-meta">
           <div class="series-meta-row"><span>MEDIA</span><span>ANIMATION / COMIC / ART</span></div>
+          <div class="series-meta-row"><span>PROOF</span><span>CHARACTER • WORLD • TIMING</span></div>
         </div>
       </div>
 
       <div class="series-right">
-        <div class="series-poster">
+        <div class="series-poster series-poster--compact">
           <img src="{% static 'core/ResearchUnitofHorrorsTitle.png' %}" alt="Research Unit of Horrors Title Card">
-          <div class="series-caption">Research Unit of Horrors</div>
+          <div class="series-caption">FILE PREVIEW // TITLE CARD</div>
         </div>
       </div>
-    </div>
+    </article>
+
 
     <!-- SPKO -->
-    <div class="series-panel series-panel--reverse" style="margin-top: 22px;">
+    <article class="series-panel series-panel--splash series-panel--reverse"
+      style="--splash: url('{% static 'core/spko/concept_art/placeholder_02.png' %}'); margin-top: 22px;">
+
       <div class="series-right">
-        <div class="series-poster">
+        <div class="series-poster series-poster--compact">
           <img src="{% static 'core/ScottPilgrimKOTitle.png' %}" alt="Scott Pilgrim: KO Title Card">
-          <div class="series-caption">Scott Pilgrim KO</div>
+          <div class="series-caption">FILE PREVIEW // TITLE CARD</div>
         </div>
       </div>
 
@@ -180,10 +190,14 @@
           <span class="stamp">ACTIVE</span>
         </div>
 
-        <h3 class="series-title">SCOTT PILGRIM: KO</h3>
+        <div class="series-titleRow">
+          <h3 class="series-title">SCOTT PILGRIM: KO</h3>
+          <div class="series-subkicker">ADAPTATION • COMIC ENERGY • FIGHT RHYTHM</div>
+        </div>
 
         <p class="series-desc">
-          Faithful Comic Book Adaptation of the famous series Scott Pilgrim.
+          A faithful adaptation exercise focused on timing, punchy motion, and graphic readability.
+          Built as a style and pacing proof for fast, clean action.
         </p>
 
         <div class="series-actions">
@@ -193,12 +207,15 @@
 
         <div class="series-meta">
           <div class="series-meta-row"><span>MEDIA</span><span>ANIMATION / ADAPTATION</span></div>
+          <div class="series-meta-row"><span>PROOF</span><span>PACE • IMPACT • CLEAN STAGING</span></div>
         </div>
       </div>
-    </div>
+
+    </article>
 
   </div>
 </section>
+
 
 <!-- =========================
      SERVICES

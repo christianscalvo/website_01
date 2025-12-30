@@ -11,6 +11,7 @@ def home(request):
 def ruoh(request):
     return render(request, "core/series_ruoh.html")
 
+
 def ruoh_chapter_01(request):
     return render(request, "core/ruoh_chapter_01.html")
 
@@ -180,3 +181,21 @@ def ruoh_comic_reader(request, comic_slug, chapter_slug):
         "mode": requested_mode,  # template uses this
     }
     return render(request, "core/ruoh_comic_reader.html", ctx)
+
+def about(request):
+    return render(request, "core/about.html")
+
+
+from .blog_loader import get_post_by_slug, load_posts
+
+
+def blog_index(request):
+    posts = load_posts()
+    return render(request, "core/blog_index.html", {"posts": posts})
+
+
+def blog_detail(request, slug: str):
+    post = get_post_by_slug(slug)
+    if not post:
+        raise Http404("Post not found")
+    return render(request, "core/blog_detail.html", {"post": post})

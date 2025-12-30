@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RUOH — Webtoon End Card (Tall)</title>
+  <style>
+    :root{
+      --bg-black: #050608;
+      --neon: #39ff14;
+
+      --text: rgba(255,255,255,0.92);
+      --muted: rgba(255,255,255,0.70);
+
+      --panel: rgba(0,0,0,0.55);
+      --border: rgba(255,255,255,0.14);
+      --border-neon: rgba(57,255,20,0.22);
+    }
+
+    *{ box-sizing: border-box; margin: 0; padding: 0; }
+    html, body{ height: 100%; background: var(--bg-black); }
+
+    /* Fixed canvas */
+    .canvas{
+      width: 1600px;
+      min-height: 3600px; /* increase if you want even more scroll */
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+      font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text);
+
+      background:
+        radial-gradient(circle at 30% 12%, rgba(57,255,20,0.10), transparent 55%),
+        radial-gradient(circle at 70% 38%, rgba(57,255,20,0.06), transparent 58%),
+        linear-gradient(to bottom, rgba(0,0,0,0.86), rgba(0,0,0,0.95));
+    }
+
+    /* Subtle scanlines */
+    .fx-scanlines{
+      position: absolute; inset: 0;
+      pointer-events: none;
+      opacity: 0.75;
+      mix-blend-mode: overlay;
+      background-image: repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.02) 0px,
+        rgba(255,255,255,0.02) 1px,
+        rgba(0,0,0,0.00) 3px,
+        rgba(0,0,0,0.35) 4px
+      );
+    }
+
+    /* Main column */
+    .stack{
+      position: relative;
+      padding: 110px 140px 140px;
+      z-index: 2;
+      display: grid;
+      gap: 44px;
+    }
+
+    /* Big centered content blocks */
+    .block{
+      border-radius: 28px;
+      border: 1px solid var(--border);
+      background: var(--panel);
+      box-shadow: 0 18px 70px rgba(0,0,0,0.62);
+      overflow: hidden;
+    }
+
+    .blockHead{
+      padding: 22px 28px;
+      border-bottom: 1px solid rgba(255,255,255,0.10);
+      background: rgba(0,0,0,0.25);
+      text-align: center;
+      letter-spacing: 0.22em;
+      font-weight: 900;
+      color: rgba(57,255,20,0.90);
+      text-transform: uppercase;
+      font-size: 1.05rem;
+    }
+
+    .blockBody{
+      padding: 34px 34px 40px;
+      display: grid;
+      gap: 26px;
+      text-align: center;
+    }
+
+    /* Placeholder art boxes for CSP */
+    .art-row{
+      display: grid;
+      grid-template-columns: 1fr 1.1fr 1fr;
+      gap: 22px;
+      align-items: center;
+    }
+
+    .art-slot{
+      border-radius: 22px;
+      border: 1px dashed rgba(255,255,255,0.22);
+      background: rgba(0,0,0,0.25);
+      min-height: 620px; /* characters */
+      display: grid;
+      place-items: center;
+      color: rgba(255,255,255,0.55);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-weight: 900;
+      font-size: 0.95rem;
+    }
+
+    .logo-slot{
+      border-radius: 24px;
+      border: 1px dashed rgba(57,255,20,0.28);
+      background: rgba(0,0,0,0.30);
+      min-height: 360px;
+      display: grid;
+      place-items: center;
+      color: rgba(57,255,20,0.85);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 900;
+      font-size: 1.05rem;
+    }
+
+    /* Big readable typography */
+    .kicker{
+      font-weight: 900;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.62);
+      font-size: 1.00rem;
+    }
+
+    .title{
+      font-weight: 1000;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(57,255,20,0.92);
+      text-shadow: 0 0 16px rgba(57,255,20,0.20);
+      font-size: 4.0rem;
+      line-height: 1.05;
+      margin-top: 6px;
+    }
+
+    .lede{
+      font-size: 1.55rem;
+      line-height: 1.5;
+      color: var(--muted);
+      max-width: 48ch;
+      margin: 0 auto;
+    }
+
+    .bigLink{
+      display: inline-block;
+      padding: 18px 26px;
+      border-radius: 18px;
+      border: 1px solid var(--border-neon);
+      background: rgba(57,255,20,0.08);
+      font-weight: 1000;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.95);
+      font-size: 2.25rem;
+      text-decoration: none;
+    }
+
+    .bigLink:hover{ text-decoration: underline; }
+
+    .handles{
+      display: grid;
+      gap: 14px;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .handleLine{
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(0,0,0,0.35);
+      padding: 18px 20px;
+      font-size: 1.65rem;
+      font-weight: 950;
+      letter-spacing: 0.08em;
+    }
+
+    .handleLine a{
+      color: rgba(57,255,20,0.95);
+      text-decoration: none;
+    }
+    .handleLine a:hover{ text-decoration: underline; }
+
+    .fine{
+      font-size: 1.15rem;
+      line-height: 1.55;
+      color: rgba(255,255,255,0.70);
+      max-width: 58ch;
+      margin: 0 auto;
+    }
+
+    /* Bottom strip */
+    .bottom{
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      padding: 18px 140px;
+      border-top: 1px solid rgba(57,255,20,0.16);
+      background: rgba(0,0,0,0.35);
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+
+      color: rgba(255,255,255,0.55);
+      letter-spacing: 0.18em;
+      font-weight: 900;
+      font-size: 0.80rem;
+      text-transform: uppercase;
+      z-index: 2;
+    }
+
+    .bottom strong{ color: rgba(57,255,20,0.92); }
+
+    @media (max-width: 1680px){
+      body{ display: grid; place-items: start center; padding: 20px 0; }
+      .canvas{ transform: scale(0.85); transform-origin: top center; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="canvas">
+    <div class="fx-scanlines" aria-hidden="true"></div>
+
+    <div class="stack">
+
+      <!-- LOGO SPACE -->
+      <section class="block">
+        <div class="blockHead">The Monster From The Lab: 01</div>
+        <div class="blockBody">
+          <div class="logo-slot">
+
+          </div>
+
+          <div class="kicker">TRANSMISSION COMPLETE</div>
+          <div class="title">Thanks for reading</div>
+
+          <p class="lede">
+            Follow for new pages and updates every Tuesday. For lore and the full archive, visit the website.
+          </p>
+        </div>
+      </section>
+
+      <!-- CHARACTER SPACES -->
+      <section class="block">
+        <div class="blockHead">Character Art Space</div>
+        <div class="blockBody">
+          <div class="art-row">
+            <div class="art-slot">CALAVERA ART HERE</div>
+            <div class="art-slot" style="min-height: 420px;">
+              OPTIONAL CENTER ART / EXTRA TEXTURE
+            </div>
+            <div class="art-slot">FREJA ART HERE</div>
+          </div>
+
+          <p class="fine">
+            Come back next Tuesday to learn more about Calavera and Freja!
+          </p>
+        </div>
+      </section>
+
+      <!-- INSTAGRAM (BIG + EASY) -->
+      <section class="block">
+        <div class="blockHead">Follow on Instagram</div>
+        <div class="blockBody">
+          <div class="handles">
+            <div class="handleLine">
+              <a href="https://www.instagram.com/theuraniumcore" target="_blank" rel="noopener">
+                @theuraniumcore
+              </a>
+            </div>
+            <div class="handleLine">
+              <a href="https://www.instagram.com/researchunitofhorrors" target="_blank" rel="noopener">
+                @researchunitofhorrors
+              </a>
+            </div>
+          </div>
+
+          <p class="fine">
+            Clips, announcements, and new page drops go up there first.
+          </p>
+        </div>
+      </section>
+
+      <!-- WEBSITE (HUGE, MEMORABLE) -->
+      <section class="block">
+        <div class="blockHead">Website</div>
+        <div class="blockBody">
+          <a class="bigLink" href="https://www.theuraniumcore.com" target="_blank" rel="noopener">
+            THEURANIUMCORE.COM
+          </a>
+
+          <p class="lede" style="max-width: 42ch;">
+            Lore. Character files. Archive. Maximum-quality pages.
+          </p>
+
+          <p class="fine">
+            If you remember one thing, remember that URL.
+          </p>
+        </div>
+      </section>
+
+      <!-- SHORT FINAL NOTE -->
+      <section class="block">
+        <div class="blockHead">End of Chapter</div>
+        <div class="blockBody">
+          <p class="lede" style="max-width: 48ch;">
+            See you in the next release.
+          </p>
+          <p class="fine">
+            — The Uranium Core / RUOH
+          </p>
+        </div>
+      </section>
+
+    </div>
+
+    <div class="bottom">
+      <div><strong>THE URANIUM CORE</strong> // RUOH</div>
+      <div>Phoenix, AZ</div>
+      <div>THEURANIUMCORE.COM</div>
+    </div>
+  </div>
+</body>
+</html>
