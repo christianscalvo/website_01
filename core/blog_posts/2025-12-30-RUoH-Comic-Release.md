@@ -36,7 +36,7 @@ Think of them as parallel experiments — same world, same characters, different
 
 These comics give us space to:
 
-- Find the right voice for each character  
+- Find the right voice for each of the characters  
 - Refine tone before locking the final version  
 - Build familiarity with the cast before the main story launches  
 
