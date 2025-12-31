@@ -3,7 +3,7 @@ title: RUoH Comic Release — Side-Quests
 date: 2025-12-30
 slug: ruoh-comic-release
 excerpt: A new Research Unit of Horrors comic series is starting — shorter, lighter stories released across web, Instagram, and Webtoon.
-cover: core/blog/2025-12-30-Ruoh-Comic-Release/cover.png
+cover: core/blog/2025-12-30-ruoh-comic-release/cover.png
 tags: ruoh, comic, release, side-projects
 ---
 
