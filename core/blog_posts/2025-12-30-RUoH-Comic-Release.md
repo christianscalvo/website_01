@@ -18,7 +18,7 @@ These comics will be published directly on this website (for the best reading qu
 
 Side-Quests are short, self-contained stories focused on the characters rather than the main plot. They’re lighter in tone, more comedic, and intentionally low-stakes.
 
-This format lets us:
+This format allows us to:
 
 - Explore character dynamics and personalities  
 - Experiment with writing and humor  
