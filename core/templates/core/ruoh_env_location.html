@@ -1,0 +1,73 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %}{{ location.name }} | RUOH Environments{% endblock %}
+
+{% block content %}
+<main class="page page--envLocation">
+
+  <header class="ruoh-hero ruoh-hero--character" style="min-height: 520px;">
+    <div style="
+      position:absolute; inset:0;
+      background-image: url('{% static location.splash %}');
+      background-size: cover;
+      background-position: center;
+      filter: contrast(105%) brightness(75%);
+      transform: scale(1.02);
+      z-index:0;
+    "></div>
+
+    <div style="
+      position:absolute; inset:0;
+      background:
+        radial-gradient(circle at 30% 20%, rgba(57,255,20,0.16), rgba(0,0,0,0.82)),
+        linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,0.88));
+      z-index:1;
+    "></div>
+
+    <div class="ruoh-hero-inner" style="position:relative; z-index:2;">
+      <div class="ruoh-hero-left">
+        <div class="ruoh-kicker">
+          <span class="badge">LOCATION</span>
+          <span class="stamp">{{ location.type|default:"LOCATION" }}</span>
+        </div>
+
+        <h1 class="ruoh-title glitch" data-text="{{ location.name|upper }}">{{ location.name|upper }}</h1>
+
+        {% if location.subtitle %}
+          <p class="ruoh-logline" style="margin-top: 14px; max-width: 72ch;">{{ location.subtitle }}</p>
+        {% endif %}
+
+        {% if location.bio %}
+          <p class="ruoh-logline" style="margin-top: 14px; max-width: 72ch;">{{ location.bio|linebreaksbr }}</p>
+        {% endif %}
+
+        <div class="ruoh-cta" style="margin-top: 18px;">
+          <a class="btn-secondary" href="{% url 'ruoh_env_country' world_slug continent_slug country_slug %}">← BACK TO COUNTRY</a>
+          <a class="btn-secondary" href="{% url 'ruoh_env_index' %}← ALL WORLDS</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="ruoh-section">
+    <header class="ruoh-section-head">
+      <h2 class="ruoh-section-title">NOTES</h2>
+      <p class="ruoh-section-subtitle">Location dossier.</p>
+    </header>
+
+    <div class="ruoh-grid">
+      <article class="ruoh-card">
+        {% if location.notes %}
+          <ul style="margin-left: 18px; display: grid; gap: 8px;">
+            {% for n in location.notes %}<li>{{ n }}</li>{% endfor %}
+          </ul>
+        {% else %}
+          <p class="ruoh-card-text">No notes yet.</p>
+        {% endif %}
+      </article>
+    </div>
+  </section>
+
+</main>
+{% endblock %}

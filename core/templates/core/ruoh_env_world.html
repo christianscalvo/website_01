@@ -1,0 +1,107 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %}{{ world.name }} | RUOH Environments{% endblock %}
+
+{% block content %}
+<main class="page page--envWorld">
+
+
+<header class="env-splashHeader">
+
+  <!-- SPLASH ART ONLY -->
+  <div class="env-splashArt"
+       style="background-image:url('{% static world.splash %}');"
+       aria-label="{{ world.name }} splash art">
+  </div>
+
+  <!-- META / TITLE UNDER SPLASH -->
+  <div class="env-splashMetaCenter">
+
+    <h1 class="ruoh-title glitch" data-text="{{ world.name|upper }}">
+      {{ world.name|upper }}
+    </h1>
+
+    {% if world.subtitle %}
+      <p class="ruoh-logline">
+        {{ world.subtitle }}
+      </p>
+    {% endif %}
+
+    <div class="ruoh-cta">
+      <a class="btn-secondary" href="{% url 'ruoh_env_index' %}">← ALL WORLDS</a>
+      <a class="btn-secondary" href="/series/research-unit-of-horrors/#explore">← BACK TO RUOH</a>
+    </div>
+
+  </div>
+
+</header>
+
+
+
+<section class="ruoh-section">
+  <header class="ruoh-section-head">
+    <h2 class="ruoh-section-title">WORLD DOSSIER</h2>
+    <p class="ruoh-section-subtitle">Primary overview and historical context.</p>
+  </header>
+
+  <div class="ruoh-grid">
+    <article class="ruoh-card" style="grid-column: 1 / -1;">
+      {% if world.bio %}
+        <div class="ruoh-card-text" style="max-width: 85ch;">
+          {{ world.bio|linebreaksbr }}
+        </div>
+      {% else %}
+        <p class="ruoh-card-text" style="opacity:.65;">
+          No world overview available.
+        </p>
+      {% endif %}
+    </article>
+  </div>
+</section>
+
+<section class="ruoh-section">
+  <header class="ruoh-section-head">
+    <h2 class="ruoh-section-title">NOTES</h2>
+    <p class="ruoh-section-subtitle">High-level world observations.</p>
+  </header>
+
+  <div class="ruoh-grid">
+    <article class="ruoh-card">
+      {% if world.notes %}
+        <ul style="margin-left: 18px; display: grid; gap: 8px;">
+          {% for n in world.notes %}<li>{{ n }}</li>{% endfor %}
+        </ul>
+      {% else %}
+        <p class="ruoh-card-text">No notes yet.</p>
+      {% endif %}
+    </article>
+
+  </div>
+</section>
+
+
+  <section class="ruoh-section">
+    <header class="ruoh-section-head">
+      <h2 class="ruoh-section-title">CONTINENTS</h2>
+      <p class="ruoh-section-subtitle">Select a continent to continue.</p>
+    </header>
+
+    <div class="ruoh-gallery">
+      {% for c in continents %}
+        <a class="ruoh-thumb ruoh-thumb--explore"
+           href="{% url 'ruoh_env_continent' world.slug c.slug %}"
+           style="--thumb: url('{% static c.splash %}');">
+          <div class="ruoh-thumb-inner">
+            <div class="ruoh-thumb-label">CONTINENT</div>
+            <div class="ruoh-thumb-title">{{ c.name|upper }}</div>
+          </div>
+        </a>
+      {% empty %}
+        <p style="color: rgba(255,255,255,0.65);">No continents found. Add folders under <code>continents/</code>.</p>
+      {% endfor %}
+    </div>
+  </section>
+
+</main>
+{% endblock %}

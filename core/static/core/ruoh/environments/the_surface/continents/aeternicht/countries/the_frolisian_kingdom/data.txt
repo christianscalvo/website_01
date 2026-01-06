@@ -1,0 +1,21 @@
+NAME: The Kingdom of Frolisia
+TYPE: Sovereign Kingdom
+SUBTITLE: A bunch of cissies
+
+BIO:
+I dont know lol
+
+HISTORY:
+Billy Boy
+
+GEOGRAPHY:
+<text>
+
+CULTURE:
+<text>
+
+GOVERNMENT:
+<text>
+
+ECONOMY:
+<text>

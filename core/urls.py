@@ -22,4 +22,10 @@ urlpatterns = [
     path("about/", views.about, name="about"),
     path("blog/", blog_index, name="blog_index"),
     path("blog/<slug:slug>/", blog_detail, name="blog_detail"),
+    path("ruoh/environments/", views.env_index, name="ruoh_env_index"),
+    path("ruoh/environments/<slug:world>/", views.env_world, name="ruoh_env_world"),
+    path("ruoh/environments/<slug:world>/<slug:continent>/", views.env_continent, name="ruoh_env_continent"),
+    path("ruoh/environments/<slug:world>/<slug:continent>/<slug:country>/", views.env_country, name="ruoh_env_country"),
+    path("ruoh/environments/<slug:world>/<slug:continent>/<slug:country>/<slug:location>/", views.env_location,
+         name="ruoh_env_location"),
 ]

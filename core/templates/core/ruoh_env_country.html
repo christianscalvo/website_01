@@ -1,0 +1,343 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %}{{ country.name }} | RUOH Environments{% endblock %}
+
+{% block content %}
+<main class="page page--envCountry page--envDossier">
+
+  <!-- =========================
+       HERO (KEEP RUOH STYLE)
+  ========================== -->
+  <header class="ruoh-hero ruoh-hero--character ruoh-hero--dossier" style="min-height: 520px;">
+    <div style="
+      position:absolute; inset:0;
+      background-image: url('{% static country.splash %}');
+      background-size: cover;
+      background-position: center;
+      filter: contrast(105%) brightness(75%);
+      transform: scale(1.02);
+      z-index:0;
+    "></div>
+
+    <div style="
+      position:absolute; inset:0;
+      background:
+        radial-gradient(circle at 30% 20%, rgba(57,255,20,0.16), rgba(0,0,0,0.82)),
+        linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,0.88));
+      z-index:1;
+    "></div>
+
+    <div class="ruoh-hero-inner" style="position:relative; z-index:2;">
+      <div class="ruoh-hero-left" style="max-width: 86ch;">
+        <div class="ruoh-kicker">
+          <span class="badge">COUNTRY</span>
+          <span class="stamp">{{ country.type|default:"COUNTRY" }}</span>
+        </div>
+
+        <h1 class="ruoh-title glitch" data-text="{{ country.name|upper }}">{{ country.name|upper }}</h1>
+
+        {% if country.subtitle %}
+          <p class="ruoh-logline" style="margin-top: 14px; max-width: 72ch;">{{ country.subtitle }}</p>
+        {% endif %}
+
+        <div class="ruoh-cta" style="margin-top: 18px;">
+          <a class="btn-secondary" href="{% url 'ruoh_env_continent' world_slug continent_slug %}">← BACK TO CONTINENT</a>
+          <a class="btn-secondary" href="{% url 'ruoh_env_world' world_slug %}">← BACK TO WORLD</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================
+       DOSSIER BODY (WIKI STRUCTURE)
+  ========================== -->
+  <section class="ruoh-section ruoh-section--dossier">
+    <div class="ruoh-dossierGrid">
+
+      <!-- ============ ARTICLE ============ -->
+      <article class="ruoh-dossierArticle">
+
+        <!-- Overview -->
+        <section class="ruoh-articleBlock" id="overview">
+          <header class="ruoh-articleHead">
+            <h2 class="ruoh-articleTitle">OVERVIEW</h2>
+            <div class="ruoh-articleRule"></div>
+          </header>
+
+          {% if country.bio %}
+            <div class="ruoh-articleBody">
+              {{ country.bio|linebreaksbr }}
+            </div>
+          {% else %}
+            <p class="ruoh-articleMuted">
+              Dossier pending. Add a <code>bio</code> for this country to populate the overview.
+            </p>
+          {% endif %}
+        </section>
+
+        <!-- History -->
+        <section class="ruoh-articleBlock" id="history">
+          <header class="ruoh-articleHead">
+            <h2 class="ruoh-articleTitle">HISTORY</h2>
+            <div class="ruoh-articleRule"></div>
+          </header>
+          <div class="ruoh-articleBody">
+            <p class="ruoh-articleMuted">
+              Add: origin, eras, major conflicts, collapses, annexations, and key turning points.
+            </p>
+          </div>
+        </section>
+
+        <!-- Geography -->
+        <section class="ruoh-articleBlock" id="geography">
+          <header class="ruoh-articleHead">
+            <h2 class="ruoh-articleTitle">GEOGRAPHY</h2>
+            <div class="ruoh-articleRule"></div>
+          </header>
+          <div class="ruoh-articleBody">
+            <p class="ruoh-articleMuted">
+              Add: terrain, climate bands, borders, waterways, resource zones, and notable hazards.
+            </p>
+          </div>
+        </section>
+
+        <!-- Culture -->
+        <section class="ruoh-articleBlock" id="culture">
+          <header class="ruoh-articleHead">
+            <h2 class="ruoh-articleTitle">CULTURE</h2>
+            <div class="ruoh-articleRule"></div>
+          </header>
+          <div class="ruoh-articleBody">
+            <p class="ruoh-articleMuted">
+              Add: language, religion, norms, festivals, cuisine, arts, and social stratification.
+            </p>
+          </div>
+        </section>
+
+        <!-- Locations (keep your gallery) -->
+        <section class="ruoh-articleBlock" id="locations">
+          <header class="ruoh-articleHead">
+            <h2 class="ruoh-articleTitle">LOCATIONS</h2>
+            <div class="ruoh-articleRule"></div>
+          </header>
+
+          <p class="ruoh-articleMuted" style="margin-top: 6px;">
+            Select a location to open its dossier.
+          </p>
+
+          <div class="ruoh-gallery" style="margin-top: 14px;">
+            {% for loc in locations %}
+              <a class="ruoh-thumb ruoh-thumb--explore"
+                 href="{% url 'ruoh_env_location' world_slug continent_slug country.slug loc.slug %}"
+                 style="--thumb: url('{% static loc.splash %}');">
+                <div class="ruoh-thumb-inner">
+                  <div class="ruoh-thumb-label">LOCATION</div>
+                  <div class="ruoh-thumb-title">{{ loc.name|upper }}</div>
+                </div>
+              </a>
+            {% empty %}
+              <p style="color: rgba(255,255,255,0.65);">No locations found. Add folders under <code>locations/</code>.</p>
+            {% endfor %}
+          </div>
+        </section>
+
+      </article>
+
+      <!-- ============ SIDE PANEL ============ -->
+      <aside class="ruoh-dossierSide">
+
+        <!-- Contents -->
+        <nav class="ruoh-panel" aria-label="Contents">
+          <div class="ruoh-panelHead">
+            <div class="ruoh-panelTitle">CONTENTS</div>
+            <div class="ruoh-panelStamp">INDEX</div>
+          </div>
+
+          <ol class="ruoh-toc">
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#history">History</a></li>
+            <li><a href="#geography">Geography</a></li>
+            <li><a href="#culture">Culture</a></li>
+            <li><a href="#locations">Locations</a></li>
+          </ol>
+        </nav>
+
+        <!-- Quick Facts -->
+        <section class="ruoh-panel">
+          <div class="ruoh-panelHead">
+            <div class="ruoh-panelTitle">DOSSIER</div>
+            <div class="ruoh-panelStamp">{{ country.type|default:"COUNTRY" }}</div>
+          </div>
+
+          <div class="ruoh-miniPoster"
+               style="background-image:url('{% static country.splash %}');"
+               aria-label="{{ country.name }} image"></div>
+
+          <dl class="ruoh-facts">
+            <div class="ruoh-factRow">
+              <dt>World</dt>
+              <dd>{{ world_slug|upper }}</dd>
+            </div>
+            <div class="ruoh-factRow">
+              <dt>Continent</dt>
+              <dd>{{ continent_slug|upper }}</dd>
+            </div>
+            {% if country.subtitle %}
+              <div class="ruoh-factRow">
+                <dt>Tagline</dt>
+                <dd>{{ country.subtitle }}</dd>
+              </div>
+            {% endif %}
+          </dl>
+
+          <div style="margin-top: 12px;">
+            <a class="btn-secondary btn-secondary--block" href="{% url 'ruoh_env_continent' world_slug continent_slug %}">
+              VIEW CONTINENT INDEX
+            </a>
+          </div>
+        </section>
+
+      </aside>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- =========================
+     DOSSIER STYLES (RUOH-ALIGNED)
+     Move into your CSS later.
+========================== -->
+<style>
+  .page--envDossier .ruoh-section--dossier { padding-top: 26px; }
+
+  .ruoh-dossierGrid{
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 22px;
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 22px;
+  }
+  @media (max-width: 980px){
+    .ruoh-dossierGrid{ grid-template-columns: 1fr; }
+    .ruoh-dossierSide{ order: -1; }
+  }
+
+  /* Article container */
+  .ruoh-dossierArticle{
+    background: rgba(0,0,0,0.16);
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: 16px;
+    padding: 18px 18px 6px;
+  }
+
+  .ruoh-articleBlock{ padding: 12px 0 16px; }
+  .ruoh-articleHead{
+    display:flex;
+    align-items:center;
+    gap: 12px;
+  }
+  .ruoh-articleTitle{
+    margin: 0;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.86);
+    white-space: nowrap;
+  }
+  .ruoh-articleRule{
+    height: 1px;
+    flex: 1;
+    background: linear-gradient(to right, rgba(57,255,20,0.45), rgba(255,255,255,0.08));
+  }
+  .ruoh-articleBody{
+    margin-top: 10px;
+    color: rgba(255,255,255,0.86);
+    line-height: 1.6;
+  }
+  .ruoh-articleMuted{
+    margin-top: 10px;
+    color: rgba(255,255,255,0.62);
+    line-height: 1.6;
+  }
+
+  /* Side panels */
+  .ruoh-panel{
+    background: rgba(0,0,0,0.20);
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: 16px;
+    padding: 14px;
+    margin-bottom: 14px;
+  }
+  .ruoh-panelHead{
+    display:flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    margin-bottom: 12px;
+  }
+  .ruoh-panelTitle{
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.78);
+  }
+  .ruoh-panelStamp{
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(57,255,20,0.80);
+  }
+
+  /* TOC */
+  .ruoh-toc{
+    margin: 0;
+    padding-left: 18px;
+    color: rgba(255,255,255,0.72);
+  }
+  .ruoh-toc a{
+    color: rgba(57,255,20,0.90);
+    text-decoration: none;
+  }
+  .ruoh-toc a:hover{ text-decoration: underline; }
+
+  /* Infobox mini poster */
+  .ruoh-miniPoster{
+    height: 150px;
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,0.10);
+    background-size: cover;
+    background-position: center;
+    filter: contrast(105%) brightness(82%);
+    margin-bottom: 12px;
+  }
+
+  /* Facts */
+  .ruoh-facts{ margin: 0; }
+  .ruoh-factRow{
+    display:grid;
+    grid-template-columns: 110px 1fr;
+    gap: 10px;
+    padding: 8px 0;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  .ruoh-factRow dt{
+    margin: 0;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.62);
+  }
+  .ruoh-factRow dd{
+    margin: 0;
+    color: rgba(255,255,255,0.88);
+  }
+
+  .btn-secondary--block{ display:block; width:100%; text-align:center; }
+</style>
+
+{% endblock %}

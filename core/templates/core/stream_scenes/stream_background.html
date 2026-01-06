@@ -1,0 +1,708 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The Uranium Core Stream Scenes</title>
+
+  <style>
+    /* ===============================
+       URANIUM CORE THEME TOKENS
+    ================================ */
+    :root{
+      --bg0:#050608;
+      --bg1:#07090c;
+      --panel: rgba(0,0,0,0.28);
+      --panel2: rgba(0,0,0,0.18);
+      --stroke: rgba(255,255,255,0.10);
+      --stroke2: rgba(255,255,255,0.08);
+
+      --neon:#39ff14;
+      --neon2:#2fae12;
+
+      --text: rgba(255,255,255,0.92);
+      --muted: rgba(255,255,255,0.62);
+      --muted2: rgba(255,255,255,0.46);
+
+      --radius: 18px;
+      --shadow: 0 24px 60px rgba(0,0,0,0.55);
+    }
+
+    /* ===============================
+       CANVAS SIZE (OBS)
+    ================================ */
+    html, body { height: 100%; }
+    body{
+      margin:0;
+      background: var(--bg0);
+      color: var(--text);
+      font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      overflow:hidden;
+    }
+
+    .frame{
+      width:1920px;
+      height:1080px;
+      position:relative;
+      margin:0;
+      background:
+        radial-gradient(circle at 20% 18%, rgba(57,255,20,0.12), rgba(0,0,0,0.86)),
+        linear-gradient(to bottom, rgba(0,0,0,0.25), rgba(0,0,0,0.88));
+      isolation:isolate;
+    }
+
+    /* ===============================
+       BACKGROUND TEXTURE
+    ================================ */
+    .scanlines{
+      pointer-events:none;
+      position:absolute; inset:0;
+      background:
+        repeating-linear-gradient(
+          to bottom,
+          rgba(255,255,255,0.03),
+          rgba(255,255,255,0.03) 1px,
+          rgba(0,0,0,0) 3px,
+          rgba(0,0,0,0) 6px
+        );
+      opacity:0.18;
+      mix-blend-mode: overlay;
+      z-index: 3;
+    }
+    .grain{
+      pointer-events:none;
+      position:absolute; inset:-20%;
+      background-image:
+        radial-gradient(circle at 20% 30%, rgba(255,255,255,0.06), transparent 55%),
+        radial-gradient(circle at 70% 60%, rgba(57,255,20,0.05), transparent 60%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+      opacity:0.12;
+      transform: rotate(2deg);
+      z-index: 2;
+    }
+
+    /* ===============================
+       SHELL
+    ================================ */
+    .shell{
+      position:absolute;
+      inset: 56px;
+      border: 1px solid var(--stroke);
+      border-radius: calc(var(--radius) + 8px);
+      background: linear-gradient(180deg, rgba(0,0,0,0.14), rgba(0,0,0,0.34));
+      box-shadow: var(--shadow);
+      z-index: 4;
+      overflow:hidden;
+    }
+    .shell:before{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(circle at 18% 22%, rgba(57,255,20,0.12), transparent 55%),
+        radial-gradient(circle at 78% 70%, rgba(57,255,20,0.08), transparent 60%);
+      opacity:0.9;
+      pointer-events:none;
+    }
+
+    .ticks{
+      position:absolute; inset:0;
+      pointer-events:none;
+      opacity:0.55;
+    }
+    .tick{
+      position:absolute;
+      width:52px; height:52px;
+      border: 1px solid rgba(57,255,20,0.22);
+    }
+    .tick.tl{ top:18px; left:18px; border-right:none; border-bottom:none; }
+    .tick.tr{ top:18px; right:18px; border-left:none; border-bottom:none; }
+    .tick.bl{ bottom:18px; left:18px; border-right:none; border-top:none; }
+    .tick.br{ bottom:18px; right:18px; border-left:none; border-top:none; }
+
+    /* ===============================
+       TOPBAR
+    ================================ */
+    .topbar{
+      position:absolute;
+      left:0; right:0; top:0;
+      height: 74px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding: 0 24px;
+      border-bottom: 1px solid var(--stroke2);
+      background: linear-gradient(to bottom, rgba(0,0,0,0.50), rgba(0,0,0,0.12));
+      z-index: 6;
+    }
+    .brand{ display:flex; align-items:center; gap:12px; }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(57,255,20,0.30);
+      background: rgba(0,0,0,0.22);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(57,255,20,0.92);
+    }
+    .logo-studio{
+      height:18px;
+      width:auto;
+      display:block;
+      opacity:0.95;
+      filter:
+        drop-shadow(0 0 8px rgba(57,255,20,0.35))
+        drop-shadow(0 0 18px rgba(57,255,20,0.18));
+    }
+    .stamp{
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.62);
+    }
+    .meta{
+      display:flex;
+      align-items:center;
+      gap:18px;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+    }
+    .dot{
+      width:8px; height:8px;
+      border-radius: 999px;
+      background: rgba(57,255,20,0.85);
+      box-shadow: 0 0 14px rgba(57,255,20,0.45);
+    }
+
+    /* ===============================
+       PANELS
+    ================================ */
+    .panel{
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius);
+      background: var(--panel);
+      padding: 18px;
+      position:relative;
+      overflow:hidden;
+    }
+    .panel:after{
+      content:"";
+      position:absolute; inset:0;
+      background: linear-gradient(90deg, rgba(57,255,20,0.08), transparent 42%, rgba(255,255,255,0.05));
+      opacity:0.55;
+      pointer-events:none;
+    }
+
+    /* ===============================
+       MAIN LAYOUT (CENTER + BOTTOM INFO)
+    ================================ */
+    .content{
+      position:absolute;
+      inset: 74px 0 56px 0;
+      display:grid;
+      grid-template-rows: 1fr auto;
+      gap: 18px;
+      padding: 22px;
+      z-index: 6;
+    }
+
+    /* CENTER CARD */
+    .centerWrap{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+      isolation:isolate; /* keep code strips behind the card */
+    }
+    .centerCard{
+      width: min(1120px, 100%);
+      text-align:center;
+      padding: 28px 28px 24px;
+      z-index: 2;
+    }
+
+    .logline{
+      margin: 14px auto 0;
+      max-width: 78ch;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.55;
+      font-size: 16px;
+      position:relative;
+      z-index:1;
+    }
+
+    .rule{
+      height:1px;
+      background: linear-gradient(to right, rgba(57,255,20,0.55), rgba(255,255,255,0.08));
+      margin: 18px 0;
+      position:relative;
+      z-index:1;
+    }
+
+    /* BOTTOM INFO STRIP */
+    .bottomStrip{
+      display:flex;
+      gap: 18px;
+      align-items:stretch;
+    }
+    .bottomStrip .panel{ flex: 1; padding: 14px 16px; }
+
+    .stripTitle{
+      margin:0 0 8px 0;
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.70);
+      position:relative;
+      z-index:1;
+    }
+    .kvRow{
+      display:flex;
+      flex-wrap:wrap;
+      gap: 12px 18px;
+      position:relative;
+      z-index:1;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.62);
+    }
+    .kvRow b{ color: rgba(255,255,255,0.88); font-weight: 700; }
+
+    .pill{
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(0,0,0,0.18);
+      color: rgba(255,255,255,0.70);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      position:relative;
+      z-index:1;
+      justify-content:center;
+      width: 100%;
+    }
+    .pill strong{ color: rgba(57,255,20,0.90); font-weight: 700; }
+
+    /* ===============================
+       SCENE CONTENT
+    ================================ */
+    .scene-tag{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(57,255,20,0.22);
+      background: rgba(0,0,0,0.18);
+      color: rgba(57,255,20,0.92);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-size: 12px;
+      position:relative;
+      z-index:1;
+      margin: 0 auto;
+    }
+
+    .big-timer{
+      margin-top: 18px;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      font-size: 80px;
+      color: rgba(255,255,255,0.92);
+      text-shadow: 0 0 26px rgba(57,255,20,0.12);
+      position:relative;
+      z-index:1;
+    }
+    .timer-sub{
+      margin-top: 6px;
+      color: rgba(255,255,255,0.56);
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      position:relative;
+      z-index:1;
+    }
+
+    .series-title{
+      max-width: 300px;
+      width: 100%;
+      height: auto;
+      display:block;
+      margin: 10px auto 0;
+      position:relative;
+      z-index:1;
+      filter:
+        drop-shadow(0 0 14px rgba(57,255,20,0.25))
+        drop-shadow(0 0 32px rgba(57,255,20,0.18));
+    }
+
+    /* ===============================
+       FAKE CODE STRIPS (LEFT/RIGHT)
+       - Runs behind center card
+       - Subtle, doesn't steal attention
+    ================================ */
+    .codeStrips{
+      position:absolute;
+      inset: 0;
+      pointer-events:none;
+      z-index: 1;
+      opacity: 0.85;
+      display:flex;
+      justify-content:space-between;
+      padding: 12px 18px;
+    }
+    .codeRail{
+      width: 340px;
+      height: 100%;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      background: rgba(0,0,0,0.10);
+      overflow:hidden;
+      position:relative;
+    }
+    /* vignettes to fade top/bottom */
+    .codeRail:before,
+    .codeRail:after{
+      content:"";
+      position:absolute;
+      left:0; right:0;
+      height: 120px;
+      pointer-events:none;
+      z-index:2;
+    }
+    .codeRail:before{
+      top:0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.75), rgba(0,0,0,0));
+    }
+    .codeRail:after{
+      bottom:0;
+      background: linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0));
+    }
+
+    .codeInner{
+      position:absolute;
+      inset: 0;
+      padding: 14px 14px 18px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 12px;
+      line-height: 1.35;
+      letter-spacing: 0.02em;
+      color: rgba(57,255,20,0.42);
+      text-shadow: 0 0 14px rgba(57,255,20,0.10);
+      white-space: pre;
+      opacity: 0.95;
+      transform: translate3d(0,0,0);
+      will-change: transform;
+      animation: codeScroll 12s linear infinite;
+    }
+
+    /* Slight variation per side so it doesn't look mirrored */
+    .codeRail.right .codeInner{
+      color: rgba(57,255,20,0.32);
+      animation-duration: 15s;
+      animation-direction: reverse;
+      opacity: 0.85;
+    }
+
+    @keyframes codeScroll{
+      0%   { transform: translateY(0); }
+      100% { transform: translateY(-50%); }
+    }
+
+    /* IMPORTANT: ensure the content is tall enough to scroll */
+    .codeContent{
+      display:block;
+    }
+
+    /* ===============================
+       FOOTER
+    ================================ */
+    .footerbar{
+      position:absolute;
+      left:0; right:0; bottom:0;
+      height: 56px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding: 0 22px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.48);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      z-index: 6;
+      background: linear-gradient(to top, rgba(0,0,0,0.50), rgba(0,0,0,0.10));
+    }
+
+    /* ===============================
+       SCENE SWITCHING
+    ================================ */
+    .frame [data-scene]{ display:none; }
+    .frame[data-scene="STARTING"] [data-scene="STARTING"],
+    .frame[data-scene="LIVE"]     [data-scene="LIVE"],
+    .frame[data-scene="BRB"]      [data-scene="BRB"],
+    .frame[data-scene="ENDING"]   [data-scene="ENDING"]{
+      display:block;
+    }
+  </style>
+</head>
+
+<body>
+
+<script>
+  // Options: "STARTING" | "LIVE" | "BRB" | "ENDING"
+  const SCENE = "BRB"; // change per export
+  window.addEventListener("DOMContentLoaded", () => {
+    document.querySelector(".frame").setAttribute("data-scene", SCENE);
+  });
+</script>
+
+<div class="frame" data-scene="STARTING">
+  <div class="grain"></div>
+  <div class="scanlines"></div>
+
+  <div class="shell">
+    <div class="ticks">
+      <div class="tick tl"></div><div class="tick tr"></div>
+      <div class="tick bl"></div><div class="tick br"></div>
+    </div>
+
+    <div class="topbar">
+      <div class="brand">
+        <div class="badge badge--logo">
+          <span class="dot"></span>
+          <img src="assets/tuc_logo.png" alt="The Uranium Core" class="logo-studio">
+          <span>THE URANIUM CORE</span>
+        </div>
+        <div class="stamp">LIVE TRANSMISSION</div>
+      </div>
+
+      <div class="meta">
+        <span>STREAM ASSET</span>
+        <span>1080P</span>
+        <span>NEON SECURE</span>
+      </div>
+    </div>
+
+    <div class="content">
+      <!-- CENTER -->
+      <div class="centerWrap">
+
+        <!-- Fake code rails behind center card -->
+        <div class="codeStrips" aria-hidden="true">
+          <div class="codeRail left">
+            <div class="codeInner">
+<span class="codeContent">[BOOT] uranium-core.stream
+[AUTH] token=*************** ok
+[PIPE] ingest:camera -> ready
+[PIPE] ingest:screen -> ready
+[PIPE] ingest:mic -> ready
+[RENDER] compositor: armed
+[NET] uplink: stable 8.4mbps
+[PROC] cache warmup ........ ok
+[PROC] shader compile ...... ok
+[PROC] LUT load ............ ok
+[PROC] waveform sync ....... ok
+
+> load RUOH module
+> init environment index
+> hydrate lore nodes
+> build spritesheets
+> preflight render queue
+> validate audio buss
+> ping CDN endpoints
+> checksum assets
+> route packets
+> write logs
+
+[OK] runloop started
+[WARN] minor jitter detected
+[INFO] adaptive bitrate engaged
+[INFO] frame pacing locked
+[INFO] encoder: nvenc hq
+[INFO] profile: 1080p60
+[INFO] keyframe: 2s
+
+[BOOT] uranium-core.stream
+[AUTH] token=*************** ok
+[PIPE] ingest:camera -> ready
+[PIPE] ingest:screen -> ready
+[PIPE] ingest:mic -> ready
+[RENDER] compositor: armed
+[NET] uplink: stable 8.4mbps
+[PROC] cache warmup ........ ok
+[PROC] shader compile ...... ok
+[PROC] LUT load ............ ok
+[PROC] waveform sync ....... ok
+
+> load RUOH module
+> init environment index
+> hydrate lore nodes
+> build spritesheets
+> preflight render queue
+> validate audio buss
+> ping CDN endpoints
+> checksum assets
+> route packets
+> write logs
+
+[OK] runloop started
+[WARN] minor jitter detected
+[INFO] adaptive bitrate engaged
+[INFO] frame pacing locked
+[INFO] encoder: nvenc hq
+[INFO] profile: 1080p60
+[INFO] keyframe: 2s
+</span>
+            </div>
+          </div>
+
+          <div class="codeRail right">
+            <div class="codeInner">
+<span class="codeContent">[RUOH] dossier compile
+[DB] connect: lore.sqlite .... ok
+[DB] query: continents ....... ok
+[DB] query: countries ........ ok
+[DB] query: locations ........ ok
+[FS] scan: /assets ........... ok
+[FS] scan: /scenes ........... ok
+[FS] scan: /audio ............ ok
+[AI] pass: cleanup lines ..... ok
+[AI] pass: color keys ........ ok
+[AI] pass: light fx .......... ok
+[AI] pass: export plates ..... ok
+
+> generate lower-thirds
+> stamp timecode
+> apply safe-margins
+> check broadcast levels
+> normalize peaks
+> push build artifacts
+> publish preview
+> rotate keys
+> monitor chat
+> log events
+
+[STAT] uptime: 00:13:42
+[STAT] dropped frames: 0
+[STAT] cpu: 19%  gpu: 28%
+[STAT] mem: 6.3gb / 32gb
+[STAT] scene: BRB
+[STAT] mode: secure
+
+[RUOH] dossier compile
+[DB] connect: lore.sqlite .... ok
+[DB] query: continents ....... ok
+[DB] query: countries ........ ok
+[DB] query: locations ........ ok
+[FS] scan: /assets ........... ok
+[FS] scan: /scenes ........... ok
+[FS] scan: /audio ............ ok
+[AI] pass: cleanup lines ..... ok
+[AI] pass: color keys ........ ok
+[AI] pass: light fx .......... ok
+[AI] pass: export plates ..... ok
+
+> generate lower-thirds
+> stamp timecode
+> apply safe-margins
+> check broadcast levels
+> normalize peaks
+> push build artifacts
+> publish preview
+> rotate keys
+> monitor chat
+> log events
+</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel centerCard">
+          <div data-scene="STARTING">
+            <div class="scene-tag">STARTING SOON</div>
+            <div class="rule"></div>
+
+            <img src="assets/tuc_logo.png" alt="The Uranium Core" class="series-title">
+
+            <p class="logline">
+              Live production session. Animation, compositing, pipeline notes in real time.
+            </p>
+
+            <div class="big-timer">00:05:00</div>
+            <div class="timer-sub">Replace with an OBS timer source, or edit for PNG</div>
+          </div>
+
+          <div data-scene="LIVE">
+            <div class="scene-tag">LIVE</div>
+            <div class="rule"></div>
+
+            <img src="assets/tuc_logo.png" alt="The Uranium Core" class="series-title">
+
+            <p class="logline">
+              Live production session. Animation, compositing, pipeline notes in real time.
+            </p>
+          </div>
+
+          <div data-scene="BRB">
+            <div class="scene-tag">BRB</div>
+            <div class="rule"></div>
+
+            <img src="assets/tuc_logo.png" alt="The Uranium Core" class="series-title">
+
+            <p class="logline">
+              Stepping away briefly. The transmission will resume shortly.
+            </p>
+          </div>
+
+          <div data-scene="ENDING">
+            <div class="scene-tag">STREAM ENDED</div>
+            <div class="rule"></div>
+
+            <img src="assets/tuc_logo.png" alt="The Uranium Core" class="series-title">
+
+            <p class="logline">
+              Thanks for watching. New content on theuraniumcore.com
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- BOTTOM INFO -->
+      <div class="bottomStrip">
+        <div class="panel">
+          <div class="stripTitle">Session</div>
+          <div class="kvRow">
+            <span>Status: <b data-scene="STARTING">Initializing</b><b data-scene="LIVE">On-air</b><b data-scene="BRB">Paused</b><b data-scene="ENDING">Archived</b></span>
+            <span>Focus: <b>Comic Book</b></span>
+            <span>Project: <b>RUOH — Side Quests</b></span>
+            <span>Site: <b>theuraniumcore.com</b></span>
+          </div>
+        </div>
+
+        <div class="panel" style="max-width: 520px;">
+          <div class="pill"><strong>TIP:</strong> Switching guns is quicker than reloading</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footerbar">
+      <div>THE URANIUM CORE</div>
+      <div>BRANDED STREAM BACKGROUND • HTML EXPORT</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,192 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %}
+  {{ n.name }} | RUOH Environments
+{% endblock %}
+
+{% block content %}
+<main class="page page--envNode">
+
+  <!-- HERO / SPLASH -->
+  <header class="ruoh-hero ruoh-hero--envNode">
+
+    <div class="env-heroSplash"
+      style="
+        position:absolute; inset:0;
+        background-image: url('{% static n.splash %}');
+        background-size: cover;
+        background-position: center;
+        filter: contrast(108%) brightness(72%);
+        transform: scale(1.02);
+        z-index:0;
+      "></div>
+
+    <div style="
+      position:absolute; inset:0;
+      background:
+        radial-gradient(circle at 28% 18%, rgba(57,255,20,0.16), rgba(0,0,0,0.82)),
+        linear-gradient(to bottom, rgba(0,0,0,0.28), rgba(0,0,0,0.90));
+      z-index:1;
+    "></div>
+
+    <div class="ruoh-hero-inner" style="position:relative; z-index:2;">
+      <div class="ruoh-hero-left">
+
+        <div class="env-breadcrumbs">
+          <a class="env-crumb" href="/ruoh/environments/">ENVIRONMENTS</a>
+          <span class="env-crumbSep">/</span>
+          <a class="env-crumb" href="/ruoh/environments/{{ n.world }}/">{{ n.world|upper }}</a>
+
+          {% if n.path %}
+            {% with parts=n.path|cut:" "|cut:""|cut:"  " %}
+            {% endwith %}
+            {# Optional: if you pass crumbs from view, use that instead #}
+          {% endif %}
+        </div>
+
+        <div class="ruoh-kicker" style="margin-top: 10px;">
+          <span class="badge">{{ n.type|default:"NODE"|upper }}</span>
+          <span class="stamp">{{ n.status|default:"ONLINE" }}</span>
+        </div>
+
+        <h1 class="ruoh-title glitch" data-text="{{ n.name|upper }}">
+          {{ n.name|upper }}
+        </h1>
+
+        {% if n.subtitle %}
+          <p class="ruoh-nickname" style="margin-top: 10px;">
+            {{ n.subtitle }}
+          </p>
+        {% endif %}
+
+        {% if n.summary %}
+          <p class="ruoh-logline" style="margin-top: 14px; max-width: 76ch;">
+            {{ n.summary|linebreaksbr }}
+          </p>
+        {% else %}
+          <p class="ruoh-logline" style="margin-top: 14px; max-width: 76ch;">
+            Placeholder summary. Describe what this place is, why it matters, and what tone it carries in the story.
+          </p>
+        {% endif %}
+
+        <div class="ruoh-cta" style="margin-top: 18px;">
+          <a class="btn-secondary" href="/ruoh/environments/{{ n.world }}/">← BACK TO {{ n.world|upper }}</a>
+          <a class="btn-secondary" href="/ruoh/environments/">← ALL WORLDS</a>
+          <a class="btn-secondary" href="/series/research-unit-of-horrors/#explore">← BACK TO RUOH</a>
+        </div>
+
+        {% if n.tags %}
+          <div class="env-tags" style="margin-top: 16px;">
+            {% for t in n.tags %}
+              <span class="env-tag">{{ t|upper }}</span>
+            {% endfor %}
+          </div>
+        {% endif %}
+
+      </div>
+    </div>
+  </header>
+
+  <!-- FACTS -->
+  <section class="ruoh-section">
+    <header class="ruoh-section-head">
+      <h2 class="ruoh-section-title">FACTS</h2>
+      <p class="ruoh-section-subtitle">High-level signals and operational notes.</p>
+    </header>
+
+    <div class="env-factsGrid">
+      {% if n.facts %}
+        {% for f in n.facts %}
+          <article class="ruoh-card">
+            <p class="ruoh-card-text">{{ f }}</p>
+          </article>
+        {% endfor %}
+      {% else %}
+        <article class="ruoh-card">
+          <p class="ruoh-card-text" style="color: rgba(255,255,255,0.70);">
+            No facts listed yet. Add a <code>facts:</code> block to this node’s <code>data.txt</code>.
+          </p>
+        </article>
+      {% endif %}
+    </div>
+  </section>
+
+  <!-- CHILDREN -->
+  <section class="ruoh-section" id="explore-children">
+    <header class="ruoh-section-head">
+      <h2 class="ruoh-section-title">EXPLORE</h2>
+      <p class="ruoh-section-subtitle">
+        {% if n.children %}
+          Branch deeper into the archive.
+        {% else %}
+          No deeper folders detected under this node.
+        {% endif %}
+      </p>
+    </header>
+
+    <div class="env-childGrid">
+      {% for ch in n.children %}
+        <a class="env-childCard" href="{{ ch.url }}" aria-label="Open {{ ch.name }}">
+          <div class="env-childThumb"
+               style="background-image:url('{% static ch.thumb %}');"></div>
+
+          <div class="env-childShade" aria-hidden="true"></div>
+
+          <div class="env-childBody">
+            <div class="env-childTop">
+              <span class="badge">NODE</span>
+              <span class="stamp">{{ ch.slug|upper }}</span>
+            </div>
+
+            <h3 class="env-childTitle">{{ ch.name|upper }}</h3>
+
+            {% if ch.subtitle %}
+              <p class="env-childSubtitle">{{ ch.subtitle }}</p>
+            {% else %}
+              <p class="env-childSubtitle">Open dossier →</p>
+            {% endif %}
+
+            <div class="env-childLink">OPEN →</div>
+          </div>
+        </a>
+      {% empty %}
+        <article class="ruoh-card">
+          <p class="ruoh-card-text" style="color: rgba(255,255,255,0.70);">
+            Add a subfolder with <code>data.txt</code> and <code>main.png</code> to populate this section.
+          </p>
+        </article>
+      {% endfor %}
+    </div>
+  </section>
+
+  <!-- SECTIONS -->
+  <section class="ruoh-section" id="dossier">
+    <header class="ruoh-section-head">
+      <h2 class="ruoh-section-title">DOSSIER</h2>
+      <p class="ruoh-section-subtitle">Detailed notes and world-building data.</p>
+    </header>
+
+    <div class="env-sectionStack">
+      {% if n.sections %}
+        {% for title, body in n.sections %}
+          <article class="env-sectionBlock ruoh-card">
+            <h3 class="env-sectionTitle">{{ title|upper }}</h3>
+            <div class="env-sectionBody ruoh-card-text">
+              {{ body|linebreaksbr }}
+            </div>
+          </article>
+        {% endfor %}
+      {% else %}
+        <article class="ruoh-card">
+          <h3 class="ruoh-card-title">PLACEHOLDER SECTIONS</h3>
+          <p class="ruoh-card-text">
+            Add a <code>sections:</code> block in <code>data.txt</code> (History, Culture, Threats, etc.).
+          </p>
+        </article>
+      {% endif %}
+    </div>
+  </section>
+
+</main>
+{% endblock %}

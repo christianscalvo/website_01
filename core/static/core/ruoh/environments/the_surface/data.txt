@@ -1,0 +1,27 @@
+name: The Surface
+subtitle: Material world layered above the Kato Kosmos.
+type: WORLD
+
+logline:
+The Surface is the known world to the characters
+
+bio: |
+  The Surface is the primary material world where most recorded human history unfolds. The dominant inhabitants are humans, though traces of magic exist and grow increasingly influential. Scientific development is currently experiencing its greatest expansion in recorded history...
+
+notes:
+- Primary setting for most RUOH operations
+- Technological and scientific boom underway
+- Magic exists but is poorly understood
+- Increasing cross-world influence from the Kato Kosmos
+
+facts:
+- key: Era
+  value: Medieval-equivalent (Western Europe)
+- key: Dominant Species
+  value: Humans
+- key: Magic Presence
+  value: Low to Moderate
+- key: Scientific Development
+  value: Rapidly Advancing
+- key: Known Continents
+  value: 8

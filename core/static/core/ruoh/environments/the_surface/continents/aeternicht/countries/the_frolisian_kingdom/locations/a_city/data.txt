@@ -1,0 +1,28 @@
+name: Aur City
+subtitle: Industrial capital built atop forgotten foundations.
+status: OBSERVED
+type: LOCATION
+
+logline:
+Aur City is a dense industrial hub where progress and decay coexist.
+
+bio:
+Aur City stands as one of Frolysia’s largest urban centers, characterized by towering factories, dense residential districts, and extensive underground infrastructure.
+
+Recent investigations suggest the city was constructed over a much older settlement. Structural anomalies and unexplained energy readings have been detected below the lower districts, prompting increased RUOH surveillance.
+
+notes:
+- Frequent power disruptions with no clear cause
+- Restricted underground access zones
+- High civilian population density
+- Multiple unresolved incident reports
+
+facts:
+- key: Population Density
+  value: Very High
+- key: Primary Industry
+  value: Manufacturing
+- key: Subsurface Activity
+  value: Anomalous
+- key: Threat Assessment
+  value: Medium

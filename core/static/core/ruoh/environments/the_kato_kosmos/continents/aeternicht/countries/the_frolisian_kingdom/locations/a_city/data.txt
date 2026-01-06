@@ -1,0 +1,17 @@
+name: Aeternicht
+type: Continent
+status: Documented
+subtitle: Primary landmass of recorded RUOH events.
+summary:
+  Aeternicht is the central continent of Surface operations...
+  Multiple powers compete across its coasts and inland kingdoms...
+
+tags: kingdoms, trade, anomalies
+facts:
+  - Dominant sea: Rudanic Sea
+  - Major blocs: Earlsian, Frolysian, Mainakean, Sorengar
+  - Risk rating: Yellow
+sections:
+  - History: Short paragraph about formation and early conflicts.
+  - Culture: Notes on customs, art, religion, etc.
+  - Threats: Local anomalies, known entities, hazards.

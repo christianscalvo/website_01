@@ -1,0 +1,32 @@
+name: The Kato Kosmos
+subtitle: Monster world beneath the Surface.
+status: ACTIVE
+type: WORLD
+
+logline:
+The Kato Kosmos is a brutal, oceanless world of monsters, magic, and eternal conflict, governed by power alone.
+
+bio:
+The Kato Kosmos is the secondary world layered beneath the Surface and the primary source of the story’s horror and magical elements. It is a land without oceans, populated entirely by monsters, beasts, and demiurges locked into a perpetual feudalist hierarchy.
+
+Life in the Kato Kosmos is defined by violence, scarcity, and survival. Tribes exist in constant conflict, and strength is the sole reliable currency. Death is commonplace, mercy is rare, and the concept of peace is often seen as weakness.
+
+The entire Kato Kosmos is currently ruled by Hades, the most powerful known demiurge. His influence extends beyond this world, shaping events on the Surface itself. Opposing the established order is Thanatos, an Osteomite of mysterious origin whose revolutionary ideas of peace and compassion threaten the foundations of both worlds.
+
+notes:
+- No oceans or large bodies of water
+- Feudalist hierarchy enforced through violence
+- Tribal conflicts are constant
+- Major influence over Surface events
+
+facts:
+- key: Dominant Races
+  value: Cucurbites, Imps, Demiurges, Commedianti
+- key: Notable Minor Races
+  value: Keres, Osteomites
+- key: Ruling Entity
+  value: Hades
+- key: Primary Ideology
+  value: Power through Strength
+- key: Anomaly Level
+  value: Extreme

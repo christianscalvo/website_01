@@ -1,0 +1,28 @@
+name: Aeter Nicht
+subtitle: Continent of fractured kingdoms and converging histories.
+status: ACTIVE
+type: CONTINENT
+
+logline:
+Aeter Nicht is a vast continent shaped by war, forgotten pacts, and long-standing political tension.
+
+bio:
+Aeter Nicht serves as the primary continental stage for many of the Surface’s most significant historical events. Kingdoms here have developed in close proximity, resulting in cultural exchange, conflict, and overlapping mythologies.
+
+Ancient ruins are common beneath modern cities, suggesting repeated cycles of collapse and reconstruction. Many anomalies investigated by RUOH trace their origins to sites buried deep within the continent’s older layers.
+
+notes:
+- High density of ancient ruins beneath modern settlements
+- Multiple kingdoms with conflicting historical records
+- Folklore often contradicts official archives
+- Strategic importance due to central geographic position
+
+facts:
+- key: Dominant Biomes
+  value: Plains, forests, coastal regions
+- key: Political Stability
+  value: Unstable
+- key: Known Kingdoms
+  value: Multiple
+- key: Anomaly Concentration
+  value: Elevated

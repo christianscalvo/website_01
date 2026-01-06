@@ -1,0 +1,67 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %}Explore Environments | RUOH{% endblock %}
+
+{% block content %}
+<main class="page page--envIndex">
+
+  <header class="ruoh-hero ruoh-hero--envIndex">
+    <div class="ruoh-hero-inner">
+      <div class="ruoh-hero-left">
+        <div class="ruoh-kicker">
+          <span class="badge">EXPLORE</span>
+          <span class="stamp">ENVIRONMENTS</span>
+        </div>
+
+        <h1 class="ruoh-title glitch" data-text="ENVIRONMENTS">ENVIRONMENTS</h1>
+
+        <p class="ruoh-logline" style="max-width: 72ch;">
+          Choose a world to explore. Each page includes a splash overview, notes, and links deeper into the archive.
+        </p>
+
+        <div class="ruoh-cta" style="margin-top: 18px;">
+          <a class="btn-secondary" href="/series/research-unit-of-horrors/#explore">← BACK TO RUOH</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="ruoh-section">
+    <header class="ruoh-section-head">
+      <h2 class="ruoh-section-title">CHOOSE A WORLD</h2>
+      <p class="ruoh-section-subtitle">Surface records and Kato Kosmos anomalies.</p>
+    </header>
+
+    <div class="env-worldGrid">
+      {% for w in worlds %}
+        <a class="env-worldCard" href="{% url 'ruoh_env_world' w.slug %}" aria-label="Open {{ w.name }}">
+          <div class="env-worldSplash" style="background-image:url('{% static w.splash %}');"></div>
+          <div class="env-worldShade" aria-hidden="true"></div>
+
+          <div class="env-worldBody">
+            <div class="env-worldTop">
+              <span class="badge">WORLD</span>
+              <span class="stamp">{{ w.type|default:"WORLD" }}</span>
+            </div>
+
+            <h3 class="env-worldTitle">{{ w.name|upper }}</h3>
+
+            <p class="env-worldSubtitle">
+              {{ w.subtitle|default:"Archive gateway. Overview dossier + branches into continents and regions." }}
+            </p>
+
+            <div class="env-worldMeta">
+              <div class="env-worldMetaRow"><span>STATUS</span><span>{{ w.status|default:"ONLINE" }}</span></div>
+              <div class="env-worldMetaRow"><span>CONTENTS</span><span>{{ w.children|length }} CONTINENTS</span></div>
+            </div>
+
+            <div class="env-worldLink">ENTER WORLD →</div>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  </section>
+
+</main>
+{% endblock %}
