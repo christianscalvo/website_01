@@ -186,6 +186,9 @@ def ruoh_comic_reader(request, comic_slug, chapter_slug):
 def about(request):
     return render(request, "core/about.html")
 
+def linktree(request):
+    return render(request, "core/linktree.html")
+
 
 from .blog_loader import get_post_by_slug, load_posts
 
